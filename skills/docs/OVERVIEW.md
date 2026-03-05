@@ -26,7 +26,7 @@
 
 ```bash
 # 自动安装（推荐）
-./install_skill.sh
+./tools/install_skill.sh
 
 # 或手动安装
 mkdir -p ~/.claude/skills
@@ -133,7 +133,7 @@ preferences:
 ls ~/.claude/skills/paper_reader.*
 
 # 重新安装
-./install_skill.sh
+./tools/install_skill.sh
 ```
 
 **Q: PDF未找到**
@@ -211,7 +211,7 @@ npm install -g @marp-team/marp-cli
 
 ```bash
 # 1. 安装
-./install_skill.sh
+./tools/install_skill.sh
 
 # 2. 配置
 echo "ANTHROPIC_API_KEY=test" > ../.env

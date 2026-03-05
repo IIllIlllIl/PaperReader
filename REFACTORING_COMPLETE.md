@@ -224,7 +224,7 @@ README.md                  # 更新命令引用 (+34行)
 
 - [x] CLI入口可用: `python cli/main.py --help`
 - [x] 工具脚本可用: `python tools/debug_data_flow.py --help`
-- [x] 兼容性包装器可用: `python main.py --help`
+- [x] 兼容性包装器可用: `python cli/main.py --help`
 - [x] Git状态正常
 
 ---
@@ -272,7 +272,7 @@ python tools/debug_data_flow.py papers/example.pdf
 **方式2: 使用兼容性包装器**
 ```bash
 # 兼容旧命令
-python main.py process --paper papers/example.pdf
+python cli/main.py process --paper papers/example.pdf
 ```
 
 **方式3: 使用快速启动脚本**
@@ -417,7 +417,7 @@ commit a58a500  # docs: update command references and add compatibility wrapper
 python cli/main.py process --paper papers/Human-In-the-Loop.pdf
 
 # 使用兼容性包装器
-python main.py process --paper papers/Human-In-the-Loop.pdf
+python cli/main.py process --paper papers/Human-In-the-Loop.pdf
 
 # 使用快速启动
 ./paperreader process --paper papers/Human-In-the-Loop.pdf

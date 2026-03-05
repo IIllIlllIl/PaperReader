@@ -15,7 +15,11 @@
       "Bash(git mv skills/OVERVIEW.md skills/docs/ 2>/dev/null || echo \"Already moved or not exist\")",
       "Bash(ls -1 /Users/taoran.wang/Documents/PaperReader | grep -E '\\\\.py$|\\\\.sh$|\\\\.md$' | sort)",
       "Bash(test -f /Users/taoran.wang/Documents/PaperReader/main.py && echo \"main.py still in root\" || echo \"main.py moved from root\")",
-      "Bash(sed -i '' 's|python main.py|python cli/main.py|g' README.md && sed -i '' 's|./install_skill.sh|./tools/install_skill.sh|g' README.md && echo \"Updated README.md\")"
+      "Bash(sed -i '' 's|python main.py|python cli/main.py|g' README.md && sed -i '' 's|./install_skill.sh|./tools/install_skill.sh|g' README.md && echo \"Updated README.md\")",
+      "Bash(find docs/ examples/ skills/ -name \"*.md\" -type f | xargs sed -i '' 's|python main.py |python cli/main.py |g' && echo \"Updated python main.py references\")",
+      "Bash(chmod +x tools/update_docs_after_refactor.sh && ./tools/update_docs_after_refactor.sh)",
+      "Bash(find . -name \"*.md\" -type f | xargs sed -i '' 's|./tool./tools/|./tools/|g' && echo \"Fixed incorrect replacements\")",
+      "Bash(sed -i '' 's|tool\\\\./tools/|tools/|g' REFACTORING_COMPLETE.md && sed -i '' 's|./tool\\\\./tools/|./tools/|g' REFACTORING_COMPLETE.md && echo \"Fixed REFACTORING_COMPLETE.md\")"
     ]
   }
 }

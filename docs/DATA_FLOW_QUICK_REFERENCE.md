@@ -204,7 +204,7 @@ PDF文件 (papers/example.pdf)
 ### 查看中间产物
 ```bash
 # 追踪数据流程（使用示例数据）
-python debug_data_flow.py papers/example.pdf --skip-ai
+python tools/debug_data_flow.py papers/example.pdf --skip-ai
 
 # 查看缓存内容
 cat cache/{hash}.json | jq .
@@ -265,10 +265,10 @@ print(f"Cost: ${stats['total_cost']:.4f}")
 
 ```bash
 # 1. 追踪数据流程（使用示例）
-python debug_data_flow.py papers/example.pdf --skip-ai
+python tools/debug_data_flow.py papers/example.pdf --skip-ai
 
 # 2. 真实处理
-python main.py process --paper papers/example.pdf --verbose
+python cli/main.py process --paper papers/example.pdf --verbose
 
 # 3. 查看输出
 ls output/

@@ -62,19 +62,25 @@ src/
 ### Running the Application
 
 ```bash
-# Process single paper
-python main.py process --paper papers/example.pdf
+# Process single paper (new path)
+python cli/main.py process --paper papers/example.pdf
 
 # Process all papers
-python main.py process --all
+python cli/main.py process --all
 
 # With options
-python main.py process -p papers/example.pdf -f html --verbose
+python cli/main.py process -p papers/example.pdf -f html --verbose
 
 # Cache management
-python main.py stats
-python main.py clear-cache
-python main.py cleanup
+python cli/main.py stats
+python cli/main.py clear-cache
+python cli/main.py cleanup
+
+# Alternative: Use compatibility wrapper
+python cli/main.py process --paper papers/example.pdf  # Works the same
+
+# Alternative: Use quick start script
+./paperreader process --paper papers/example.pdf  # Shortest!
 ```
 
 ### Development
@@ -91,7 +97,7 @@ cp .env.example .env
 pytest tests/
 
 # Run with verbose logging
-python main.py process -p papers/example.pdf -v
+python cli/main.py process -p papers/example.pdf -v
 ```
 
 ## Configuration

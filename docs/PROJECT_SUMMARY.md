@@ -149,23 +149,23 @@ cp .env.example .env
 ### 基本使用
 ```bash
 # 处理单篇论文
-python main.py process --paper papers/example.pdf
+python cli/main.py process --paper papers/example.pdf
 
 # 处理所有论文
-python main.py process --all
+python cli/main.py process --all
 
 # 指定格式
-python main.py process -p papers/example.pdf -f html
+python cli/main.py process -p papers/example.pdf -f html
 
 # 详细输出
-python main.py process -p papers/example.pdf --verbose
+python cli/main.py process -p papers/example.pdf --verbose
 ```
 
 ### 缓存管理
 ```bash
-python main.py stats        # 查看缓存统计
-python main.py clear-cache  # 清空缓存
-python main.py cleanup      # 清理过期缓存
+python cli/main.py stats        # 查看缓存统计
+python cli/main.py clear-cache  # 清空缓存
+python cli/main.py cleanup      # 清理过期缓存
 ```
 
 ## 技术亮点

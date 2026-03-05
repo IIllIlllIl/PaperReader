@@ -69,7 +69,7 @@
    └─> 理解每个阶段的详细处理
 
 4. 真实处理一篇论文 (15分钟)
-   python main.py process -p papers/example.pdf -v
+   python cli/main.py process -p papers/example.pdf -v
 
 5. 检查缓存文件 (5分钟)
    cat cache/{hash}.json | jq .
@@ -105,7 +105,7 @@
 → 查看 [DATA_FLOW.md](DATA_FLOW.md) 的缓存文件示例
 
 **"如何调试我的论文处理？"**
-→ 运行 `python debug_data_flow.py papers/your_paper.pdf`
+→ 运行 `python tools/debug_data_flow.py papers/your_paper.pdf`
 
 **"成本和时间消耗如何？"**
 → 查看 [DATA_VISUALIZATION.md](DATA_VISUALIZATION.md) 的成本分析
@@ -114,7 +114,7 @@
 → 查看 [DATA_FLOW.md](DATA_FLOW.md) 的数据流图
 
 **"如何查看真实案例？"**
-→ 运行 `python debug_data_flow.py papers/example.pdf --skip-ai`
+→ 运行 `python tools/debug_data_flow.py papers/example.pdf --skip-ai`
 
 ## 📊 核心中间产物速查
 
@@ -134,10 +134,10 @@
 
 ```bash
 # 查看完整的数据流程（使用示例数据）
-python debug_data_flow.py papers/example.pdf --skip-ai
+python tools/debug_data_flow.py papers/example.pdf --skip-ai
 
 # 查看完整的数据流程（真实AI分析）
-python debug_data_flow.py papers/example.pdf
+python tools/debug_data_flow.py papers/example.pdf
 
 # 查看示例中间产物
 python examples/middle_products_example.py
@@ -149,7 +149,7 @@ cat cache/*.json | jq .
 cat output/markdown/*.md
 
 # 统计信息
-python main.py stats
+python cli/main.py stats
 ```
 
 ## 📚 文档关系图

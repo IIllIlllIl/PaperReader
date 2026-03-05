@@ -6,7 +6,7 @@
 
 ```bash
 # 在项目根目录运行
-./install_skill.sh
+./tools/install_skill.sh
 ```
 
 ### 方法2: 手动安装
@@ -399,7 +399,7 @@ npm install -g @marp-team/marp-cli
 /papers-stats
 
 # 清理过期缓存
-python main.py cleanup
+python cli/main.py cleanup
 ```
 
 ## 与其他工具集成
@@ -481,8 +481,8 @@ download.pdf
 
 ```bash
 # 每周运行一次
-python main.py cleanup  # 清理过期缓存
-python main.py stats    # 检查使用情况
+python cli/main.py cleanup  # 清理过期缓存
+python cli/main.py stats    # 检查使用情况
 ```
 
 ## 反馈和支持

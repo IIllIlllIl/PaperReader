@@ -42,10 +42,10 @@ print(paper_analysis_example['problem'])
 
 ```bash
 # 使用示例数据（不需要API密钥）
-python debug_data_flow.py papers/your_paper.pdf --skip-ai
+python tools/debug_data_flow.py papers/your_paper.pdf --skip-ai
 
 # 真实处理（需要API密钥）
-python debug_data_flow.py papers/your_paper.pdf
+python tools/debug_data_flow.py papers/your_paper.pdf
 ```
 
 输出包括：
@@ -81,7 +81,7 @@ python debug_data_flow.py papers/your_paper.pdf
 
 2. **追踪真实论文**（使用示例数据）
    ```bash
-   python debug_data_flow.py papers/your_paper.pdf --skip-ai
+   python tools/debug_data_flow.py papers/your_paper.pdf --skip-ai
    ```
 
 3. **查看详细文档**
@@ -90,7 +90,7 @@ python debug_data_flow.py papers/your_paper.pdf
 
 4. **真实处理**
    ```bash
-   python main.py process --paper papers/your_paper.pdf --verbose
+   python cli/main.py process --paper papers/your_paper.pdf --verbose
    ```
 
 5. **检查输出**
