@@ -4,6 +4,25 @@
 
 PaperReader automatically analyzes academic papers and generates professional presentation slides using AI.
 
+## 📂 Project Structure
+
+PaperReader uses a clear, layered structure:
+
+| Directory | Purpose |
+|-----------|---------|
+| `src/` | Core source code - stable API |
+| `cli/` | Command-line interface |
+| `tools/` | Utility scripts and tools |
+| `docs/` | Detailed documentation |
+| `skills/` | Claude Skills integration |
+| `tests/` | Test suite |
+| `examples/` | Examples and demos |
+
+**Quick Links**:
+- 📚 [Documentation Center](docs/README.md) - All detailed docs
+- 🎯 [Quick Start](#quick-start) - Get started in 5 minutes
+- 🛠️ [Developer Guide](CLAUDE.md) - Architecture and development
+
 ## Features
 
 - 📄 **PDF Parsing**: Extracts text, sections, and metadata from PDF papers
@@ -304,20 +323,21 @@ MIT License
 
 To better understand how PaperReader processes your papers:
 
-- **[DATA_FLOW.md](DATA_FLOW.md)** - 详细的数据流程和中间产物说明
-- **[DATA_FLOW_QUICK_REFERENCE.md](DATA_FLOW_QUICK_REFERENCE.md)** - 快速参考卡片
-- **[examples/middle_products_example.py](examples/middle_products_example.py)** - 完整的中间产物示例
+- **[Documentation Center](docs/README.md)** - Complete documentation hub
+- **[Data Flow Guide](docs/DATA_FLOW.md)** - Detailed data flow explanation
+- **[Quick Reference](docs/DATA_FLOW_QUICK_REFERENCE.md)** - Quick reference card
+- **[Examples](examples/middle_products_example.py)** - Complete intermediate products example
 
 ### Debugging Tool
 
 Track the data flow of a specific paper:
 
 ```bash
-# 使用示例数据（不需要API密钥）
-python debug_data_flow.py papers/example.pdf --skip-ai
+# Using example data (no API key needed)
+python tools/debug_data_flow.py papers/example.pdf --skip-ai
 
-# 真实处理（需要API密钥）
-python debug_data_flow.py papers/example.pdf
+# Real processing (requires API key)
+python tools/debug_data_flow.py papers/example.pdf
 ```
 
 This will show you:

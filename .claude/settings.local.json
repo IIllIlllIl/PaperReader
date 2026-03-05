@@ -5,7 +5,14 @@
       "Bash(python3 main.py process --paper papers/Human-In-the-Loop.pdf --format pdf --verbose 2>&1)",
       "Bash(python3 main.py process --paper papers/Human-In-the-Loop.pdf --format html --verbose 2>&1 | head -100)",
       "Bash(python3 md_to_pptx.py output/markdown/Human-In-the-Loop_debug.md output/slides/Human-In-the-Loop.pptx)",
-      "Bash(git init && git add -A && git commit -m \"chore: checkpoint before reorganization\")"
+      "Bash(git init && git add -A && git commit -m \"chore: checkpoint before reorganization\")",
+      "Bash(git -C /Users/taoran.wang/Documents/PaperReader status)",
+      "Bash(git mv main.py cli/ && ls -la cli/)",
+      "Bash(wc -l /Users/taoran.wang/Documents/PaperReader/tools/*.py /Users/taoran.wang/Documents/PaperReader/tools/*.sh)",
+      "Bash(git mv DATA_FLOW.md DATA_FLOW_QUICK_REFERENCE.md DATA_VISUALIZATION.md UNDERSTANDING_DATA_FLOW.md PROJECT_SUMMARY.md docs/)",
+      "Bash(ls -1 /Users/taoran.wang/Documents/PaperReader/*.md 2>/dev/null | grep -E \"\\(DATA_FLOW|DATA_VISUALIZATION|UNDERSTANDING|PROJECT_SUMMARY\\)\" || echo \"No target files found in root directory \\(expected\\)\")",
+      "Bash(ls -lh /Users/taoran.wang/Documents/PaperReader/docs/*.md)",
+      "Bash(git mv skills/OVERVIEW.md skills/docs/ 2>/dev/null || echo \"Already moved or not exist\")"
     ]
   }
 }
