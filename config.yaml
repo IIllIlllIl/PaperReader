@@ -1,0 +1,36 @@
+paper:
+  input_dir: "./papers"
+  supported_formats:
+    - pdf
+
+ai:
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  haiku_model: "claude-haiku-4-5-20251001"
+  api_key_env: "ANTHROPIC_API_KEY"
+  max_tokens: 4096
+  temperature: 0.7
+  max_retries: 3
+  retry_delay: 1.0
+
+cache:
+  enabled: true
+  cache_dir: "./cache"
+  ttl: 604800  # 7 days in seconds
+
+presentation:
+  template: "./templates/ppt_template.md"
+  output_dir: "./output"
+  format: "markdown"
+  theme: "academic"
+  slide_conversion_tool: "marp"
+
+marp:
+  theme: "academic"
+  paginate: true
+  size: "16:9"
+
+logging:
+  level: "INFO"
+  file: "./logs/paperreader.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

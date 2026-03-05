@@ -1,0 +1,28 @@
+# PDF Processing
+PyMuPDF==1.23.8
+PyPDF2==3.0.1
+
+# AI Integration
+anthropic==0.39.0
+
+# Configuration
+PyYAML==6.0.1
+
+# Presentation
+markdown==3.5.1
+
+# Utilities
+python-dotenv==1.0.0
+click==8.1.7
+rich==13.7.0
+
+# Image Processing (for OCR support)
+Pillow==10.2.0
+pytesseract==0.3.10
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Optional: Marp CLI (requires separate installation)
+# npm install -g @marp-team/marp-cli

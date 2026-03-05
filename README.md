@@ -1,0 +1,332 @@
+# PaperReader
+
+🤖 **AI-Powered Academic Paper Reading and Presentation Generation Tool**
+
+PaperReader automatically analyzes academic papers and generates professional presentation slides using AI.
+
+## Features
+
+- 📄 **PDF Parsing**: Extracts text, sections, and metadata from PDF papers
+- 🤖 **AI Analysis**: Uses Claude AI to understand and analyze paper content
+- 📊 **Presentation Generation**: Creates academic-style slides in Markdown, HTML, or PDF
+- 💾 **Smart Caching**: Caches analysis results to avoid redundant API calls
+- 🔄 **Resilient**: Automatic retry and error handling for reliable processing
+- 📈 **Progress Tracking**: Real-time progress updates with rich UI
+
+## Installation
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Node.js (optional, for Marp CLI)
+- Anthropic API key
+
+### Setup
+
+1. **Clone the repository**
+```bash
+cd PaperReader
+```
+
+2. **Install Python dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+3. **Install Marp CLI (optional, for HTML/PDF output)**
+```bash
+npm install -g @marp-team/marp-cli
+```
+
+4. **Configure API key**
+
+Create a `.env` file:
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add your Anthropic API key:
+```
+ANTHROPIC_API_KEY=your-api-key-here
+```
+
+Or set it as an environment variable:
+```bash
+export ANTHROPIC_API_KEY=your-api-key-here
+```
+
+## Quick Start
+
+### Method 1: Using Claude Skill (Recommended) ⭐
+
+The easiest way to use PaperReader is through Claude's skill system:
+
+```bash
+# 1. Install the skill
+./install_skill.sh
+
+# 2. In Claude chat, simply type:
+/paper                    # Process latest PDF
+/paper attention.pdf      # Process specific file
+/papers                   # Batch process all papers
+```
+
+**Benefits**:
+- ✅ Simplest commands (just `/paper`)
+- ✅ Natural language support
+- ✅ Auto-completion
+- ✅ Intelligent defaults
+
+**See**: [skills/README.md](skills/README.md) for details
+
+### Method 2: Using Command Line
+
+```bash
+python main.py process --paper papers/example.pdf
+```
+
+### Process All Papers
+
+```bash
+# Place your PDF papers in the papers/ directory
+python main.py process --all
+```
+
+### Specify Output Format
+
+```bash
+# Generate HTML slides
+python main.py process --paper papers/example.pdf --format html
+
+# Generate PDF slides
+python main.py process --paper papers/example.pdf --format pdf
+
+# Generate Markdown only
+python main.py process --paper papers/example.pdf --format markdown
+```
+
+### Verbose Mode
+
+```bash
+python main.py process --paper papers/example.pdf --verbose
+```
+
+## Usage
+
+### Basic Commands
+
+```bash
+# Process single paper
+python main.py process -p papers/paper.pdf
+
+# Process all papers in papers/ directory
+python main.py process --all
+
+# Specify output format
+python main.py process -p papers/paper.pdf -f html
+
+# Verbose output
+python main.py process -p papers/paper.pdf -v
+
+# Disable cache
+python main.py process -p papers/paper.pdf --no-cache
+
+# Use custom config
+python main.py process -p papers/paper.pdf --config my_config.yaml
+```
+
+### Cache Management
+
+```bash
+# View cache statistics
+python main.py stats
+
+# Clear all cache
+python main.py clear-cache
+
+# Clean up expired cache files
+python main.py cleanup
+```
+
+## Output Structure
+
+```
+output/
+├── markdown/
+│   └── paper_name.md       # Generated Markdown slides
+└── slides/
+    ├── paper_name.html     # HTML presentation
+    └── paper_name.pdf      # PDF presentation
+```
+
+## Generated Presentation Structure
+
+The tool generates a 15-20 slide presentation with the following structure:
+
+1. **Title Slide** - Paper title, authors, venue, year
+2. **Background & Motivation** - Research context and motivation
+3. **Existing Problems** - Current challenges
+4. **Research Problem** - Core research question
+5. **Method Overview** - Proposed approach
+6. **Technical Details** - Implementation details
+7. **Innovations** - Key contributions
+8. **Experimental Setup** - Datasets, baselines, metrics
+9. **Main Results** - Experimental results
+10. **Result Analysis** - Interpretation of results
+11. **Discussion** - Implications and insights
+12. **Pros** - Advantages and strengths
+13. **Cons** - Limitations and weaknesses
+14. **Future Work** - Future research directions
+15. **Conclusion** - Summary and takeaways
+16. **Q&A** - Questions and discussion
+
+## Configuration
+
+Edit `config.yaml` to customize behavior:
+
+```yaml
+ai:
+  model: "claude-sonnet-4-6"          # Primary model
+  haiku_model: "claude-haiku-4-5-20251001"  # Cheaper model for quick analysis
+  max_tokens: 4096
+  temperature: 0.7
+  max_retries: 3
+
+cache:
+  enabled: true
+  cache_dir: "./cache"
+  ttl: 604800  # 7 days
+
+presentation:
+  theme: "academic"
+  slide_conversion_tool: "marp"
+
+marp:
+  theme: "academic"
+  paginate: true
+  size: "16:9"
+```
+
+## Cost Estimation
+
+### API Costs (approximate)
+
+- **Quick analysis** (abstract + conclusions): ~$0.01 per paper
+- **Full analysis**: ~$0.05-0.10 per paper (depending on length)
+- **With caching**: 50-70% cost reduction on repeated processing
+
+### Tips to Reduce Costs
+
+1. **Enable caching** (enabled by default)
+2. **Use verbose mode** to track costs: `--verbose`
+3. **Process papers once** and reuse cached results
+4. **Clear cache periodically**: `python main.py cleanup`
+
+## Architecture
+
+```
+PaperReader/
+├── papers/              # Input PDF papers
+├── src/
+│   ├── pdf_parser.py    # PDF text extraction
+│   ├── pdf_validator.py # PDF quality validation
+│   ├── ai_analyzer.py   # AI-powered analysis
+│   ├── content_extractor.py  # Slide content extraction
+│   ├── ppt_generator.py # Presentation generation
+│   ├── cache_manager.py # Caching layer
+│   ├── resilience.py    # Retry and error handling
+│   ├── progress_reporter.py  # Progress tracking
+│   └── utils.py         # Utility functions
+├── templates/
+│   └── ppt_template.md  # Slide template
+├── output/              # Generated presentations
+├── cache/               # Cached analysis results
+├── logs/                # Log files
+├── main.py              # Main entry point
+├── config.yaml          # Configuration
+└── requirements.txt     # Dependencies
+```
+
+## Troubleshooting
+
+### PDF Parsing Issues
+
+**Problem**: "No extractable text found"
+
+**Solution**: The PDF may be scanned. Currently, scanned PDFs are not supported. Use OCR tools to convert to text.
+
+### API Errors
+
+**Problem**: "API key not found"
+
+**Solution**: Set the `ANTHROPIC_API_KEY` environment variable or create a `.env` file.
+
+**Problem**: "Rate limit exceeded"
+
+**Solution**: The tool will automatically retry with exponential backoff. Wait a moment and try again.
+
+### Marp Conversion Issues
+
+**Problem**: "Marp CLI not found"
+
+**Solution**:
+- Install Marp CLI: `npm install -g @marp-team/marp-cli`
+- Or use `--format markdown` to generate Markdown only
+- The tool will fallback to standalone HTML generation
+
+## Development
+
+### Running Tests
+
+```bash
+pytest tests/
+```
+
+### Code Style
+
+This project follows PEP 8 style guidelines.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## License
+
+MIT License
+
+## Acknowledgments
+
+- Powered by [Anthropic Claude](https://www.anthropic.com/)
+- Presentation generation with [Marp](https://marp.app/)
+- PDF parsing with [PyMuPDF](https://pymupdf.readthedocs.io/)
+
+## Understanding the Data Flow
+
+To better understand how PaperReader processes your papers:
+
+- **[DATA_FLOW.md](DATA_FLOW.md)** - 详细的数据流程和中间产物说明
+- **[DATA_FLOW_QUICK_REFERENCE.md](DATA_FLOW_QUICK_REFERENCE.md)** - 快速参考卡片
+- **[examples/middle_products_example.py](examples/middle_products_example.py)** - 完整的中间产物示例
+
+### Debugging Tool
+
+Track the data flow of a specific paper:
+
+```bash
+# 使用示例数据（不需要API密钥）
+python debug_data_flow.py papers/example.pdf --skip-ai
+
+# 真实处理（需要API密钥）
+python debug_data_flow.py papers/example.pdf
+```
+
+This will show you:
+- PDF validation results
+- Extracted text and metadata
+- AI analysis results
+- Generated presentation content
+- All intermediate products
+
+## Support
+
+For issues and questions, please [open an issue](https://github.com/yourusername/paperreader/issues).

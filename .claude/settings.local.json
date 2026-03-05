@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lh papers/*.pdf)",
+      "Bash(python3 main.py process --paper papers/Human-In-the-Loop.pdf --format pdf --verbose 2>&1)",
+      "Bash(python3 main.py process --paper papers/Human-In-the-Loop.pdf --format html --verbose 2>&1 | head -100)",
+      "Bash(python3 md_to_pptx.py output/markdown/Human-In-the-Loop_debug.md output/slides/Human-In-the-Loop.pptx)",
+      "Bash(git init && git add -A && git commit -m \"chore: checkpoint before reorganization\")"
+    ]
+  }
+}
