@@ -82,7 +82,7 @@ The easiest way to use PaperReader is through Claude's skill system:
 
 ```bash
 # 1. Install the skill
-./install_skill.sh
+./tools/install_skill.sh
 
 # 2. In Claude chat, simply type:
 /paper                    # Process latest PDF
@@ -101,33 +101,33 @@ The easiest way to use PaperReader is through Claude's skill system:
 ### Method 2: Using Command Line
 
 ```bash
-python main.py process --paper papers/example.pdf
+python cli/main.py process --paper papers/example.pdf
 ```
 
 ### Process All Papers
 
 ```bash
 # Place your PDF papers in the papers/ directory
-python main.py process --all
+python cli/main.py process --all
 ```
 
 ### Specify Output Format
 
 ```bash
 # Generate HTML slides
-python main.py process --paper papers/example.pdf --format html
+python cli/main.py process --paper papers/example.pdf --format html
 
 # Generate PDF slides
-python main.py process --paper papers/example.pdf --format pdf
+python cli/main.py process --paper papers/example.pdf --format pdf
 
 # Generate Markdown only
-python main.py process --paper papers/example.pdf --format markdown
+python cli/main.py process --paper papers/example.pdf --format markdown
 ```
 
 ### Verbose Mode
 
 ```bash
-python main.py process --paper papers/example.pdf --verbose
+python cli/main.py process --paper papers/example.pdf --verbose
 ```
 
 ## Usage
@@ -136,35 +136,35 @@ python main.py process --paper papers/example.pdf --verbose
 
 ```bash
 # Process single paper
-python main.py process -p papers/paper.pdf
+python cli/main.py process -p papers/paper.pdf
 
 # Process all papers in papers/ directory
-python main.py process --all
+python cli/main.py process --all
 
 # Specify output format
-python main.py process -p papers/paper.pdf -f html
+python cli/main.py process -p papers/paper.pdf -f html
 
 # Verbose output
-python main.py process -p papers/paper.pdf -v
+python cli/main.py process -p papers/paper.pdf -v
 
 # Disable cache
-python main.py process -p papers/paper.pdf --no-cache
+python cli/main.py process -p papers/paper.pdf --no-cache
 
 # Use custom config
-python main.py process -p papers/paper.pdf --config my_config.yaml
+python cli/main.py process -p papers/paper.pdf --config my_config.yaml
 ```
 
 ### Cache Management
 
 ```bash
 # View cache statistics
-python main.py stats
+python cli/main.py stats
 
 # Clear all cache
-python main.py clear-cache
+python cli/main.py clear-cache
 
 # Clean up expired cache files
-python main.py cleanup
+python cli/main.py cleanup
 ```
 
 ## Output Structure
@@ -239,7 +239,7 @@ marp:
 1. **Enable caching** (enabled by default)
 2. **Use verbose mode** to track costs: `--verbose`
 3. **Process papers once** and reuse cached results
-4. **Clear cache periodically**: `python main.py cleanup`
+4. **Clear cache periodically**: `python cli/main.py cleanup`
 
 ## Architecture
 

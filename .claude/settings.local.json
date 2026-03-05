@@ -12,7 +12,10 @@
       "Bash(git mv DATA_FLOW.md DATA_FLOW_QUICK_REFERENCE.md DATA_VISUALIZATION.md UNDERSTANDING_DATA_FLOW.md PROJECT_SUMMARY.md docs/)",
       "Bash(ls -1 /Users/taoran.wang/Documents/PaperReader/*.md 2>/dev/null | grep -E \"\\(DATA_FLOW|DATA_VISUALIZATION|UNDERSTANDING|PROJECT_SUMMARY\\)\" || echo \"No target files found in root directory \\(expected\\)\")",
       "Bash(ls -lh /Users/taoran.wang/Documents/PaperReader/docs/*.md)",
-      "Bash(git mv skills/OVERVIEW.md skills/docs/ 2>/dev/null || echo \"Already moved or not exist\")"
+      "Bash(git mv skills/OVERVIEW.md skills/docs/ 2>/dev/null || echo \"Already moved or not exist\")",
+      "Bash(ls -1 /Users/taoran.wang/Documents/PaperReader | grep -E '\\\\.py$|\\\\.sh$|\\\\.md$' | sort)",
+      "Bash(test -f /Users/taoran.wang/Documents/PaperReader/main.py && echo \"main.py still in root\" || echo \"main.py moved from root\")",
+      "Bash(sed -i '' 's|python main.py|python cli/main.py|g' README.md && sed -i '' 's|./install_skill.sh|./tools/install_skill.sh|g' README.md && echo \"Updated README.md\")"
     ]
   }
 }
