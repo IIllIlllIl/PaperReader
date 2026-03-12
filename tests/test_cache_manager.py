@@ -6,7 +6,7 @@ import pytest
 import tempfile
 import json
 from pathlib import Path
-from src.cache_manager import CacheManager
+from src.core.cache_manager import CacheManager
 
 
 class TestCacheManager:

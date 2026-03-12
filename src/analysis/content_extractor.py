@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class EnhancedSlideContentV3:
+class SlideContent:
     """Content for a single slide (V3)"""
     title: str  # English only
     bullet_points: List[str]  # Keywords only
@@ -26,19 +26,19 @@ class EnhancedSlideContentV3:
 
 
 @dataclass
-class EnhancedOrganizedPresentationV3:
+class OrganizedPresentation:
     """Organized presentation with all slides (V3)"""
-    slides: List[EnhancedSlideContentV3]
+    slides: List[SlideContent]
     total_slides: int
 
 
-class EnhancedContentExtractorV3:
+class ContentExtractor:
     """Extracts and organizes content for V3 presentation"""
 
     def __init__(self):
         self.max_words_per_slide = 30
 
-    def extract_detailed_slides(self, analysis: Any) -> EnhancedOrganizedPresentationV3:
+    def extract_detailed_slides(self, analysis: Any) -> OrganizedPresentation:
         """
         Extract slides from analysis with V3 requirements
         
@@ -155,12 +155,12 @@ class EnhancedContentExtractorV3:
         
         logger.info(f"Created {len(slides)} slides (V3)")
         
-        return EnhancedOrganizedPresentationV3(
+        return OrganizedPresentation(
             slides=slides,
             total_slides=len(slides)
         )
     
-    def _create_title_slide(self, analysis: Any) -> EnhancedSlideContentV3:
+    def _create_title_slide(self, analysis: Any) -> SlideContent:
         """Create title slide"""
         title = getattr(analysis, 'title', 'Unknown Title')
         authors = getattr(analysis, 'authors', [])
@@ -176,7 +176,7 @@ class EnhancedContentExtractorV3:
             f"{year}"
         ]
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title=title,
             bullet_points=bullet_points,
             notes="Welcome slide",
@@ -184,7 +184,7 @@ class EnhancedContentExtractorV3:
             word_count=self._count_words(bullet_points)
         )
     
-    def _create_outline_slide(self) -> EnhancedSlideContentV3:
+    def _create_outline_slide(self) -> SlideContent:
         """Create outline slide"""
         bullet_points = [
             "Background & Problem",
@@ -195,7 +195,7 @@ class EnhancedContentExtractorV3:
             "Conclusion & Future Work"
         ]
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title="Outline",
             bullet_points=bullet_points,
             notes="Presentation outline",
@@ -203,12 +203,12 @@ class EnhancedContentExtractorV3:
             word_count=self._count_words(bullet_points)
         )
     
-    def _create_keywords_slide(self, title: str, keywords: List[str]) -> EnhancedSlideContentV3:
+    def _create_keywords_slide(self, title: str, keywords: List[str]) -> SlideContent:
         """Create slide with keywords"""
         # Ensure max 30 words
         bullet_points = keywords[:6]  # Max 6 items
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title=title,
             bullet_points=bullet_points,
             notes=f"{title} slide",
@@ -216,11 +216,11 @@ class EnhancedContentExtractorV3:
             word_count=self._count_words(bullet_points)
         )
     
-    def _create_insights_slide(self, insights: List[str]) -> EnhancedSlideContentV3:
+    def _create_insights_slide(self, insights: List[str]) -> SlideContent:
         """Create insights slide with emoji"""
         bullet_points = insights[:5]  # Max 5 insights
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title="Key Insights",
             bullet_points=bullet_points,
             notes="Key insights and breakthroughs",
@@ -228,11 +228,11 @@ class EnhancedContentExtractorV3:
             word_count=self._count_words(bullet_points)
         )
     
-    def _create_results_slide(self, results: List[str]) -> EnhancedSlideContentV3:
+    def _create_results_slide(self, results: List[str]) -> SlideContent:
         """Create results slide with bold numbers"""
         bullet_points = results[:6]  # Max 6 results
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title="Main Results",
             bullet_points=bullet_points,
             notes="Main experimental results",
@@ -240,12 +240,12 @@ class EnhancedContentExtractorV3:
             word_count=self._count_words(bullet_points)
         )
     
-    def _create_table_slide(self, title: str, table_content: str) -> EnhancedSlideContentV3:
+    def _create_table_slide(self, title: str, table_content: str) -> SlideContent:
         """Create table slide"""
         # Table content is already in Markdown format
         bullet_points = [table_content]
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title=title,
             bullet_points=bullet_points,
             notes=f"{title} table",
@@ -253,9 +253,9 @@ class EnhancedContentExtractorV3:
             word_count=self._count_table_words(table_content)
         )
     
-    def _create_qa_slide(self) -> EnhancedSlideContentV3:
+    def _create_qa_slide(self) -> SlideContent:
         """Create Q&A slide"""
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title="Q&A",
             bullet_points=["Thank you", "Questions?"],
             notes="Open for questions",
@@ -286,7 +286,7 @@ class EnhancedContentExtractorV3:
         # Estimate words: ~2 words per cell
         return header_cells * data_rows * 2
 
-    def _create_figure_slide(self, title: str, image_path: str, caption: str = "") -> EnhancedSlideContentV3:
+    def _create_figure_slide(self, title: str, image_path: str, caption: str = "") -> SlideContent:
         """Create slide with figure"""
         bullet_points = []
         
@@ -298,7 +298,7 @@ class EnhancedContentExtractorV3:
         if caption:
             bullet_points.append(f"*{caption}*")
         
-        return EnhancedSlideContentV3(
+        return SlideContent(
             title=title,
             bullet_points=bullet_points,
             notes=f"Figure: {title}",

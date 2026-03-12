@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class DetailedPaperAnalysis:
+class PaperAnalysis:
     """Detailed analysis of the paper"""
     
     # Basic information
@@ -72,7 +72,7 @@ class DetailedPaperAnalysis:
     key_takeaways: List[str]  # Max 4 keywords
 
 
-class EnhancedAIAnalyzer:
+class AIAnalyzer:
     """Enhanced AI analyzer with V3 prompt engineering"""
     
     def __init__(self, api_key: str, model: str = "claude-sonnet-4-6"):
@@ -86,7 +86,7 @@ class EnhancedAIAnalyzer:
             "claude-sonnet-4-6": {"input": 0.003, "output": 0.015}
         }
     
-    def analyze_paper_detailed(self, paper_text: str, metadata: Optional[Dict] = None) -> DetailedPaperAnalysis:
+    def analyze_paper_detailed(self, paper_text: str, metadata: Optional[Dict] = None) -> PaperAnalysis:
         """Perform detailed analysis of paper with V3 format"""
         logger.info("Starting V3 detailed paper analysis")
         
@@ -251,7 +251,7 @@ Paper text to analyze:
 
         return prompt
     
-    def _parse_v3_response(self, content: str, metadata: Optional[Dict] = None) -> DetailedPaperAnalysis:
+    def _parse_v3_response(self, content: str, metadata: Optional[Dict] = None) -> PaperAnalysis:
         """Parse V3 response into structured data"""
         
         # Extract data from response
@@ -259,7 +259,7 @@ Paper text to analyze:
         
         # Parse sections from response
         # This is a simplified parser - you may need to enhance it
-        analysis = DetailedPaperAnalysis(
+        analysis = PaperAnalysis(
             title=metadata.get('title', 'Unknown') if metadata else 'Unknown',
             authors=metadata.get('authors', 'Unknown') if metadata else 'Unknown',
             year=metadata.get('year', '2024') if metadata else '2024',

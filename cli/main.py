@@ -15,20 +15,20 @@ from src.utils import (
     load_config, setup_logging, get_file_hash, ensure_dir,
     get_api_key, scan_papers, format_time
 )
-from src.pdf_parser import PDFParser
-from src.pdf_validator import PDFQuality
-from src.ai_analyzer import AIAnalyzer
-from src.content_extractor import ContentExtractor
-from src.ppt_generator import PPTGenerator
-from src.cache_manager import CacheManager
-from src.resilience import ResilientAIAnalyzer, RetryConfig
-from src.progress_reporter import get_reporter
+from src.parser.pdf_parser import PDFParser
+from src.parser.pdf_validator import PDFQuality
+from src.analysis.ai_analyzer import AIAnalyzer
+from src.analysis.content_extractor import ContentExtractor
+from src.generation.ppt_generator import PPTGenerator
+from src.core.cache_manager import CacheManager
+from src.core.resilience import ResilientAIAnalyzer, RetryConfig
+from src.core.progress_reporter import get_reporter
 
 # Import enhanced modules
 try:
-    from src.ai_analyzer_enhanced import EnhancedAIAnalyzer
-    from src.content_extractor_enhanced import EnhancedContentExtractor
-    from src.ppt_generator_enhanced import EnhancedPPTGenerator
+    from src.analysis.ai_analyzer import EnhancedAIAnalyzer
+    from src.analysis.content_extractor import EnhancedContentExtractor
+    from src.generation.ppt_generator import EnhancedPPTGenerator
     ENHANCED_AVAILABLE = True
 except ImportError:
     ENHANCED_AVAILABLE = False

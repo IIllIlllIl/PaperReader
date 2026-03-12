@@ -3,8 +3,8 @@ Tests for PPT Generator
 """
 
 import pytest
-from src.ppt_generator import PPTGenerator
-from src.content_extractor import ContentExtractor, OrganizedPresentation, SlideContent
+from src.generation.ppt_generator import PPTGenerator
+from src.analysis.content_extractor import ContentExtractor, OrganizedPresentation, SlideContent
 
 
 class TestPPTGenerator:

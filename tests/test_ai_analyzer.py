@@ -3,7 +3,7 @@ Tests for AI Analyzer
 """
 
 import pytest
-from src.ai_analyzer import AIAnalyzer, PaperAnalysis, PresentationContent
+from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis, PresentationContent
 
 
 class TestAIAnalyzer:

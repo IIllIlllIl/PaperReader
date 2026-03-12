@@ -16,7 +16,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-class EnhancedPPTGeneratorV3:
+class PPTGenerator:
     """Generates presentation slides in Markdown format (V3)"""
 
     def __init__(self, template_path: str = "./templates/ppt_template.md"):

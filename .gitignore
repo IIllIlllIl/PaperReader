@@ -66,3 +66,13 @@ htmlcov/
 # Temporary files
 *.tmp
 *.bak
+
+
+# Added by refactor script
+# Runtime data
+runtime/cache/
+runtime/logs/
+# Outputs
+outputs/slides/*.pptx
+outputs/images/*.png
+outputs/markdown/*.md

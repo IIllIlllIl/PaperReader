@@ -76,7 +76,18 @@
       "Bash(ls -lh tools/*.py)",
       "Bash(chmod +x /Users/taoran.wang/Documents/PaperReader/scripts/refactor_repository.py)",
       "Bash(python scripts/refactor_repository.py --help)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(rm -rf src/analysis src/core src/generation src/parser runtime outputs archive 2>/dev/null; git clean -fd)",
+      "Bash(python3 scripts/refactor_repository.py 2>&1 | tee /tmp/refactor_output.log)",
+      "Bash(python3 -m pytest tests/ -v 2>&1 | head -50)",
+      "Bash(python3 -m pytest tests/ -v 2>&1 | head -80)",
+      "Bash(python3 -c \"from src.analysis.ai_analyzer import AIAnalyzer; print\\('✅ AIAnalyzer import OK'\\)\")",
+      "Bash(python3 -c \"from src.analysis.content_extractor import ContentExtractor; print\\('✅ ContentExtractor import OK'\\)\")",
+      "Bash(python3 -c \"from src.generation.ppt_generator import PPTGenerator; print\\('✅ PPTGenerator import OK'\\)\")",
+      "Bash(python3 -m pytest tests/ -v 2>&1 | tail -30)",
+      "Bash(python3 -c \"from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis; print\\('✅ AIAnalyzer & PaperAnalysis import OK'\\)\")",
+      "Bash(python3 -c \"from src.analysis.content_extractor import ContentExtractor, OrganizedPresentation, SlideContent; print\\('✅ ContentExtractor & classes import OK'\\)\")",
+      "Bash(python3 -m pytest tests/ -v 2>&1 | tail -20)"
     ]
   }
 }

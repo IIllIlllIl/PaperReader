@@ -4,8 +4,8 @@ Tests for PDF Parser
 
 import pytest
 from pathlib import Path
-from src.pdf_parser import PDFParser
-from src.pdf_validator import PDFValidator, PDFQuality, LayoutType
+from src.parser.pdf_parser import PDFParser
+from src.parser.pdf_validator import PDFValidator, PDFQuality, LayoutType
 
 
 class TestPDFValidator:
