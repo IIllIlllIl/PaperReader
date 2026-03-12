@@ -3,10 +3,13 @@
 PaperReader - Academic Paper Reading and Presentation Generation Tool
 
 Main entry point for processing papers and generating presentations
+
+Enhanced with PPTX support and detailed slide generation
 """
 
 import sys
 import time
+import subprocess
 from pathlib import Path
 from typing import Optional, List
 import click
@@ -44,14 +47,32 @@ def cli():
 @cli.command()
 @click.option('--paper', '-p', type=click.Path(exists=True), help='Path to a single PDF paper')
 @click.option('--all', 'process_all', is_flag=True, help='Process all papers in the papers directory')
-@click.option('--format', '-f', type=click.Choice(['markdown', 'html', 'pdf']), default='html',
-              help='Output format (default: html)')
+@click.option('--format', '-f', 
+              type=click.Choice(['markdown', 'html', 'pdf', 'pptx']), 
+              default='html',
+              help='Output format (default: html, pptx=enhanced)')
+@click.option('--enhanced', '-e', is_flag=True, 
+              help='Use enhanced mode for more detailed slides (30+ slides, ~$0.11)')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose output with progress details')
 @click.option('--no-cache', is_flag=True, help='Disable cache')
 @click.option('--config', type=click.Path(exists=True), default='config.yaml', help='Path to config file')
-def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
-           no_cache: bool, config: str):
+def process(paper: Optional[str], process_all: bool, format: str, enhanced: bool,
+           verbose: bool, no_cache: bool, config: str):
     """Process paper(s) and generate presentation(s)"""
+    
+    # Check if enhanced mode is requested but not available
+    if enhanced and not ENHANCED_AVAILABLE:
+        click.echo("Error: Enhanced mode requires additional modules.")
+        click.echo("Please ensure the following files exist:")
+        click.echo("  - src/ai_analyzer_enhanced.py")
+        click.echo("  - src/content_extractor_enhanced.py")
+        click.echo("  - src/ppt_generator_enhanced.py")
+        sys.exit(1)
+    
+    # Check if pptx format is requested but enhanced mode is not enabled
+    if format == 'pptx' and not enhanced:
+        click.echo("Note: PPTX format automatically enables enhanced mode for better quality.")
+        enhanced = True
     
     # Load configuration
     cfg = load_config(config)
@@ -78,19 +99,25 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
     if no_cache:
         cache_manager.disable()
     
-    ai_analyzer = AIAnalyzer(
-        api_key=api_key,
-        model=cfg['ai']['model'],
-        haiku_model=cfg['ai']['haiku_model']
-    )
+    # Use enhanced or standard components based on mode
+    if enhanced:
+        reporter.info("Using enhanced mode for detailed slides")
+        ai_analyzer = EnhancedAIAnalyzer(api_key=api_key)
+        content_extractor = EnhancedContentExtractor()
+        ppt_generator = EnhancedPPTGenerator()
+    else:
+        ai_analyzer = AIAnalyzer(
+            api_key=api_key,
+            model=cfg['ai']['model'],
+            haiku_model=cfg['ai']['haiku_model']
+        )
+        content_extractor = ContentExtractor()
+        ppt_generator = PPTGenerator(template_path=cfg['presentation']['template'])
     
     resilient_analyzer = ResilientAIAnalyzer(
         analyzer=ai_analyzer,
         config=RetryConfig(max_retries=cfg['ai']['max_retries'])
     )
-    
-    content_extractor = ContentExtractor()
-    ppt_generator = PPTGenerator(template_path=cfg['presentation']['template'])
     
     # Determine which papers to process
     if process_all:
@@ -120,9 +147,10 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
     
     start_time = time.time()
     
+    mode_str = "enhanced" if enhanced else "standard"
     reporter.show_panel(
         "PaperReader",
-        f"Papers to process: {len(papers)}\nOutput format: {format}\nCache: {'disabled' if no_cache else 'enabled'}"
+        f"Papers to process: {len(papers)}\nOutput format: {format} ({mode_str} mode)\nCache: {'disabled' if no_cache else 'enabled'}"
     )
     
     for i, paper_path in enumerate(papers, 1):
@@ -138,6 +166,7 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
                 content_extractor=content_extractor,
                 ppt_generator=ppt_generator,
                 output_format=format,
+                enhanced=enhanced,
                 reporter=reporter
             )
             
@@ -164,9 +193,8 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
 
 
 def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager,
-                        analyzer: ResilientAIAnalyzer, raw_analyzer: AIAnalyzer,
-                        content_extractor: ContentExtractor, ppt_generator: PPTGenerator,
-                        output_format: str, reporter) -> bool:
+                        analyzer, raw_analyzer, content_extractor, ppt_generator,
+                        output_format: str, enhanced: bool, reporter) -> bool:
     """
     Process a single paper
     
@@ -208,14 +236,22 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
     
     if cached_analysis:
         reporter.success("Using cached analysis")
-        analysis = AIAnalyzer.api_key.__class__(**cached_analysis['analysis'])
-        presentation_content = AIAnalyzer.generate_presentation_content.__func__(AIAnalyzer, analysis, metadata.__dict__)
+        if enhanced:
+            analysis = type(raw_analyzer).__class__(**cached_analysis['analysis'])
+            presentation_content = type(raw_analyzer).generate_presentation_content.__func__(raw_analyzer, analysis, metadata.__dict__)
+        else:
+            analysis = type(raw_analyzer).PaperAnalysis(**cached_analysis['analysis'])
+            presentation_content = type(raw_analyzer).generate_presentation_content.__func__(raw_analyzer, analysis, metadata.__dict__)
     else:
         # Step 4: AI Analysis
         reporter.update(description="Analyzing with AI...")
         try:
-            analysis = analyzer.analyze_with_retry(paper_text, metadata=metadata.__dict__)
-            presentation_content = raw_analyzer.generate_presentation_content(analysis, metadata.__dict__)
+            if enhanced:
+                analysis = analyzer.analyze_with_retry(paper_text, metadata=metadata.__dict__)
+                presentation_content = raw_analyzer.generate_presentation_content(analysis, metadata.__dict__)
+            else:
+                analysis = analyzer.analyze_with_retry(paper_text, metadata=metadata.__dict__)
+                presentation_content = raw_analyzer.generate_presentation_content(analysis, metadata.__dict__)
             
             # Save to cache
             cache_manager.save_analysis(
@@ -231,7 +267,10 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
     
     # Step 5: Extract slide content
     reporter.update(description="Extracting slide content...")
-    organized_presentation = content_extractor.extract_slide_content(analysis, presentation_content)
+    if enhanced:
+        organized_presentation = content_extractor.extract_detailed_slides(analysis)
+    else:
+        organized_presentation = content_extractor.extract_slide_content(analysis, presentation_content)
     reporter.success(f"Organized {organized_presentation.total_slides} slides")
     
     # Step 6: Generate presentation
@@ -242,7 +281,8 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         
         # Save Markdown
         markdown_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'markdown')
-        markdown_path = markdown_dir / f"{paper_name}.md"
+        suffix = '_enhanced' if enhanced else ''
+        markdown_path = markdown_dir / f"{paper_name}{suffix}.md"
         ppt_generator.save_presentation(markdown, str(markdown_path))
         
         reporter.success(f"Markdown saved: {markdown_path}")
@@ -250,7 +290,7 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         # Convert to final format
         if output_format in ['html', 'pdf']:
             slides_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'slides')
-            output_path = slides_dir / f"{paper_name}.{output_format}"
+            output_path = slides_dir / f"{paper_name}{suffix}.{output_format}"
             
             if output_format == 'html':
                 success = ppt_generator.convert_to_html(str(markdown_path), str(output_path))
@@ -267,9 +307,30 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
                     f.write(standalone_html)
                 reporter.success(f"Standalone HTML saved: {output_path}")
         
+        elif output_format == 'pptx':
+            # Convert to PPTX using md_to_pptx.py
+            slides_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'slides')
+            output_path = slides_dir / f"{paper_name}{suffix}.pptx"
+            
+            # Use md_to_pptx.py tool
+            md_to_pptx_path = Path(__file__).parent.parent / 'tools' / 'md_to_pptx.py'
+            
+            result = subprocess.run(
+                ['python3', str(md_to_pptx_path), str(markdown_path), str(output_path)],
+                capture_output=True,
+                text=True
+            )
+            
+            if result.returncode == 0:
+                reporter.success(f"PPTX saved: {output_path}")
+            else:
+                reporter.error(f"PPTX conversion failed: {result.stderr}")
+                reporter.stop(success=False, message="PPTX conversion failed")
+                return False
+        
         reporter.stop(success=True, message="Processing completed!")
         return True
-    
+        
     except Exception as e:
         reporter.error(f"Presentation generation failed: {e}")
         reporter.stop(success=False, message="Presentation generation failed")

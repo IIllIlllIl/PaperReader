@@ -24,18 +24,9 @@ from src.cache_manager import CacheManager
 from src.resilience import ResilientAIAnalyzer, RetryConfig
 from src.progress_reporter import get_reporter
 
-# Import enhanced modules
-try:
-    from src.ai_analyzer_enhanced import EnhancedAIAnalyzer
-    from src.content_extractor_enhanced import EnhancedContentExtractor
-    from src.ppt_generator_enhanced import EnhancedPPTGenerator
-    ENHANCED_AVAILABLE = True
-except ImportError:
-    ENHANCED_AVAILABLE = False
-
 
 @click.group()
-@click.version_option(version='0.2.0')
+@click.version_option(version='0.1.0')
 def cli():
     """PaperReader - Generate presentations from academic papers"""
     pass
@@ -52,46 +43,46 @@ def cli():
 def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
            no_cache: bool, config: str):
     """Process paper(s) and generate presentation(s)"""
-    
+
     # Load configuration
     cfg = load_config(config)
-    
+
     # Setup logging
     logger = setup_logging(cfg)
-    
+
     # Setup progress reporter
     reporter = get_reporter(verbose)
-    
+
     # Get API key
     try:
         api_key = get_api_key(cfg)
     except ValueError as e:
         reporter.error(str(e))
         sys.exit(1)
-    
+
     # Initialize components
     cache_manager = CacheManager(
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     if no_cache:
         cache_manager.disable()
-    
+
     ai_analyzer = AIAnalyzer(
         api_key=api_key,
         model=cfg['ai']['model'],
         haiku_model=cfg['ai']['haiku_model']
     )
-    
+
     resilient_analyzer = ResilientAIAnalyzer(
         analyzer=ai_analyzer,
         config=RetryConfig(max_retries=cfg['ai']['max_retries'])
     )
-    
+
     content_extractor = ContentExtractor()
     ppt_generator = PPTGenerator(template_path=cfg['presentation']['template'])
-    
+
     # Determine which papers to process
     if process_all:
         try:
@@ -104,11 +95,11 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
     else:
         reporter.error("Please specify --paper or --all")
         sys.exit(1)
-    
+
     if not papers:
         reporter.warning("No papers found to process")
         sys.exit(0)
-    
+
     # Process papers
     stats = {
         'papers_processed': 0,
@@ -117,17 +108,17 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
         'total_time': 0,
         'estimated_cost': 0.0,
     }
-    
+
     start_time = time.time()
-    
+
     reporter.show_panel(
         "PaperReader",
         f"Papers to process: {len(papers)}\nOutput format: {format}\nCache: {'disabled' if no_cache else 'enabled'}"
     )
-    
+
     for i, paper_path in enumerate(papers, 1):
         reporter.info(f"\n[{i}/{len(papers)}] Processing: {Path(paper_path).name}")
-        
+
         try:
             success = process_single_paper(
                 paper_path=paper_path,
@@ -140,25 +131,25 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
                 output_format=format,
                 reporter=reporter
             )
-            
+
             if success:
                 stats['papers_processed'] += 1
                 stats['cache_hits'] += 1 if cache_manager.enabled else 0
             else:
                 stats['papers_failed'] += 1
-                
+
         except Exception as e:
             logger.error(f"Failed to process {paper_path}: {e}")
             reporter.error(f"Failed: {e}")
             stats['papers_failed'] += 1
-    
+
     # Calculate stats
     stats['total_time'] = format_time(time.time() - start_time)
     stats['estimated_cost'] = ai_analyzer.get_stats()['total_cost']
-    
+
     # Show summary
     reporter.show_summary(stats)
-    
+
     if stats['papers_failed'] > 0:
         sys.exit(1)
 
@@ -169,27 +160,27 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
                         output_format: str, reporter) -> bool:
     """
     Process a single paper
-    
+
     Returns:
         True if successful, False otherwise
     """
     paper_name = Path(paper_path).stem
-    
+
     # Start progress
     reporter.start(total_steps=6, description=f"Processing {paper_name}")
-    
+
     # Step 1: Validate PDF
     reporter.update(description="Validating PDF...")
     parser = PDFParser(paper_path)
     is_valid, validation_msg = parser.validate()
-    
+
     if not is_valid:
         reporter.error(validation_msg)
         reporter.stop(success=False, message="PDF validation failed")
         return False
-    
+
     reporter.success(f"PDF validation: {validation_msg}")
-    
+
     # Step 2: Extract text and metadata
     reporter.update(description="Extracting text...")
     try:
@@ -200,63 +191,63 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         reporter.error(f"Text extraction failed: {e}")
         reporter.stop(success=False, message="Text extraction failed")
         return False
-    
+
     # Step 3: Check cache
     reporter.update(description="Checking cache...")
     pdf_hash = get_file_hash(paper_path)
     cached_analysis = cache_manager.get_cached_analysis(pdf_hash)
-    
+
     if cached_analysis:
         reporter.success("Using cached analysis")
-        analysis = AIAnalyzer.api_key.__class__(**cached_analysis['analysis'])
-        presentation_content = AIAnalyzer.generate_presentation_content.__func__(AIAnalyzer, analysis, metadata.__dict__)
+        analysis = cached_analysis['analysis']
+        presentation_content = cached_analysis['presentation_content']
     else:
         # Step 4: AI Analysis
         reporter.update(description="Analyzing with AI...")
         try:
             analysis = analyzer.analyze_with_retry(paper_text, metadata=metadata.__dict__)
             presentation_content = raw_analyzer.generate_presentation_content(analysis, metadata.__dict__)
-            
+
             # Save to cache
             cache_manager.save_analysis(
                 pdf_hash,
                 {'analysis': analysis.__dict__, 'presentation_content': presentation_content.__dict__}
             )
-            
+
             reporter.success(f"AI analysis completed (cost: ${raw_analyzer.get_stats()['total_cost']:.4f})")
         except Exception as e:
             reporter.error(f"AI analysis failed: {e}")
             reporter.stop(success=False, message="AI analysis failed")
             return False
-    
+
     # Step 5: Extract slide content
     reporter.update(description="Extracting slide content...")
     organized_presentation = content_extractor.extract_slide_content(analysis, presentation_content)
     reporter.success(f"Organized {organized_presentation.total_slides} slides")
-    
+
     # Step 6: Generate presentation
     reporter.update(description="Generating presentation...")
     try:
         # Generate Markdown
         markdown = ppt_generator.generate_markdown(organized_presentation)
-        
+
         # Save Markdown
         markdown_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'markdown')
         markdown_path = markdown_dir / f"{paper_name}.md"
         ppt_generator.save_presentation(markdown, str(markdown_path))
-        
+
         reporter.success(f"Markdown saved: {markdown_path}")
-        
+
         # Convert to final format
         if output_format in ['html', 'pdf']:
             slides_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'slides')
             output_path = slides_dir / f"{paper_name}.{output_format}"
-            
+
             if output_format == 'html':
                 success = ppt_generator.convert_to_html(str(markdown_path), str(output_path))
             else:
                 success = ppt_generator.convert_to_pdf(str(markdown_path), str(output_path))
-            
+
             if success:
                 reporter.success(f"{output_format.upper()} saved: {output_path}")
             else:
@@ -266,10 +257,10 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
                 with open(output_path, 'w', encoding='utf-8') as f:
                     f.write(standalone_html)
                 reporter.success(f"Standalone HTML saved: {output_path}")
-        
+
         reporter.stop(success=True, message="Processing completed!")
         return True
-    
+
     except Exception as e:
         reporter.error(f"Presentation generation failed: {e}")
         reporter.stop(success=False, message="Presentation generation failed")
@@ -284,9 +275,9 @@ def stats():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     cache_stats = cache_manager.get_cache_stats()
-    
+
     click.echo("Cache Statistics:")
     click.echo(f"  Total files: {cache_stats['total_files']}")
     click.echo(f"  Valid files: {cache_stats['valid_files']}")
@@ -302,7 +293,7 @@ def clear_cache():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     count = cache_manager.clear_cache()
     click.echo(f"Cleared {count} cache files")
 
@@ -315,7 +306,7 @@ def cleanup():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     count = cache_manager.cleanup_expired()
     click.echo(f"Removed {count} expired cache files")
 
