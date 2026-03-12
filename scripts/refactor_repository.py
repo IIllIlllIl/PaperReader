@@ -221,10 +221,10 @@ class RepositoryRefactor:
                     )
 
     def reorganize_runtime(self):
-        """Reorganize runtime data"""
+        """Reorganize runtime data (using regular mv, not git mv)"""
         self.log("\n💾 Phase 2.4: Reorganizing runtime data...")
 
-        # Move cache
+        # Move cache (not in git, use shutil)
         cache_dir = self.root_dir / "cache"
         if cache_dir.exists():
             runtime_cache = self.root_dir / "runtime" / "cache"
@@ -234,13 +234,16 @@ class RepositoryRefactor:
 
             for cache_file in cache_dir.glob("*"):
                 if cache_file.is_file():
-                    self.move_file(
-                        f"cache/{cache_file.name}",
-                        f"runtime/cache/{cache_file.name}",
-                        "runtime cache"
-                    )
+                    src_path = cache_file
+                    dst_path = runtime_cache / cache_file.name
 
-        # Move logs
+                    self.log(f"Moving: cache/{cache_file.name} → runtime/cache/{cache_file.name}")
+
+                    if not self.dry_run:
+                        shutil.move(str(src_path), str(dst_path))
+                    self.stats['files_moved'] += 1
+
+        # Move logs (not in git, use shutil)
         logs_dir = self.root_dir / "logs"
         if logs_dir.exists():
             runtime_logs = self.root_dir / "runtime" / "logs"
@@ -250,11 +253,14 @@ class RepositoryRefactor:
 
             for log_file in logs_dir.glob("*"):
                 if log_file.is_file():
-                    self.move_file(
-                        f"logs/{log_file.name}",
-                        f"runtime/logs/{log_file.name}",
-                        "runtime log"
-                    )
+                    src_path = log_file
+                    dst_path = runtime_logs / log_file.name
+
+                    self.log(f"Moving: logs/{log_file.name} → runtime/logs/{log_file.name}")
+
+                    if not self.dry_run:
+                        shutil.move(str(src_path), str(dst_path))
+                    self.stats['files_moved'] += 1
 
         # Rename output to outputs
         output_dir = self.root_dir / "output"
@@ -262,8 +268,21 @@ class RepositoryRefactor:
             outputs_dir = self.root_dir / "outputs"
             if not outputs_dir.exists():
                 self.log("Renaming: output → outputs")
-                if not self.dry_run:
-                    self.run_command(["git", "mv", "output", "outputs"])
+
+                # Check if output is in git
+                result = self.run_command(
+                    ["git", "ls-files", "output/"],
+                    check=False
+                )
+
+                if result.returncode == 0 and result.stdout.strip():
+                    # Use git mv if output is tracked
+                    if not self.dry_run:
+                        self.run_command(["git", "mv", "output", "outputs"])
+                else:
+                    # Use shutil if not tracked
+                    if not self.dry_run:
+                        shutil.move(str(output_dir), str(outputs_dir))
 
     def update_imports_in_file(self, file_path: Path) -> bool:
         """Update imports in a single file"""
