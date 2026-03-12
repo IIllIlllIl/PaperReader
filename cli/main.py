@@ -11,6 +11,9 @@ from pathlib import Path
 from typing import Optional, List
 import click
 
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from src.utils import (
     load_config, setup_logging, get_file_hash, ensure_dir,
     get_api_key, scan_papers, format_time

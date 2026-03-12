@@ -54,8 +54,9 @@ class TestContentExtractor:
         extractor = ContentExtractor()
         assert extractor is not None
 
+    @pytest.mark.skip(reason="V3 API does not have suggest_visualizations method")
     def test_suggest_visualizations(self):
-        """Test visualization suggestions"""
+        """Test visualization suggestions (deprecated in V3)"""
         extractor = ContentExtractor()
 
         results = [

@@ -3,7 +3,7 @@ Tests for AI Analyzer
 """
 
 import pytest
-from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis, PresentationContent
+from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis
 
 
 class TestAIAnalyzer:
@@ -15,67 +15,52 @@ class TestAIAnalyzer:
         assert AIAnalyzer is not None
 
     def test_paper_analysis_dataclass(self):
-        """Test PaperAnalysis dataclass"""
+        """Test PaperAnalysis dataclass (V3 API)"""
+        # V3 uses keyword-first approach with many fields
+        # Just test that we can create an instance with minimal required fields
         analysis = PaperAnalysis(
             title="Test Paper",
-            authors=["Author 1", "Author 2"],
-            problem="Test problem",
-            motivation="Test motivation",
-            method="Test method",
-            innovations=["Innovation 1"],
-            experiments="Test experiments",
-            results=["Result 1"],
-            pros=["Pro 1"],
-            cons=["Con 1"],
-            conclusions="Test conclusions",
-            future_work="Test future work"
+            authors="Author 1, Author 2",
+            year="2024",
+            summary="Test summary",
+            research_background_keywords=["keyword1", "keyword2"],
+            research_context_stats={"metric": "value"},
+            research_gap_keywords=["gap1"],
+            research_problem_statement="Test problem statement",
+            key_insights=["insight1", "insight2"],
+            framework_name="TestFramework",
+            key_components=["component1"],
+            workflow_steps=["step1"],
+            core_algorithms=["algo1"],
+            key_techniques=["tech1"],
+            techniques_comparison_table={"Tech": ["Pro", "Con"]},
+            datasets_table={"Dataset": "Description"},
+            baselines_table={"Baseline": "Description"},
+            metrics_table={"Metric": "Description"},
+            experimental_setup_table={"Config": "Value"},
+            main_results=["result1"],
+            performance_comparison_table={"Metric": ["Val1", "Val2"]},
+            key_findings=["finding1"],
+            implications=["implication1"],
+            strengths=["strength1"],
+            limitations_keywords=["limitation1"],
+            future_work_keywords=["future1"],
+            key_takeaways=["takeaway1"]
         )
 
         assert analysis.title == "Test Paper"
-        assert len(analysis.authors) == 2
-        assert len(analysis.innovations) == 1
-
-    def test_presentation_content_dataclass(self):
-        """Test PresentationContent dataclass"""
-        content = PresentationContent(
-            title="Test",
-            authors="Test Author",
-            venue="Test Venue",
-            year="2024",
-            motivation=["Motivation 1"],
-            existing_problems=["Problem 1"],
-            research_problem="Test problem",
-            method_overview="Test method",
-            technical_details=["Detail 1"],
-            innovations=["Innovation 1"],
-            experimental_setup="Test setup",
-            main_results=["Result 1"],
-            result_analysis="Test analysis",
-            discussion="Test discussion",
-            pros=["Pro 1"],
-            cons=["Con 1"],
-            future_work=["Future 1"],
-            conclusions="Test conclusions"
-        )
-
-        assert content.title == "Test"
-        assert len(content.motivation) == 1
+        assert analysis.authors == "Author 1, Author 2"
+        assert len(analysis.research_background_keywords) == 2
+        assert len(analysis.key_insights) == 2
 
 
-class TestPromptTemplates:
-    """Test AI prompt templates"""
+class TestAnalyzerMethods:
+    """Test analyzer methods exist"""
 
-    def test_quick_analysis_prompt_exists(self):
-        """Test quick analysis prompt exists"""
-        assert hasattr(AIAnalyzer, 'QUICK_ANALYSIS_PROMPT')
-        assert len(AIAnalyzer.QUICK_ANALYSIS_PROMPT) > 0
+    def test_analyze_paper_detailed_method_exists(self):
+        """Test analyze_paper_detailed method exists"""
+        assert hasattr(AIAnalyzer, 'analyze_paper_detailed')
 
-    def test_full_analysis_prompt_exists(self):
-        """Test full analysis prompt exists"""
-        assert hasattr(AIAnalyzer, 'FULL_ANALYSIS_PROMPT')
-        assert len(AIAnalyzer.FULL_ANALYSIS_PROMPT) > 0
-
-    def test_prompts_contain_placeholders(self):
-        """Test prompts contain necessary placeholders"""
-        assert '{paper_text}' in AIAnalyzer.QUICK_ANALYSIS_PROMPT
-        assert '{paper_text}' in AIAnalyzer.FULL_ANALYSIS_PROMPT
+    def test_get_stats_method_exists(self):
+        """Test get_stats method exists"""
+        assert hasattr(AIAnalyzer, 'get_stats')
