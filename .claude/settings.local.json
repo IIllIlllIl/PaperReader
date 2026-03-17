@@ -133,7 +133,8 @@
       "Bash(cat:*)",
       "Bash(for dir:*)",
       "Bash(wc:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(./tools/cleanup_abandoned_files.sh << 'INPUT'\ny\nn\nINPUT)"
     ]
   }
 }
