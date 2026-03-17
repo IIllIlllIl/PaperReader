@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from typing import Optional, List
 import click
+import yaml
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -20,21 +21,13 @@ from src.utils import (
 )
 from src.parser.pdf_parser import PDFParser
 from src.parser.pdf_validator import PDFQuality
-from src.analysis.ai_analyzer import AIAnalyzer
+from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis
 from src.analysis.content_extractor import ContentExtractor
 from src.generation.ppt_generator import PPTGenerator
 from src.core.cache_manager import CacheManager
-from src.core.resilience import ResilientAIAnalyzer, RetryConfig
+from src.core.resilience import RetryConfig, exponential_backoff
 from src.core.progress_reporter import get_reporter
-
-# Import enhanced modules
-try:
-    from src.analysis.ai_analyzer import EnhancedAIAnalyzer
-    from src.analysis.content_extractor import EnhancedContentExtractor
-    from src.generation.ppt_generator import EnhancedPPTGenerator
-    ENHANCED_AVAILABLE = True
-except ImportError:
-    ENHANCED_AVAILABLE = False
+from src.core.pipeline import PaperPresentationPipeline
 
 
 @click.group()
@@ -83,13 +76,7 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
     
     ai_analyzer = AIAnalyzer(
         api_key=api_key,
-        model=cfg['ai']['model'],
-        haiku_model=cfg['ai']['haiku_model']
-    )
-    
-    resilient_analyzer = ResilientAIAnalyzer(
-        analyzer=ai_analyzer,
-        config=RetryConfig(max_retries=cfg['ai']['max_retries'])
+        model=cfg['ai']['model']
     )
     
     content_extractor = ContentExtractor()
@@ -136,7 +123,7 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
                 paper_path=paper_path,
                 cfg=cfg,
                 cache_manager=cache_manager,
-                analyzer=resilient_analyzer,
+                analyzer=ai_analyzer,
                 raw_analyzer=ai_analyzer,
                 content_extractor=content_extractor,
                 ppt_generator=ppt_generator,
@@ -167,7 +154,7 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
 
 
 def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager,
-                        analyzer: ResilientAIAnalyzer, raw_analyzer: AIAnalyzer,
+                        analyzer: AIAnalyzer, raw_analyzer: AIAnalyzer,
                         content_extractor: ContentExtractor, ppt_generator: PPTGenerator,
                         output_format: str, reporter) -> bool:
     """
@@ -211,30 +198,35 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
     
     if cached_analysis:
         reporter.success("Using cached analysis")
-        analysis = AIAnalyzer.api_key.__class__(**cached_analysis['analysis'])
-        presentation_content = AIAnalyzer.generate_presentation_content.__func__(AIAnalyzer, analysis, metadata.__dict__)
+        # Restore analysis from cache
+        analysis = PaperAnalysis(**cached_analysis['analysis'])
     else:
         # Step 4: AI Analysis
         reporter.update(description="Analyzing with AI...")
         try:
-            analysis = analyzer.analyze_with_retry(paper_text, metadata=metadata.__dict__)
-            presentation_content = raw_analyzer.generate_presentation_content(analysis, metadata.__dict__)
-            
+            @exponential_backoff
+            def run_analysis():
+                return analyzer.analyze_paper_detailed(paper_text, metadata=metadata.__dict__)
+
+            analysis = run_analysis(
+                retry_config=RetryConfig(max_retries=cfg['ai']['max_retries'])
+            )
+
             # Save to cache
             cache_manager.save_analysis(
                 pdf_hash,
-                {'analysis': analysis.__dict__, 'presentation_content': presentation_content.__dict__}
+                {'analysis': analysis.__dict__}
             )
-            
+
             reporter.success(f"AI analysis completed (cost: ${raw_analyzer.get_stats()['total_cost']:.4f})")
         except Exception as e:
             reporter.error(f"AI analysis failed: {e}")
             reporter.stop(success=False, message="AI analysis failed")
             return False
-    
+
     # Step 5: Extract slide content
     reporter.update(description="Extracting slide content...")
-    organized_presentation = content_extractor.extract_slide_content(analysis, presentation_content)
+    organized_presentation = content_extractor.extract_detailed_slides(analysis)
     reporter.success(f"Organized {organized_presentation.total_slides} slides")
     
     # Step 6: Generate presentation
@@ -247,29 +239,8 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         markdown_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'markdown')
         markdown_path = markdown_dir / f"{paper_name}.md"
         ppt_generator.save_presentation(markdown, str(markdown_path))
-        
+
         reporter.success(f"Markdown saved: {markdown_path}")
-        
-        # Convert to final format
-        if output_format in ['html', 'pdf']:
-            slides_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'slides')
-            output_path = slides_dir / f"{paper_name}.{output_format}"
-            
-            if output_format == 'html':
-                success = ppt_generator.convert_to_html(str(markdown_path), str(output_path))
-            else:
-                success = ppt_generator.convert_to_pdf(str(markdown_path), str(output_path))
-            
-            if success:
-                reporter.success(f"{output_format.upper()} saved: {output_path}")
-            else:
-                # Fallback to standalone HTML
-                reporter.warning(f"Marp conversion failed, generating standalone HTML")
-                standalone_html = ppt_generator.generate_standalone_html(markdown)
-                with open(output_path, 'w', encoding='utf-8') as f:
-                    f.write(standalone_html)
-                reporter.success(f"Standalone HTML saved: {output_path}")
-        
         reporter.stop(success=True, message="Processing completed!")
         return True
     
@@ -277,6 +248,68 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         reporter.error(f"Presentation generation failed: {e}")
         reporter.stop(success=False, message="Presentation generation failed")
         return False
+
+
+@cli.command()
+@click.option('--paper', '-p', type=click.Path(exists=True), required=True,
+              help='Path to PDF paper')
+@click.option('--output', '-o', type=click.Path(), default='outputs',
+              help='Output directory (default: outputs)')
+@click.option('--verbose', '-v', is_flag=True, help='Verbose output')
+@click.option('--config', type=click.Path(exists=True), default='config.yaml',
+              help='Path to config file')
+def pipeline(paper: str, output: str, verbose: bool, config: str):
+    """Run the full presentation pipeline (PDF → PhD meeting PPT)
+
+    This is the recommended command for generating presentations.
+    It runs the complete 8-stage pipeline:
+
+    1. Parse PDF
+    2. Extract structured sections
+    3. Run AI analysis
+    4. Generate slide plan
+    5. Generate narrative plan
+    6. Generate slides markdown
+    7. Export PPTX
+    8. Generate presentation script
+
+    Example:
+        paperreader pipeline --paper papers/example.pdf
+    """
+
+    # Load configuration
+    cfg = load_config(config)
+
+    # Setup logging
+    logger = setup_logging(cfg)
+
+    # Get API key
+    try:
+        api_key = get_api_key(cfg)
+    except ValueError as e:
+        click.echo(f"Error: {e}", err=True)
+        sys.exit(1)
+
+    # Initialize pipeline
+    pipeline_runner = PaperPresentationPipeline(
+        api_key=api_key,
+        config=cfg,
+        model=cfg['ai']['model']
+    )
+
+    # Run pipeline
+    try:
+        result = pipeline_runner.run(pdf_path=paper, output_dir=output)
+
+        if result['success']:
+            sys.exit(0)
+        else:
+            click.echo(f"Pipeline failed: {result.get('error', 'Unknown error')}", err=True)
+            sys.exit(1)
+    except Exception as e:
+        logger.error(f"Pipeline failed with exception: {e}", exc_info=True)
+        click.echo(f"Pipeline failed: {e}", err=True)
+        sys.exit(1)
 
 
 @cli.command()

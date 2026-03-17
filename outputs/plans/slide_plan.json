@@ -1,0 +1,126 @@
+{
+  "total_slides": 11,
+  "slides": [
+    {
+      "title": "Human-In-the-Loop Software Development Agents",
+      "key_points": [
+        "Paper title: Human-In-the-Loop Software Development Agents",
+        "Authors: Wannita Takerngsaksiri et al. (Monash, Melbourne, Atlassian)",
+        "Year: 2025",
+        "Industry-academia collaboration for real-world validation"
+      ],
+      "slide_type": "title",
+      "notes": "Establish credibility through Atlassian partnership and highlight industry focus"
+    },
+    {
+      "title": "Motivation: Why Human-in-the-Loop Matters",
+      "key_points": [
+        "Existing agents lack human feedback and real-world deployment validation",
+        "SWE-bench benchmarks do not reflect complex enterprise contexts",
+        "Need to validate if LLM agents actually save time in practice",
+        "Industry requires collaborative Human-AI synergy over full automation"
+      ],
+      "slide_type": "content",
+      "notes": "Explain WHY this problem is important for real-world software development"
+    },
+    {
+      "title": "Problem Definition",
+      "key_points": [
+        "Integrating human feedback into automated software development cycles",
+        "Bridging the gap between academic benchmarks and industrial deployment",
+        "Evaluating trade-offs between automation speed and code quality",
+        "Balancing human oversight with agent autonomy"
+      ],
+      "slide_type": "content",
+      "notes": "Define the specific problem this paper addresses"
+    },
+    {
+      "title": "Related Work & Positioning",
+      "key_points": [
+        "SWE-agent / AutoCodeRover: Autonomous agents limited to historical benchmarks",
+        "Magai / Masai: Multi-agent systems lacking human-in-the-loop mechanisms",
+        "Gap: No prior work deployed human-in-the-loop agents in large enterprise",
+        "This work: First industrial deployment with human collaboration"
+      ],
+      "slide_type": "content",
+      "notes": "Compare approaches and highlight limitations of previous work"
+    },
+    {
+      "title": "Core Idea: HULA Framework",
+      "key_points": [
+        "HULA: Human-in-the-Loop Agent framework for JIRA issue resolution",
+        "AI Planner and Coding agents collaborate with human engineers",
+        "Cooperative paradigm: agents adjust based on human feedback",
+        "Deployed directly into production Atlassian JIRA instance"
+      ],
+      "slide_type": "content",
+      "notes": "Present the main contribution in ONE clear concept"
+    },
+    {
+      "title": "Method Overview: Multi-Agent Architecture",
+      "key_points": [
+        "Three agent types: AI Planner, AI Coding Agent, Human Agent",
+        "Four-stage workflow: Setup, Planning, Coding, Raising PR",
+        "Cooperative DPDE paradigm for iterative refinement",
+        "Direct integration with Atlassian's internal JIRA instance"
+      ],
+      "slide_type": "content",
+      "notes": "High-level architecture and workflow explanation"
+    },
+    {
+      "title": "Method Details: Agent Roles & Interaction",
+      "key_points": [
+        "AI Planner Agent: Localizes files and generates coding plans",
+        "AI Coding Agent: Generates code with self-refinement via linter feedback",
+        "Human Agent: Reviews plans, modifies code, provides corrective guidance",
+        "Shared memory architecture for context access without direct communication"
+      ],
+      "slide_type": "content",
+      "notes": "Technical details of each agent's responsibilities"
+    },
+    {
+      "title": "Experiment Setup",
+      "key_points": [
+        "Datasets: SWE-bench Verified (500 issues), Atlassian Internal (369 issues)",
+        "Baseline: SWE-agent Claude (Leaderboard comparison)",
+        "Metrics: Plan/Code Generation Rate, Approval Rate, PR Merge Rate",
+        "Environment: Production Atlassian JIRA with 2,600+ practitioners"
+      ],
+      "slide_type": "content",
+      "notes": "Establish experimental rigor and real-world deployment scale"
+    },
+    {
+      "title": "Results: Key Findings",
+      "key_points": [
+        "82% plan approval rate indicates high trust in AI planning",
+        "59% merged PR rate for raised pull requests shows practical utility",
+        "8% of total issues resulted in successfully merged HULA-assisted code",
+        "Performance gap: 86% recall on SWE-bench vs 30% internally"
+      ],
+      "slide_type": "content",
+      "notes": "Present quantitative results with interpretation"
+    },
+    {
+      "title": "Limitations & Critical Analysis",
+      "key_points": [
+        "Significant performance drop on internal data vs open-source benchmarks",
+        "Generated code often functionally incorrect without human edits",
+        "High cognitive load: users must write detailed issue descriptions",
+        "GPT-4 dependency limits reproducibility and raises cost concerns"
+      ],
+      "slide_type": "content",
+      "notes": "Honest assessment of weaknesses and deployment challenges"
+    },
+    {
+      "title": "Takeaways & Discussion Questions",
+      "key_points": [
+        "Human-in-the-loop is critical for enterprise-grade software generation",
+        "Detailed issue descriptions are vital for agent performance",
+        "Q1: How to reduce cognitive load of writing detailed prompts?",
+        "Q2: Does human verification negate productivity gains of automation?"
+      ],
+      "slide_type": "content",
+      "notes": "Summarize insights and prompt group discussion"
+    }
+  ]
+}

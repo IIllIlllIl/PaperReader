@@ -3,7 +3,7 @@
 ## Problem Analysis
 
 ### Current State
-- ✅ Images ARE extracted from PDF (output/images/)
+- ✅ Images ARE extracted from PDF (outputs/images/)
 - ✅ Images ARE referenced in Markdown (e.g., `![Figure 1](path/to/image.png)`)
 - ❌ Images are LOST during Markdown → PPTX conversion
 - ❌ `md_to_pptx.py` treats image markdown as plain text
@@ -202,7 +202,7 @@ else:
 
 ### Phase 3: Smart Image Selection
 
-**File**: `src/pdf_image_extractor.py` (enhance existing)
+**File**: `src/parser/pdf_image_extractor.py` (enhance existing)
 
 #### 3.1 Improve Caption Detection
 ```python
@@ -395,7 +395,7 @@ If issues arise:
    - Add image insertion function (~40 lines)
    - Update slide creation logic (~50 lines)
 
-2. **src/pdf_image_extractor.py** (optional enhancements)
+2. **src/parser/pdf_image_extractor.py** (optional enhancements)
    - Enhanced caption detection (~30 lines)
    - Improved prioritization (~20 lines)
 

@@ -5,7 +5,7 @@
 ### Test Execution
 
 ```bash
-$ python3 tools/md_to_pptx_prototype.py output/markdown/Human-In-the-Loop_v3.md
+$ python3 tools/md_to_pptx_prototype.py outputs/markdown/Human-In-the-Loop_v3.md
 ```
 
 ### Results
@@ -23,14 +23,14 @@ $ python3 tools/md_to_pptx_prototype.py output/markdown/Human-In-the-Loop_v3.md
 ### Verification Output
 
 ```
-📄 Converting output/markdown/Human-In-the-Loop_v3.md to PPTX...
-   🖼️  Found image: Figure 1 -> output/images/Human-In-the-Loop_figure_1.png
-   🖼️  Found image: Figure 2 -> output/images/Human-In-the-Loop_figure_2.png
-   🖼️  Found image: Figure 3 -> output/images/Human-In-the-Loop_figure_3.png
+📄 Converting outputs/markdown/Human-In-the-Loop_v3.md to PPTX...
+   🖼️  Found image: Figure 1 -> outputs/images/Human-In-the-Loop_figure_1.png
+   🖼️  Found image: Figure 2 -> outputs/images/Human-In-the-Loop_figure_2.png
+   🖼️  Found image: Figure 3 -> outputs/images/Human-In-the-Loop_figure_3.png
    ✅ Added image: Human-In-the-Loop_figure_1.png (5.0" x 5.0")
    ✅ Added image: Human-In-the-Loop_figure_2.png (5.0" x 5.0")
    ✅ Added image: Human-In-the-Loop_figure_3.png (5.0" x 5.0")
-✅ Created PPTX: output/slides/Human-In-the-Loop_prototype_test.pptx
+✅ Created PPTX: outputs/slides/Human-In-the-Loop_prototype_test.pptx
 ```
 
 **Conclusion**: ✅ **Prototype is production-ready**
@@ -125,7 +125,7 @@ cp tools/md_to_pptx_prototype.py tools/md_to_pptx.py
 python tools/generate_enhanced_pptx.py papers/Human-In-the-Loop.pdf
 
 # Check output
-open output/slides/Human-In-the-Loop_enhanced.pptx
+open outputs/slides/Human-In-the-Loop_enhanced.pptx
 # → Should see actual images in slides 14-16
 ```
 
@@ -143,19 +143,19 @@ cp tools/md_to_pptx_original.py tools/md_to_pptx.py
 
 **Slide 14 - Figure 1: Framework Overview**
 ```
-Before: "![Figure 1](output/images/...)"  ← Text
+Before: "![Figure 1](outputs/images/...)"  ← Text
 After:  [Actual HULA Framework Diagram]    ← Image ✅
 ```
 
 **Slide 15 - Figure 2: System Components**
 ```
-Before: "![Figure 2](output/images/...)"  ← Text
+Before: "![Figure 2](outputs/images/...)"  ← Text
 After:  [Actual System Diagram]            ← Image ✅
 ```
 
 **Slide 16 - Figure 3: Results Chart**
 ```
-Before: "![Figure 3](output/images/...)"  ← Text
+Before: "![Figure 3](outputs/images/...)"  ← Text
 After:  [Actual Results Chart]             ← Image ✅
 ```
 

@@ -28,7 +28,7 @@ python cli/main.py process \
 
 ### 2. Markdown 转 PPTX
 ```bash
-python tools/md_to_pptx.py output/markdown/Human-In-the-Loop.md
+python tools/md_to_pptx.py outputs/markdown/Human-In-the-Loop.md
 ```
 
 **结果**: ✅ 成功
@@ -115,7 +115,7 @@ python-pptx==1.0.2
 
 创建脚本支持批量将 Markdown 转换为 PPTX：
 ```bash
-python tools/batch_md_to_pptx.py output/markdown/
+python tools/batch_md_to_pptx.py outputs/markdown/
 ```
 
 ## 结论
@@ -133,5 +133,5 @@ PaperReader 项目能够成功：
 ## 文件位置
 
 - PDF 源文件: `papers/Human-In-the-Loop.pdf`
-- Markdown 输出: `output/markdown/Human-In-the-Loop.md`
-- PPTX 输出: `output/slides/Human-In-the-Loop.pptx`
+- Markdown 输出: `outputs/markdown/Human-In-the-Loop.md`
+- PPTX 输出: `outputs/slides/Human-In-the-Loop.pptx`

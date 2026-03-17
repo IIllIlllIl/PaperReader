@@ -21,8 +21,8 @@ python tools/generate_enhanced_pptx.py papers/your-paper.pdf
 ```
 
 ### 输出文件
-- 📝 Markdown: `output/markdown/[PaperName]_enhanced.md`
-- 📊 PPTX: `output/slides/[PaperName]_enhanced.pptx`
+- 📝 Markdown: `outputs/markdown/[PaperName]_enhanced.md`
+- 📊 PPTX: `outputs/slides/[PaperName]_enhanced.pptx`
 
 ---
 

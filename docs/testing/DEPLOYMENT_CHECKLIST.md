@@ -79,7 +79,7 @@ grep -n "def add_image_to_slide" tools/md_to_pptx.py
 python tools/generate_enhanced_pptx.py papers/Human-In-the-Loop.pdf
 
 # Check output
-ls -lh output/slides/Human-In-the-Loop_enhanced.pptx
+ls -lh outputs/slides/Human-In-the-Loop_enhanced.pptx
 ```
 
 **Expected**: File size ~87KB (with images)
@@ -87,7 +87,7 @@ ls -lh output/slides/Human-In-the-Loop_enhanced.pptx
 ### Step 5: Verify Image Embedding
 ```bash
 # Check for embedded images
-unzip -l output/slides/Human-In-the-Loop_enhanced.pptx | grep image
+unzip -l outputs/slides/Human-In-the-Loop_enhanced.pptx | grep image
 ```
 
 **Expected**: 3 image files in ppt/media/
@@ -95,7 +95,7 @@ unzip -l output/slides/Human-In-the-Loop_enhanced.pptx | grep image
 ### Step 6: Open and Visual Check
 ```bash
 # Open PPTX file
-open output/slides/Human-In-the-Loop_enhanced.pptx
+open outputs/slides/Human-In-the-Loop_enhanced.pptx
 ```
 
 **Expected**:
@@ -144,7 +144,7 @@ ls -lh tools/md_to_pptx.py
 python tools/generate_enhanced_pptx.py papers/Human-In-the-Loop.pdf
 
 # Check file size (should be ~47KB without images)
-ls -lh output/slides/Human-In-the-Loop_enhanced.pptx
+ls -lh outputs/slides/Human-In-the-Loop_enhanced.pptx
 ```
 
 **Note**: Rollback is very unlikely to be needed due to 100% backward compatibility.

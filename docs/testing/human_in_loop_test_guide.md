@@ -8,8 +8,8 @@
 ## 📋 测试准备
 
 ### 已生成的测试文件
-- 📝 Markdown: `output/markdown/Human-In-the-Loop_enhanced.md` (26KB)
-- 📊 **PPTX**: `output/slides/Human-In-the-Loop_enhanced.pptx` (69KB, 30 slides)
+- 📝 Markdown: `outputs/markdown/Human-In-the-Loop_enhanced.md` (26KB)
+- 📊 **PPTX**: `outputs/slides/Human-In-the-Loop_enhanced.pptx` (69KB, 30 slides)
 
 ---
 
@@ -103,7 +103,7 @@
 ### 5. 对比测试 (5分钟)
 
 #### 与标准版对比
-打开标准版: `output/slides/Human-In-the-Loop.pptx` (16 slides)
+打开标准版: `outputs/slides/Human-In-the-Loop.pptx` (16 slides)
 
 对比以下方面：
 

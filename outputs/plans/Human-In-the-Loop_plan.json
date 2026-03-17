@@ -1,0 +1,157 @@
+{
+  "total_slides": 13,
+  "slides": [
+    {
+      "title": "Human-In-the-Loop Software Development Agents",
+      "key_points": [
+        "Wannita Takerngsaksiri et al.",
+        "2025",
+        "HULA framework",
+        "Atlassian JIRA + Bitbucket deployment"
+      ],
+      "slide_type": "title",
+      "notes": "Paper identity and presentation framing"
+    },
+    {
+      "title": "Motivation",
+      "key_points": [
+        "Enterprise software maintenance burden",
+        "Benchmark-to-production mismatch",
+        "Risks of unsupervised code changes",
+        "Need for stage-wise human oversight",
+        "Missing practitioner adoption evidence"
+      ],
+      "slide_type": "content",
+      "notes": "Why enterprise human-AI coding matters"
+    },
+    {
+      "title": "Research Questions",
+      "key_points": [
+        "RQ1: 🔥 JIRA deployment",
+        "RQ2: How does the proposed approach address 🔥 **82%** plan approval...?",
+        "RQ3: How does the method improve over prior work?"
+      ],
+      "slide_type": "content",
+      "notes": "Main research questions this paper addresses"
+    },
+    {
+      "title": "Problem Definition",
+      "key_points": [
+        "JIRA issue-to-PR automation task",
+        "Human-guided planning and coding stages",
+        "File localization, plan generation, code synthesis",
+        "Enterprise repositories across 10+ languages",
+        "Success criteria from plan approval to PR merge"
+      ],
+      "slide_type": "content",
+      "notes": "Define the paper's target problem precisely"
+    },
+    {
+      "title": "Related Work",
+      "key_points": [
+        "SWE-agent-style autonomous coding agents",
+        "Benchmark-centric evaluation on SWE-bench",
+        "Multi-agent coding without human feedback loops",
+        "Limited enterprise deployment and user studies",
+        "HULA advantage: stage-wise collaboration + production validation"
+      ],
+      "slide_type": "content",
+      "notes": "Contrast prior agent designs with HULA"
+    },
+    {
+      "title": "Core Idea",
+      "key_points": [
+        "Planner-coder-human triad",
+        "Approve plans before writing code",
+        "Editable code with tool-guided refinement",
+        "JIRA-native workflow to Bitbucket PRs"
+      ],
+      "slide_type": "content",
+      "notes": "One-line contribution distilled into core elements"
+    },
+    {
+      "title": "Method Overview",
+      "key_points": [
+        "Issue and repository selection",
+        "Planner file localization",
+        "Draft implementation plan",
+        "Human review, edits, approval",
+        "Code generation, refinement, PR raising"
+      ],
+      "slide_type": "content",
+      "notes": "End-to-end workflow at a glance"
+    },
+    {
+      "title": "Method Details",
+      "key_points": [
+        "DPDE coordination",
+        "Shared repository memory",
+        "LLM-based file localization and plan generation",
+        "Code synthesis with compiler/linter-guided self-refinement",
+        "Human feedback insertion points"
+      ],
+      "slide_type": "content",
+      "notes": "Technical mechanisms and implementation insights"
+    },
+    {
+      "title": "Experiment Setup",
+      "key_points": [
+        "GPT-4 backbone; Atlassian JIRA + Bitbucket environment",
+        "SWE-bench Verified: 500 Python issues",
+        "Atlassian internal offline set: 369 issues, 94 repos, 10+ languages",
+        "Online deployment + survey: 663 issues; 109/146 responses",
+        "Baselines and metrics: offline HULA, human PRs, SWE-agent; recall, test pass, similarity, PR outcomes"
+      ],
+      "slide_type": "content",
+      "notes": "Offline, online, and practitioner evaluation design"
+    },
+    {
+      "title": "Results",
+      "key_points": [
+        "82% plan approval: planning alignment",
+        "59% merged PR rate: practical utility",
+        "8% issue-to-merge: end-to-end production success",
+        "86% file recall vs 31% test pass: localization strength, execution gap",
+        "30% internal code similarity: code-quality gap to human PRs"
+      ],
+      "slide_type": "content",
+      "notes": "Headline numbers with brief interpretation"
+    },
+    {
+      "title": "Limitations",
+      "key_points": [
+        "Code-quality inconsistency across generated PRs",
+        "Sparse or ambiguous issue descriptions",
+        "Single-backbone dependence on GPT-4",
+        "Atlassian-specific tooling and workflow bias",
+        "Limited correctness evaluation and missing test generation"
+      ],
+      "slide_type": "content",
+      "notes": "Critical analysis beyond positive deployment results"
+    },
+    {
+      "title": "Future Work",
+      "key_points": [
+        "Address: Code-quality inconsistency",
+        "Address: Short issue descriptions",
+        "Reduce input effort required",
+        "Explore other domains",
+        "Long-term impact studies"
+      ],
+      "slide_type": "content",
+      "notes": "Future research directions and opportunities"
+    },
+    {
+      "title": "Takeaways & Discussion",
+      "key_points": [
+        "Humans-in-the-loop as default design pattern",
+        "Planning-stage approval over full autonomy",
+        "Deployment feasibility for simple enterprise tasks",
+        "Documentation quality as a performance lever",
+        "Discussion: context augmentation, richer evaluation, broader transfer"
+      ],
+      "slide_type": "content",
+      "notes": "Key insights and open discussion directions"
+    }
+  ]
+}

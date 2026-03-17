@@ -16,7 +16,7 @@ PaperReader uses a clear, layered structure:
 | `docs/` | Detailed documentation |
 | `skills/` | Claude Skills integration |
 | `tests/` | Test suite |
-| `examples/` | Examples and demos |
+| `tools/manual_tests/` | Manual test scripts |
 
 **Quick Links**:
 - 📚 [Documentation Center](docs/README.md) - All detailed docs
@@ -170,7 +170,7 @@ python cli/main.py cleanup
 ## Output Structure
 
 ```
-output/
+outputs/
 ├── markdown/
 │   └── paper_name.md       # Generated Markdown slides
 └── slides/
@@ -213,7 +213,7 @@ ai:
 
 cache:
   enabled: true
-  cache_dir: "./cache"
+  cache_dir: "./runtime/cache"
   ttl: 604800  # 7 days
 
 presentation:
@@ -247,21 +247,19 @@ marp:
 PaperReader/
 ├── papers/              # Input PDF papers
 ├── src/
-│   ├── pdf_parser.py    # PDF text extraction
-│   ├── pdf_validator.py # PDF quality validation
-│   ├── ai_analyzer.py   # AI-powered analysis
-│   ├── content_extractor.py  # Slide content extraction
-│   ├── ppt_generator.py # Presentation generation
-│   ├── cache_manager.py # Caching layer
-│   ├── resilience.py    # Retry and error handling
-│   ├── progress_reporter.py  # Progress tracking
-│   └── utils.py         # Utility functions
+│   ├── parser/
+│   ├── analysis/
+│   ├── generation/
+│   ├── core/
+│   ├── planning/
+│   ├── prompts/
+│   └── utils.py
 ├── templates/
 │   └── ppt_template.md  # Slide template
-├── output/              # Generated presentations
-├── cache/               # Cached analysis results
-├── logs/                # Log files
-├── main.py              # Main entry point
+├── runtime/
+│   ├── cache/           # Cached analysis results
+│   └── logs/            # Log files
+├── outputs/             # Generated presentations and artifacts
 ├── config.yaml          # Configuration
 └── requirements.txt     # Dependencies
 ```
@@ -324,9 +322,9 @@ MIT License
 To better understand how PaperReader processes your papers:
 
 - **[Documentation Center](docs/README.md)** - Complete documentation hub
-- **[Data Flow Guide](docs/DATA_FLOW.md)** - Detailed data flow explanation
-- **[Quick Reference](docs/DATA_FLOW_QUICK_REFERENCE.md)** - Quick reference card
-- **[Examples](examples/middle_products_example.py)** - Complete intermediate products example
+- **[Data Flow Guide](docs/architecture/DATA_FLOW.md)** - Detailed data flow explanation
+- **[Quick Reference](docs/architecture/DATA_FLOW_QUICK_REFERENCE.md)** - Quick reference card
+- **[Project Improvements](docs/project/IMPROVEMENTS_SUMMARY.md)** - Recent pipeline improvements
 
 ### Debugging Tool
 

@@ -33,7 +33,7 @@
   - 可直接运行查看
   - 适合学习数据格式
 
-- **[examples/README.md](examples/README.md)**
+- **[EXAMPLES_ARCHIVED](../project/EXAMPLES_ARCHIVED_20260317.md)**
   - 示例文件使用指南
   - 学习路径建议
 
@@ -72,7 +72,7 @@
    python cli/main.py process -p papers/example.pdf -v
 
 5. 检查缓存文件 (5分钟)
-   cat cache/{hash}.json | jq .
+   cat runtime/cache/{hash}.json | jq .
 ```
 
 ### 路径3: 开发者深入（2小时）
@@ -80,9 +80,9 @@
 1. 完成路径2的所有内容 (1小时)
 
 2. 阅读源代码 (30分钟)
-   ├─ src/pdf_parser.py
-   ├─ src/ai_analyzer.py
-   └─ src/ppt_generator.py
+   ├─ src/parser/pdf_parser.py
+   ├─ src/analysis/ai_analyzer.py
+   └─ src/generation/ppt_generator.py
 
 3. 修改和实验 (30分钟)
    └─ 调整prompt、模板等
@@ -124,11 +124,11 @@
 | 提取的文本 | debug_data_flow.py | DATA_FLOW.md#阶段2 |
 | 论文元数据 | debug_data_flow.py | DATA_FLOW.md#阶段2 |
 | PDF哈希 | cache目录文件名 | DATA_FLOW.md#阶段3 |
-| AI分析结果 | cache/{hash}.json | DATA_FLOW.md#阶段4 |
-| 演示内容 | cache/{hash}.json | DATA_FLOW.md#阶段5 |
+| AI分析结果 | runtime/cache/{hash}.json | DATA_FLOW.md#阶段4 |
+| 演示内容 | runtime/cache/{hash}.json | DATA_FLOW.md#阶段5 |
 | 组织的幻灯片 | debug_data_flow.py | DATA_FLOW.md#阶段7 |
-| Markdown | output/markdown/ | DATA_FLOW.md#阶段8 |
-| 最终PPT | output/slides/ | DATA_FLOW.md#阶段9 |
+| Markdown | outputs/markdown/ | DATA_FLOW.md#阶段8 |
+| 最终PPT | outputs/slides/ | DATA_FLOW.md#阶段9 |
 
 ## 🛠️ 实用命令
 
@@ -143,10 +143,10 @@ python tools/debug_data_flow.py papers/example.pdf
 python examples/middle_products_example.py
 
 # 查看缓存内容
-cat cache/*.json | jq .
+cat runtime/cache/*.json | jq .
 
 # 查看生成的Markdown
-cat output/markdown/*.md
+cat outputs/markdown/*.md
 
 # 统计信息
 python cli/main.py stats

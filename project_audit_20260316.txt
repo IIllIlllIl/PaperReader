@@ -1,0 +1,2071 @@
+项目健康度报告
+================================================================================
+生成时间: 2026-03-16 15:35:37
+项目根目录: .
+文件总数: 1681
+
+1. 目录结构树（深度 ≤ 3）
+--------------------------------------------------------------------------------
+./ (1681 files)
+├── .claude/ (1251 files)
+│   ├── worktrees/ (1250 files)
+│   │   ├── agent-a2d73f51/ (125 files)
+│   │   ├── agent-a54a5bae/ (125 files)
+│   │   ├── agent-a5d3ed6f/ (125 files)
+│   │   ├── agent-a68dbaf4/ (125 files)
+│   │   ├── agent-a7cf8aea/ (125 files)
+│   │   ├── agent-a9f1dfa4/ (125 files)
+│   │   ├── agent-ab6bb737/ (125 files)
+│   │   ├── agent-ab87a90d/ (125 files)
+│   │   ├── agent-ac2fa99a/ (125 files)
+│   │   └── agent-adbffd55/ (125 files)
+│   └── settings.local.json
+├── archive/ (12 files)
+│   ├── experiments/ (5 files)
+│   │   ├── generate_enhanced_pptx.py
+│   │   ├── generate_v3_pptx.py
+│   │   ├── generate_v3_pptx_optimized.py
+│   │   ├── generate_v3_pptx_simple.py
+│   │   └── md_to_pptx_prototype.py
+│   ├── legacy/ (6 files)
+│   │   ├── ai_analyzer_enhanced.py
+│   │   ├── ai_analyzer_v1.py
+│   │   ├── content_extractor_enhanced.py
+│   │   ├── content_extractor_v1.py
+│   │   ├── ppt_generator_enhanced.py
+│   │   └── ppt_generator_v1.py
+│   └── .DS_Store
+├── cli/ (1 files)
+│   └── main.py
+├── docs/ (73 files)
+│   ├── architecture/ (12 files)
+│   │   ├── DATA_FLOW.md
+│   │   ├── DATA_FLOW_QUICK_REFERENCE.md
+│   │   ├── DATA_VISUALIZATION.md
+│   │   ├── IMAGE_SUPPORT_PLAN.md
+│   │   ├── IMAGE_SUPPORT_SOLUTION_SUMMARY.md
+│   │   ├── IMAGE_SUPPORT_VISUAL.md
+│   │   ├── PPTX_IMPROVEMENTS.md
+│   │   ├── PPTX_V3_IMPROVEMENTS.md
+│   │   ├── PROJECT_SUMMARY.md
+│   │   ├── PROMPT_ENGINEERING_V3.md
+│   │   ├── SLIDE_PLANNING_LAYER.md
+│   │   └── UNDERSTANDING_DATA_FLOW.md
+│   ├── archived/ (24 files)
+│   │   ├── legacy_20260306/ (20 files)
+│   │   ├── ENHANCED_INTEGRATION_GUID.md
+│   │   ├── ENHANCED_PPTX_SUMMARY.md
+│   │   ├── README.md
+│   │   └── REORGANIZATION_PLAN.md
+│   ├── changelogs/ (2 files)
+│   │   ├── DOCUMENTATION_UPDATE_COMPLETE.md
+│   │   └── REFACTORING_COMPLETE.md
+│   ├── features/ (8 files)
+│   │   ├── CHART_GENERATION.md
+│   │   ├── NARRATIVE_INTEGRATION_GUIDE.md
+│   │   ├── NARRATIVE_PLANNER.md
+│   │   ├── NARRATIVE_PLANNER_SUMMARY.md
+│   │   ├── NARRATIVE_QUICKSTART.md
+│   │   ├── SLIDE_FORMATTER.md
+│   │   ├── SLIDE_FORMATTER_QUICKSTART.md
+│   │   └── SLIDE_FORMATTER_SUMMARY.md
+│   ├── project/ (2 files)
+│   │   ├── PROJECT_REORGANIZATION.md
+│   │   └── PROJECT_STATUS.md
+│   ├── refactor/ (7 files)
+│   │   ├── FINAL_CLEANUP.md
+│   │   ├── MIGRATION_PLAN.md
+│   │   ├── PROJECT_STRUCTURE.md
+│   │   ├── REFACTOR_100_PERCENT_COMPLETE.md
+│   │   ├── REFACTOR_COMPLETED.md
+│   │   ├── REFACTOR_FINAL_SUCCESS.md
+│   │   └── REFACTOR_QUICKSTART.md
+│   ├── testing/ (15 files)
+│   │   ├── ACCEPTANCE_EXECUTIVE_SUMMARY.md
+│   │   ├── DEPLOYMENT_CHECKLIST.md
+│   │   ├── enhanced_pptx_comparison.md
+│   │   ├── human_in_loop_pptx_review_20260306.md
+│   │   ├── human_in_loop_pptx_review_v3_20260306.md
+│   │   ├── human_in_loop_test_guide.md
+│   │   ├── human_in_loop_v3_final_review.md
+│   │   ├── human_in_loop_v3_review_package.md
+│   │   ├── IMAGE_SUPPORT_ACCEPTANCE_REPORT.md
+│   │   ├── PHD_MEETING_V2_COMPLETE.md
+│   │   ├── README.md
+│   │   ├── REFACTOR_TEST_REPORT.md
+│   │   ├── RESEARCH_MEETING_UPGRADE.md
+│   │   ├── test_pptx_generation.md
+│   │   └── v3_implementation_summary.md
+│   ├── user-guide/ (2 files)
+│   │   ├── .gitkeep
+│   │   └── ENHANCED_PPTX_GUIDE.md
+│   └── README.md
+├── examples/ (1 files)
+│   └── README.md
+├── outputs/ (276 files)
+│   ├── caption_test/ (5 files)
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   └── Human-In-the-Loop_figure_5.png
+│   ├── caption_test_10/ (8 files)
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   ├── Human-In-the-Loop_figure_5.png
+│   │   ├── Human-In-the-Loop_figure_6.png
+│   │   ├── Human-In-the-Loop_figure_8.png
+│   │   └── Human-In-the-Loop_figure_9.png
+│   ├── caption_test_old/ (20 files)
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_10.png
+│   │   ├── Human-In-the-Loop_figure_11.png
+│   │   ├── Human-In-the-Loop_figure_12.png
+│   │   ├── Human-In-the-Loop_figure_13.png
+│   │   ├── Human-In-the-Loop_figure_14.png
+│   │   ├── Human-In-the-Loop_figure_15.png
+│   │   ├── Human-In-the-Loop_figure_16.png
+│   │   ├── Human-In-the-Loop_figure_17.png
+│   │   ├── Human-In-the-Loop_figure_18.png
+│   │   ├── Human-In-the-Loop_figure_19.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_20.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   ├── Human-In-the-Loop_figure_5.png
+│   │   ├── Human-In-the-Loop_figure_6.png
+│   │   ├── Human-In-the-Loop_figure_7.png
+│   │   ├── Human-In-the-Loop_figure_8.png
+│   │   └── Human-In-the-Loop_figure_9.png
+│   ├── charts/ (1 files)
+│   │   └── results_summary.png
+│   ├── debug_images/ (101 files)
+│   │   ├── _contact_sheet.png
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_10.png
+│   │   ├── Human-In-the-Loop_figure_100.png
+│   │   ├── Human-In-the-Loop_figure_11.png
+│   │   ├── Human-In-the-Loop_figure_12.png
+│   │   ├── Human-In-the-Loop_figure_13.png
+│   │   ├── Human-In-the-Loop_figure_14.png
+│   │   ├── Human-In-the-Loop_figure_15.png
+│   │   ├── Human-In-the-Loop_figure_16.png
+│   │   ├── Human-In-the-Loop_figure_17.png
+│   │   ├── Human-In-the-Loop_figure_18.png
+│   │   ├── Human-In-the-Loop_figure_19.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_20.png
+│   │   ├── Human-In-the-Loop_figure_21.png
+│   │   ├── Human-In-the-Loop_figure_22.png
+│   │   ├── Human-In-the-Loop_figure_23.png
+│   │   ├── Human-In-the-Loop_figure_24.png
+│   │   ├── Human-In-the-Loop_figure_25.png
+│   │   ├── Human-In-the-Loop_figure_26.png
+│   │   ├── Human-In-the-Loop_figure_27.png
+│   │   ├── Human-In-the-Loop_figure_28.png
+│   │   ├── Human-In-the-Loop_figure_29.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_30.png
+│   │   ├── Human-In-the-Loop_figure_31.png
+│   │   ├── Human-In-the-Loop_figure_32.png
+│   │   ├── Human-In-the-Loop_figure_33.png
+│   │   ├── Human-In-the-Loop_figure_34.png
+│   │   ├── Human-In-the-Loop_figure_35.png
+│   │   ├── Human-In-the-Loop_figure_36.png
+│   │   ├── Human-In-the-Loop_figure_37.png
+│   │   ├── Human-In-the-Loop_figure_38.png
+│   │   ├── Human-In-the-Loop_figure_39.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   ├── Human-In-the-Loop_figure_40.png
+│   │   ├── Human-In-the-Loop_figure_41.png
+│   │   ├── Human-In-the-Loop_figure_42.png
+│   │   ├── Human-In-the-Loop_figure_43.png
+│   │   ├── Human-In-the-Loop_figure_44.png
+│   │   ├── Human-In-the-Loop_figure_45.png
+│   │   ├── Human-In-the-Loop_figure_46.png
+│   │   ├── Human-In-the-Loop_figure_47.png
+│   │   ├── Human-In-the-Loop_figure_48.png
+│   │   ├── Human-In-the-Loop_figure_49.png
+│   │   ├── Human-In-the-Loop_figure_5.png
+│   │   ├── Human-In-the-Loop_figure_50.png
+│   │   ├── Human-In-the-Loop_figure_51.png
+│   │   ├── Human-In-the-Loop_figure_52.png
+│   │   ├── Human-In-the-Loop_figure_53.png
+│   │   ├── Human-In-the-Loop_figure_54.png
+│   │   ├── Human-In-the-Loop_figure_55.png
+│   │   ├── Human-In-the-Loop_figure_56.png
+│   │   ├── Human-In-the-Loop_figure_57.png
+│   │   ├── Human-In-the-Loop_figure_58.png
+│   │   ├── Human-In-the-Loop_figure_59.png
+│   │   ├── Human-In-the-Loop_figure_6.png
+│   │   ├── Human-In-the-Loop_figure_60.png
+│   │   ├── Human-In-the-Loop_figure_61.png
+│   │   ├── Human-In-the-Loop_figure_62.png
+│   │   ├── Human-In-the-Loop_figure_63.png
+│   │   ├── Human-In-the-Loop_figure_64.png
+│   │   ├── Human-In-the-Loop_figure_65.png
+│   │   ├── Human-In-the-Loop_figure_66.png
+│   │   ├── Human-In-the-Loop_figure_67.png
+│   │   ├── Human-In-the-Loop_figure_68.png
+│   │   ├── Human-In-the-Loop_figure_69.png
+│   │   ├── Human-In-the-Loop_figure_7.png
+│   │   ├── Human-In-the-Loop_figure_70.png
+│   │   ├── Human-In-the-Loop_figure_71.png
+│   │   ├── Human-In-the-Loop_figure_72.png
+│   │   ├── Human-In-the-Loop_figure_73.png
+│   │   ├── Human-In-the-Loop_figure_74.png
+│   │   ├── Human-In-the-Loop_figure_75.png
+│   │   ├── Human-In-the-Loop_figure_76.png
+│   │   ├── Human-In-the-Loop_figure_77.png
+│   │   ├── Human-In-the-Loop_figure_78.png
+│   │   ├── Human-In-the-Loop_figure_79.png
+│   │   ├── Human-In-the-Loop_figure_8.png
+│   │   ├── Human-In-the-Loop_figure_80.png
+│   │   ├── Human-In-the-Loop_figure_81.png
+│   │   ├── Human-In-the-Loop_figure_82.png
+│   │   ├── Human-In-the-Loop_figure_83.png
+│   │   ├── Human-In-the-Loop_figure_84.png
+│   │   ├── Human-In-the-Loop_figure_85.png
+│   │   ├── Human-In-the-Loop_figure_86.png
+│   │   ├── Human-In-the-Loop_figure_87.png
+│   │   ├── Human-In-the-Loop_figure_88.png
+│   │   ├── Human-In-the-Loop_figure_89.png
+│   │   ├── Human-In-the-Loop_figure_9.png
+│   │   ├── Human-In-the-Loop_figure_90.png
+│   │   ├── Human-In-the-Loop_figure_91.png
+│   │   ├── Human-In-the-Loop_figure_92.png
+│   │   ├── Human-In-the-Loop_figure_93.png
+│   │   ├── Human-In-the-Loop_figure_94.png
+│   │   ├── Human-In-the-Loop_figure_95.png
+│   │   ├── Human-In-the-Loop_figure_96.png
+│   │   ├── Human-In-the-Loop_figure_97.png
+│   │   ├── Human-In-the-Loop_figure_98.png
+│   │   └── Human-In-the-Loop_figure_99.png
+│   ├── debug_images_v2/ (101 files)
+│   │   ├── _contact_sheet.png
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_10.png
+│   │   ├── Human-In-the-Loop_figure_100.png
+│   │   ├── Human-In-the-Loop_figure_11.png
+│   │   ├── Human-In-the-Loop_figure_12.png
+│   │   ├── Human-In-the-Loop_figure_13.png
+│   │   ├── Human-In-the-Loop_figure_14.png
+│   │   ├── Human-In-the-Loop_figure_15.png
+│   │   ├── Human-In-the-Loop_figure_16.png
+│   │   ├── Human-In-the-Loop_figure_17.png
+│   │   ├── Human-In-the-Loop_figure_18.png
+│   │   ├── Human-In-the-Loop_figure_19.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_20.png
+│   │   ├── Human-In-the-Loop_figure_21.png
+│   │   ├── Human-In-the-Loop_figure_22.png
+│   │   ├── Human-In-the-Loop_figure_23.png
+│   │   ├── Human-In-the-Loop_figure_24.png
+│   │   ├── Human-In-the-Loop_figure_25.png
+│   │   ├── Human-In-the-Loop_figure_26.png
+│   │   ├── Human-In-the-Loop_figure_27.png
+│   │   ├── Human-In-the-Loop_figure_28.png
+│   │   ├── Human-In-the-Loop_figure_29.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_30.png
+│   │   ├── Human-In-the-Loop_figure_31.png
+│   │   ├── Human-In-the-Loop_figure_32.png
+│   │   ├── Human-In-the-Loop_figure_33.png
+│   │   ├── Human-In-the-Loop_figure_34.png
+│   │   ├── Human-In-the-Loop_figure_35.png
+│   │   ├── Human-In-the-Loop_figure_36.png
+│   │   ├── Human-In-the-Loop_figure_37.png
+│   │   ├── Human-In-the-Loop_figure_38.png
+│   │   ├── Human-In-the-Loop_figure_39.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   ├── Human-In-the-Loop_figure_40.png
+│   │   ├── Human-In-the-Loop_figure_41.png
+│   │   ├── Human-In-the-Loop_figure_42.png
+│   │   ├── Human-In-the-Loop_figure_43.png
+│   │   ├── Human-In-the-Loop_figure_44.png
+│   │   ├── Human-In-the-Loop_figure_45.png
+│   │   ├── Human-In-the-Loop_figure_46.png
+│   │   ├── Human-In-the-Loop_figure_47.png
+│   │   ├── Human-In-the-Loop_figure_48.png
+│   │   ├── Human-In-the-Loop_figure_49.png
+│   │   ├── Human-In-the-Loop_figure_5.png
+│   │   ├── Human-In-the-Loop_figure_50.png
+│   │   ├── Human-In-the-Loop_figure_51.png
+│   │   ├── Human-In-the-Loop_figure_52.png
+│   │   ├── Human-In-the-Loop_figure_53.png
+│   │   ├── Human-In-the-Loop_figure_54.png
+│   │   ├── Human-In-the-Loop_figure_55.png
+│   │   ├── Human-In-the-Loop_figure_56.png
+│   │   ├── Human-In-the-Loop_figure_57.png
+│   │   ├── Human-In-the-Loop_figure_58.png
+│   │   ├── Human-In-the-Loop_figure_59.png
+│   │   ├── Human-In-the-Loop_figure_6.png
+│   │   ├── Human-In-the-Loop_figure_60.png
+│   │   ├── Human-In-the-Loop_figure_61.png
+│   │   ├── Human-In-the-Loop_figure_62.png
+│   │   ├── Human-In-the-Loop_figure_63.png
+│   │   ├── Human-In-the-Loop_figure_64.png
+│   │   ├── Human-In-the-Loop_figure_65.png
+│   │   ├── Human-In-the-Loop_figure_66.png
+│   │   ├── Human-In-the-Loop_figure_67.png
+│   │   ├── Human-In-the-Loop_figure_68.png
+│   │   ├── Human-In-the-Loop_figure_69.png
+│   │   ├── Human-In-the-Loop_figure_7.png
+│   │   ├── Human-In-the-Loop_figure_70.png
+│   │   ├── Human-In-the-Loop_figure_71.png
+│   │   ├── Human-In-the-Loop_figure_72.png
+│   │   ├── Human-In-the-Loop_figure_73.png
+│   │   ├── Human-In-the-Loop_figure_74.png
+│   │   ├── Human-In-the-Loop_figure_75.png
+│   │   ├── Human-In-the-Loop_figure_76.png
+│   │   ├── Human-In-the-Loop_figure_77.png
+│   │   ├── Human-In-the-Loop_figure_78.png
+│   │   ├── Human-In-the-Loop_figure_79.png
+│   │   ├── Human-In-the-Loop_figure_8.png
+│   │   ├── Human-In-the-Loop_figure_80.png
+│   │   ├── Human-In-the-Loop_figure_81.png
+│   │   ├── Human-In-the-Loop_figure_82.png
+│   │   ├── Human-In-the-Loop_figure_83.png
+│   │   ├── Human-In-the-Loop_figure_84.png
+│   │   ├── Human-In-the-Loop_figure_85.png
+│   │   ├── Human-In-the-Loop_figure_86.png
+│   │   ├── Human-In-the-Loop_figure_87.png
+│   │   ├── Human-In-the-Loop_figure_88.png
+│   │   ├── Human-In-the-Loop_figure_89.png
+│   │   ├── Human-In-the-Loop_figure_9.png
+│   │   ├── Human-In-the-Loop_figure_90.png
+│   │   ├── Human-In-the-Loop_figure_91.png
+│   │   ├── Human-In-the-Loop_figure_92.png
+│   │   ├── Human-In-the-Loop_figure_93.png
+│   │   ├── Human-In-the-Loop_figure_94.png
+│   │   ├── Human-In-the-Loop_figure_95.png
+│   │   ├── Human-In-the-Loop_figure_96.png
+│   │   ├── Human-In-the-Loop_figure_97.png
+│   │   ├── Human-In-the-Loop_figure_98.png
+│   │   └── Human-In-the-Loop_figure_99.png
+│   ├── hil_test/ (0 files)
+│   │   ├── markdown/ (0 files)
+│   │   ├── plans/ (0 files)
+│   │   ├── scripts/ (0 files)
+│   │   └── slides/ (0 files)
+│   ├── hil_test_final/ (4 files)
+│   │   ├── markdown/ (1 files)
+│   │   ├── plans/ (1 files)
+│   │   ├── scripts/ (1 files)
+│   │   └── slides/ (1 files)
+│   ├── hil_test_fixed/ (0 files)
+│   │   ├── markdown/ (0 files)
+│   │   ├── plans/ (0 files)
+│   │   ├── scripts/ (0 files)
+│   │   └── slides/ (0 files)
+│   ├── hil_test_with_figures/ (14 files)
+│   │   ├── images/ (10 files)
+│   │   ├── markdown/ (1 files)
+│   │   ├── plans/ (1 files)
+│   │   ├── scripts/ (1 files)
+│   │   └── slides/ (1 files)
+│   ├── images/ (10 files)
+│   │   ├── Human-In-the-Loop_figure_1.png
+│   │   ├── Human-In-the-Loop_figure_10.png
+│   │   ├── Human-In-the-Loop_figure_2.png
+│   │   ├── Human-In-the-Loop_figure_3.png
+│   │   ├── Human-In-the-Loop_figure_4.png
+│   │   ├── Human-In-the-Loop_figure_5.png
+│   │   ├── Human-In-the-Loop_figure_6.png
+│   │   ├── Human-In-the-Loop_figure_7.png
+│   │   ├── Human-In-the-Loop_figure_8.png
+│   │   └── Human-In-the-Loop_figure_9.png
+│   ├── markdown/ (5 files)
+│   │   ├── Human-In-the-Loop.md
+│   │   ├── Human-In-the-Loop_enhanced.md
+│   │   ├── Human-In-the-Loop_PhD_Meeting_V2.md
+│   │   ├── Human-In-the-Loop_ResearchMeeting.md
+│   │   └── Human-In-the-Loop_v3.md
+│   ├── plans/ (2 files)
+│   │   ├── Human-In-the-Loop_plan.json
+│   │   └── slide_plan.json
+│   ├── scripts/ (2 files)
+│   │   ├── Human-In-the-Loop_presentation_script.md
+│   │   └── Human-In-the-Loop_PresentationScript.md
+│   ├── slides/ (2 files)
+│   │   ├── .DS_Store
+│   │   └── Human-In-the-Loop.pptx
+│   └── .DS_Store
+├── papers/ (2 files)
+│   ├── .gitkeep
+│   └── Human-In-the-Loop.pdf
+├── runtime/ (4 files)
+│   ├── cache/ (2 files)
+│   │   ├── .gitkeep
+│   │   └── 8ae8ab6a707b4ecb4c3787cda6d2716c.json
+│   └── logs/ (2 files)
+│       ├── .gitkeep
+│       └── paperreader.log
+├── scripts/ (1 files)
+│   └── README.md
+├── src/ (33 files)
+│   ├── analysis/ (7 files)
+│   │   ├── __init__.py
+│   │   ├── ai_analyzer.py
+│   │   ├── ai_analyzer_research_meeting.py
+│   │   ├── content_extractor.py
+│   │   ├── content_extractor_phd_meeting.py
+│   │   ├── content_extractor_research_meeting.py
+│   │   └── result_analyzer.py
+│   ├── core/ (5 files)
+│   │   ├── __init__.py
+│   │   ├── cache_manager.py
+│   │   ├── pipeline.py
+│   │   ├── progress_reporter.py
+│   │   └── resilience.py
+│   ├── generation/ (5 files)
+│   │   ├── __init__.py
+│   │   ├── chart_generator.py
+│   │   ├── ppt_generator.py
+│   │   ├── pptx_exporter.py
+│   │   └── slide_formatter.py
+│   ├── parser/ (4 files)
+│   │   ├── __init__.py
+│   │   ├── pdf_image_extractor.py
+│   │   ├── pdf_parser.py
+│   │   └── pdf_validator.py
+│   ├── planning/ (4 files)
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── narrative_planner.py
+│   │   └── slide_planner.py
+│   ├── prompts/ (6 files)
+│   │   ├── __init__.py
+│   │   ├── narrative_planning_prompt.py
+│   │   ├── phd_meeting_prompt_v2.py
+│   │   ├── research_meeting_prompt.py
+│   │   ├── slide_planning_prompt.py
+│   │   └── v3_prompt.py
+│   ├── __init__.py
+│   └── utils.py
+├── templates/ (1 files)
+│   └── ppt_template.md
+├── tests/ (6 files)
+│   ├── __init__.py
+│   ├── test_ai_analyzer.py
+│   ├── test_cache_manager.py
+│   ├── test_pdf_parser.py
+│   ├── test_pipeline.py
+│   └── test_ppt_generator.py
+├── tools/ (9 files)
+│   ├── archive_legacy_files.sh
+│   ├── md_to_pptx.py
+│   ├── refactor_repository.py
+│   ├── test_chart_generation.py
+│   ├── test_narrative_planner.py
+│   ├── test_phd_meeting_v2.py
+│   ├── test_research_meeting.py
+│   ├── test_slide_formatter.py
+│   └── test_slide_planner.py
+├── .DS_Store
+├── .env
+├── .env.example
+├── .gitignore
+├── CLAUDE.md
+├── config.yaml
+├── IMPROVEMENTS_SUMMARY.md
+├── paperreader
+├── PIPELINE_IMPLEMENTATION.md
+├── README.md
+└── requirements.txt
+
+2. 文件大小排行榜（Top 20）
+--------------------------------------------------------------------------------
+大小 | 文件路径 | 最后修改时间
+2.84 MB | papers/Human-In-the-Loop.pdf | 2026-03-04 15:33:07
+2.84 MB | .claude/worktrees/agent-a2d73f51/papers/Human-In-the-Loop.pdf | 2026-03-13 11:46:13
+2.84 MB | .claude/worktrees/agent-ab87a90d/papers/Human-In-the-Loop.pdf | 2026-03-13 11:38:44
+2.84 MB | .claude/worktrees/agent-adbffd55/papers/Human-In-the-Loop.pdf | 2026-03-13 11:38:44
+2.84 MB | .claude/worktrees/agent-a9f1dfa4/papers/Human-In-the-Loop.pdf | 2026-03-16 11:36:33
+2.84 MB | .claude/worktrees/agent-ac2fa99a/papers/Human-In-the-Loop.pdf | 2026-03-16 11:58:31
+2.84 MB | .claude/worktrees/agent-ab6bb737/papers/Human-In-the-Loop.pdf | 2026-03-16 11:48:11
+2.84 MB | .claude/worktrees/agent-a68dbaf4/papers/Human-In-the-Loop.pdf | 2026-03-16 11:28:44
+2.84 MB | .claude/worktrees/agent-a7cf8aea/papers/Human-In-the-Loop.pdf | 2026-03-13 11:38:44
+2.84 MB | .claude/worktrees/agent-a54a5bae/papers/Human-In-the-Loop.pdf | 2026-03-16 11:28:44
+2.84 MB | .claude/worktrees/agent-a5d3ed6f/papers/Human-In-the-Loop.pdf | 2026-03-16 11:28:44
+241.12 KB | outputs/caption_test_10/Human-In-the-Loop_figure_5.png | 2026-03-16 15:30:36
+241.12 KB | outputs/caption_test/Human-In-the-Loop_figure_5.png | 2026-03-16 15:29:06
+206.95 KB | outputs/caption_test_10/Human-In-the-Loop_figure_2.png | 2026-03-16 15:30:33
+206.95 KB | outputs/caption_test/Human-In-the-Loop_figure_2.png | 2026-03-16 15:29:04
+202.73 KB | outputs/debug_images/_contact_sheet.png | 2026-03-16 15:03:31
+175.07 KB | outputs/caption_test_10/Human-In-the-Loop_figure_9.png | 2026-03-16 15:30:39
+164.02 KB | outputs/debug_images_v2/_contact_sheet.png | 2026-03-16 15:12:33
+146.58 KB | outputs/caption_test_10/Human-In-the-Loop_figure_4.png | 2026-03-16 15:30:35
+146.58 KB | outputs/caption_test/Human-In-the-Loop_figure_4.png | 2026-03-16 15:29:05
+
+3. 文档文件清单（docs/）
+--------------------------------------------------------------------------------
+文件名 | 大小 | 最后修改时间 | 前3行内容预览
+docs/testing/human_in_loop_v3_review_package.md | 9.10 KB | 2026-03-13 13:53:51 | # Human-in-the-Loop V3 人工审核包 / **生成日期**: 2026-03-09   / **版本**: V3 (Final)  
+docs/testing/human_in_loop_test_guide.md | 5.40 KB | 2026-03-13 13:39:45 | # 🧪 Human-in-the-Loop 测试指南 /  / **日期**: 2026-03-06  
+docs/testing/human_in_loop_pptx_review_v3_20260306.md | 0.43 KB | 2026-03-13 13:39:45 |  / # Human-in-the-Loop PPTX Quality检查报告 (V3标准) / 
+docs/architecture/PROJECT_SUMMARY.md | 7.15 KB | 2026-03-13 13:39:45 | # PaperReader 项目完成总结 /  / ## 项目状态：✅ 已完成
+docs/architecture/UNDERSTANDING_DATA_FLOW.md | 8.03 KB | 2026-03-13 13:39:45 | # 📚 PaperReader 数据流程文档索引 /  / 本项目的数据流程文档已经齐全，帮助您深入理解系统的每个环节。
+docs/architecture/DATA_VISUALIZATION.md | 29.34 KB | 2026-03-13 13:22:29 | # 📊 PaperReader 数据流程可视化 /  / ## 完整流程图
+docs/architecture/IMAGE_SUPPORT_PLAN.md | 10.84 KB | 2026-03-13 13:21:47 | # Image Support Implementation Plan /  / ## Problem Analysis
+docs/testing/DEPLOYMENT_CHECKLIST.md | 5.63 KB | 2026-03-13 13:21:46 | # Image Support - Deployment Checklist /  / **Feature**: Image Support for PPTX Presentations
+docs/architecture/IMAGE_SUPPORT_SOLUTION_SUMMARY.md | 7.35 KB | 2026-03-13 13:21:46 | # Image Support Solution - Implementation Summary /  / ## ✅ Prototype Validation Results
+docs/architecture/IMAGE_SUPPORT_VISUAL.md | 13.24 KB | 2026-03-13 13:21:46 | # Image Support - Visual Design /  / ## Current Flow (Broken)
+docs/architecture/DATA_FLOW.md | 25.65 KB | 2026-03-13 13:15:20 | # PaperReader 数据流程和中间产物详解 /  / ## 完整数据处理流程
+docs/architecture/DATA_FLOW_QUICK_REFERENCE.md | 9.10 KB | 2026-03-13 13:14:43 | # PaperReader 数据流程快速参考 /  / ## 📊 中间产物一览表
+docs/testing/test_pptx_generation.md | 2.98 KB | 2026-03-13 13:14:24 | # PPTX 生成功能测试报告 /  / **测试日期**: 2026-03-05  
+docs/testing/README.md | 5.54 KB | 2026-03-13 13:14:24 | # Image Support Feature - Acceptance Testing Complete /  / **Date**: 2026-03-10
+docs/testing/RESEARCH_MEETING_UPGRADE.md | 9.50 KB | 2026-03-13 13:14:24 | # 🎉 Research Meeting Pipeline Upgrade Report /  / **Date**: 2026-03-12
+docs/testing/enhanced_pptx_comparison.md | 2.63 KB | 2026-03-13 13:14:06 | # 📊 增强版 PPTX 生成对比报告 /  / **日期**: 2026-03-05  
+docs/README.md | 2.33 KB | 2026-03-13 13:08:34 | # 📚 PaperReader 文档中心 /  / **欢迎来到 PaperReader 文档中心！**
+docs/architecture/SLIDE_PLANNING_LAYER.md | 10.81 KB | 2026-03-13 13:07:45 | # 🎯 Slide Planning Layer Implementation Report /  / **Date**: 2026-03-13
+docs/user-guide/ENHANCED_PPTX_GUIDE.md | 1.10 KB | 2026-03-13 13:06:20 | # 🎯 PaperReader 增强版 PPTX 生成指南 /  / **版本**: 2.0  
+docs/testing/PHD_MEETING_V2_COMPLETE.md | 9.92 KB | 2026-03-13 13:06:20 | # 🎓 PhD Research Meeting V2 - Complete Upgrade Report /  / **Date**: 2026-03-13
+docs/features/SLIDE_FORMATTER_SUMMARY.md | 10.15 KB | 2026-03-13 11:29:51 | # ✅ Slide Formatter Implementation Summary /  / **Date**: 2026-03-13
+docs/features/SLIDE_FORMATTER_QUICKSTART.md | 5.05 KB | 2026-03-13 11:28:40 | # 📝 Slide Formatter - Quick Start /  / **Enforce design rules for clean, professional slides**
+docs/features/SLIDE_FORMATTER.md | 13.30 KB | 2026-03-13 11:28:06 | # 📝 Slide Formatter - Design Rules Enforcement /  / **Date**: 2026-03-13
+docs/features/NARRATIVE_QUICKSTART.md | 2.66 KB | 2026-03-13 11:18:09 | # 📖 Narrative Planner - Quick Start Guide /  / **Fast reference for using the Narrative Planner**
+docs/features/NARRATIVE_PLANNER_SUMMARY.md | 10.22 KB | 2026-03-13 11:17:18 | # ✅ Narrative Planner Implementation Summary /  / **Date**: 2026-03-13
+docs/features/NARRATIVE_INTEGRATION_GUIDE.md | 11.82 KB | 2026-03-13 11:16:11 | # 🔄 Narrative Planner Integration Guide /  / **How to integrate narrative planning into the presentation pipeline**
+docs/features/NARRATIVE_PLANNER.md | 13.82 KB | 2026-03-13 11:14:37 | # 📖 Narrative Planner Feature - Implementation Report /  / **Date**: 2026-03-13
+docs/features/CHART_GENERATION.md | 8.90 KB | 2026-03-13 11:04:26 | # 📊 Chart Generation Feature - Implementation Report /  / **Date**: 2026-03-13
+docs/testing/REFACTOR_TEST_REPORT.md | 6.28 KB | 2026-03-12 16:41:50 | # 🎉 PaperReader Refactor Test Report /  / **Date**: 2026-03-12
+docs/refactor/FINAL_CLEANUP.md | 6.66 KB | 2026-03-12 16:01:42 | # 🎉 Final Repository Organization - COMPLETE! /  / **Date**: 2026-03-12
+docs/refactor/REFACTOR_100_PERCENT_COMPLETE.md | 9.40 KB | 2026-03-12 15:50:44 | # 🎉 Repository Refactoring - 100% COMPLETE! /  / **Date**: 2026-03-12
+docs/refactor/REFACTOR_FINAL_SUCCESS.md | 7.98 KB | 2026-03-12 15:12:16 | # 🎉 Repository Refactoring - COMPLETE SUCCESS! /  / **Date**: 2026-03-12
+docs/refactor/REFACTOR_COMPLETED.md | 7.37 KB | 2026-03-12 14:47:00 | # 🎉 Repository Refactoring - SUCCESS! /  / **Date**: 2026-03-12
+docs/refactor/REFACTOR_QUICKSTART.md | 3.89 KB | 2026-03-12 14:10:39 | # 🚀 Repository Refactor Quick Start /  / **Goal**: Consolidate fragmented versions into clean pipeline architecture
+docs/refactor/PROJECT_STRUCTURE.md | 7.58 KB | 2026-03-12 13:21:22 | # Project Structure Reference /  / **Last Updated**: 2026-03-12
+docs/refactor/MIGRATION_PLAN.md | 18.10 KB | 2026-03-12 13:20:14 | # Repository Refactoring Migration Plan /  / **Date**: 2026-03-12
+docs/testing/ACCEPTANCE_EXECUTIVE_SUMMARY.md | 4.68 KB | 2026-03-11 10:23:19 | # Image Support Feature - Executive Summary /  / **Date**: 2026-03-10
+docs/testing/IMAGE_SUPPORT_ACCEPTANCE_REPORT.md | 15.28 KB | 2026-03-10 17:13:52 | # Image Support Feature - Acceptance Test Report /  / **Date**: 2026-03-10
+docs/testing/human_in_loop_v3_final_review.md | 2.96 KB | 2026-03-09 17:49:46 | # Human-in-the-Loop V3 最终验收报告 /  / **日期**: 2026-03-09
+docs/testing/v3_implementation_summary.md | 0.99 KB | 2026-03-09 17:47:56 | # V3 Implementation Summary /  / **Date**: 2026-03-09
+docs/testing/human_in_loop_pptx_review_20260306.md | 5.09 KB | 2026-03-06 17:26:15 | # Human-in-the-Loop PPTX Quality Review Report /  / **生成时间**: 2026-03-06 17:16  
+docs/archived/legacy_20260306/ARCHIVE_SUMMARY.md | 4.82 KB | 2026-03-06 17:05:19 | # Legacy Files Archive Summary /  / **Archive Date**: 2026-03-06  
+docs/archived/legacy_20260306/README.md | 1.92 KB | 2026-03-06 17:03:32 | # Legacy Files Archive /  / This directory contains archived files that are no longer used in the main workflow.
+docs/architecture/PROMPT_ENGINEERING_V3.md | 6.15 KB | 2026-03-06 16:29:44 | # AI Prompt Engineering V3 Guidelines /  / **Version**: 3.0  
+docs/architecture/PPTX_V3_IMPROVEMENTS.md | 8.05 KB | 2026-03-06 16:23:35 | # 📊 PPTX V3 改进方案（基于用户反馈） /  / **日期**: 2026-03-06  
+docs/architecture/PPTX_IMPROVEMENTS.md | 6.35 KB | 2026-03-06 15:18:07 | # 📊 PPTX 生成改进方案 /  / **创建日期**: 2026-03-06  
+docs/archived/legacy_20260306/docs/FINAL_SUMMARY.md | 5.11 KB | 2026-03-06 14:43:08 | # 🎉 PaperReader 项目完成总结 /  / **日期**: 2026-03-06  
+docs/archived/legacy_20260306/shell/quick_test.sh | 2.01 KB | 2026-03-06 14:31:25 | #!/bin/bash / # / # 快速测试脚本 - Human-in-the-Loop PPTX 验证
+docs/archived/README.md | 0.49 KB | 2026-03-06 14:23:31 | # 📂 归档文档 /  / 此目录包含已过时或已完成的临时文档。
+docs/archived/ENHANCED_INTEGRATION_GUID.md | 1.13 KB | 2026-03-06 14:02:20 | # 🎯 增强版 PPTX 集成指南 /  / ## 快速开始
+docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 13.85 KB | 2026-03-06 13:18:14 | #!/usr/bin/env python3 / """ / PaperReader - Academic Paper Reading and Presentation Generation Tool
+docs/archived/legacy_20260306/docs/PROJECT_SUMMARY.md | 2.73 KB | 2026-03-06 13:09:28 | # 📊 PaperReader 项目总结 / **日期**: 2026-03-06 / 
+docs/user-guide/.gitkeep | 0.00 KB | 2026-03-06 13:06:15 | 
+docs/archived/ENHANCED_PPTX_SUMMARY.md | 4.76 KB | 2026-03-06 12:43:56 | # 🎉 增强版 PPTX 生成功能完成总结 /  / **日期**: 2026-03-06  
+docs/archived/legacy_20260306/shell/reorganize_project.sh | 5.63 KB | 2026-03-05 15:30:07 | #!/bin/bash / # / # PaperReader 项目结构整理脚本
+docs/archived/REORGANIZATION_PLAN.md | 5.96 KB | 2026-03-05 15:27:14 | # 📁 PaperReader 根目录整理方案 /  / **创建日期**: 2026-03-05  
+docs/project/PROJECT_STATUS.md | 7.65 KB | 2026-03-05 15:15:28 | # 📊 PaperReader 项目状态报告 /  / **更新时间**: 2026-03-05  
+docs/changelogs/DOCUMENTATION_UPDATE_COMPLETE.md | 5.10 KB | 2026-03-05 15:07:19 | # 📝 文档更新完成总结 /  / **执行时间**: 2026-03-05
+docs/changelogs/REFACTORING_COMPLETE.md | 11.43 KB | 2026-03-05 14:55:16 | # 🎉 PaperReader 项目重构完成报告 /  / **执行日期**: 2026-03-05
+docs/archived/legacy_20260306/skills/README.md | 7.80 KB | 2026-03-05 14:52:01 | # 🚀 PaperReader Skill 使用指南 /  / ## 快速安装
+docs/archived/legacy_20260306/skills/docs/OVERVIEW.md | 4.96 KB | 2026-03-05 14:52:01 | # PaperReader Skills 目录 /  / 本目录包含PaperReader的Claude Skill集成系统，让您可以在Claude对话框中用最简单的命令处理学术论文。
+docs/project/PROJECT_REORGANIZATION.md | 11.29 KB | 2026-03-05 13:57:30 | # 📁 PaperReader 项目重构方案 /  / ## 当前问题分析
+docs/archived/legacy_20260306/docs/Human-In-the-Loop_debug.md | 1.26 KB | 2026-03-05 13:57:30 | --- / marp: true / theme: academic
+docs/archived/legacy_20260306/skills/docs/PROMPT_SUGGESTIONS.md | 7.25 KB | 2026-03-05 13:57:30 | # 💬 PaperReader Prompt 建议和技巧 /  / 本文档提供高效的Prompt建议，帮助您更智能地使用PaperReader。
+docs/archived/legacy_20260306/skills/docs/QUICK_REFERENCE.md | 1.93 KB | 2026-03-05 13:57:30 | # PaperReader Skill 快速参考卡片 /  / ## 🚀 快速命令
+docs/archived/legacy_20260306/shell/update_docs_after_refactor.sh | 2.54 KB | 2026-03-05 13:55:01 | #!/bin/bash / # PaperReader - 文档路径更新脚本 / # 在项目重构后，更新所有文档中的命令引用
+docs/archived/legacy_20260306/scripts/main.py | 0.43 KB | 2026-03-05 13:42:13 | #!/usr/bin/env python3 / """ / PaperReader Compatibility Wrapper
+docs/archived/legacy_20260306/shell/test_skill.sh | 5.00 KB | 2026-03-05 11:28:38 | #!/usr/bin/env python3 / """ / Test script for PaperReader Skill
+docs/archived/legacy_20260306/shell/install_skill.sh | 4.80 KB | 2026-03-05 11:20:27 | #!/bin/bash /  / # PaperReader Skill 安装脚本
+docs/archived/legacy_20260306/skills/paper_reader.yaml | 5.56 KB | 2026-03-05 11:18:31 | # PaperReader Skill Configuration / # Place this file in: ~/.claude/skills/paper_reader.yaml / 
+docs/archived/legacy_20260306/skills/paper_reader.py | 11.25 KB | 2026-03-05 11:17:43 | # PaperReader Skill 设计方案 /  / ## 概述
+docs/archived/legacy_20260306/scripts/debug_data_flow.py | 11.89 KB | 2026-03-05 10:08:16 | #!/usr/bin/env python3 / """ / 数据流程追踪工具
+docs/archived/legacy_20260306/scripts/middle_products_example.py | 19.87 KB | 2026-03-05 10:06:39 | """ / 中间产物示例 / 
+
+4. 疑似冗余文件检测
+--------------------------------------------------------------------------------
+文件路径 | 最后修改时间 | 匹配规则
+.claude/worktrees/agent-a2d73f51/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-13 11:46:13 | backup
+.claude/worktrees/agent-a2d73f51/templates/ppt_template.md | 2026-03-13 11:46:13 | temp
+.claude/worktrees/agent-a54a5bae/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:28:44 | backup
+.claude/worktrees/agent-a54a5bae/templates/ppt_template.md | 2026-03-16 11:28:44 | temp
+.claude/worktrees/agent-a5d3ed6f/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:28:44 | backup
+.claude/worktrees/agent-a5d3ed6f/templates/ppt_template.md | 2026-03-16 11:28:44 | temp
+.claude/worktrees/agent-a68dbaf4/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:28:44 | backup
+.claude/worktrees/agent-a68dbaf4/templates/ppt_template.md | 2026-03-16 11:28:44 | temp
+.claude/worktrees/agent-a7cf8aea/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-13 11:38:44 | backup
+.claude/worktrees/agent-a7cf8aea/templates/ppt_template.md | 2026-03-13 11:38:44 | temp
+.claude/worktrees/agent-a9f1dfa4/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:36:33 | backup
+.claude/worktrees/agent-a9f1dfa4/templates/ppt_template.md | 2026-03-16 11:36:33 | temp
+.claude/worktrees/agent-ab6bb737/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:48:11 | backup
+.claude/worktrees/agent-ab6bb737/templates/ppt_template.md | 2026-03-16 11:48:11 | temp
+.claude/worktrees/agent-ab87a90d/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-13 11:38:44 | backup
+.claude/worktrees/agent-ab87a90d/templates/ppt_template.md | 2026-03-13 11:38:44 | temp
+.claude/worktrees/agent-ac2fa99a/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-16 11:58:31 | backup
+.claude/worktrees/agent-ac2fa99a/templates/ppt_template.md | 2026-03-16 11:58:31 | temp
+.claude/worktrees/agent-adbffd55/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-13 11:38:44 | backup
+.claude/worktrees/agent-adbffd55/templates/ppt_template.md | 2026-03-13 11:38:44 | temp
+docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py | 2026-03-06 13:18:14 | backup
+templates/ppt_template.md | 2026-03-05 13:57:30 | temp
+tools/test_chart_generation.py | 2026-03-13 12:16:59 | test_outside_tests
+tools/test_narrative_planner.py | 2026-03-13 11:11:44 | test_outside_tests
+tools/test_phd_meeting_v2.py | 2026-03-13 12:17:18 | test_outside_tests
+tools/test_research_meeting.py | 2026-03-13 12:17:18 | test_outside_tests
+tools/test_slide_formatter.py | 2026-03-13 11:26:39 | test_outside_tests
+tools/test_slide_planner.py | 2026-03-13 12:16:59 | test_outside_tests
+
+5. 重复功能猜测
+--------------------------------------------------------------------------------
+[Analysis/Content]
+- 功能簇: aianalyzer
+  - class: AIAnalyzer | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - class: AIAnalyzer | archive/legacy/ai_analyzer_v1.py
+  - class: AIAnalyzer | src/analysis/ai_analyzer.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - class: EnhancedAIAnalyzer | archive/legacy/ai_analyzer_enhanced.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - class: ResilientAIAnalyzer | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - class: ResilientAIAnalyzer | src/core/resilience.py
+- 功能簇: analysis
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | archive/legacy/ai_analyzer_enhanced.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | src/analysis/ai_analyzer.py
+  - class: ResearchMeetingAnalysis | src/analysis/ai_analyzer_research_meeting.py
+- 功能簇: analysis_to_dict
+  - function: NarrativePlanner._analysis_to_dict | src/planning/narrative_planner.py
+  - function: SlidePlanner._analysis_to_dict | src/planning/slide_planner.py
+- 功能簇: analyze_paper
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.analyze_paper | src/analysis/ai_analyzer.py
+  - function: ResearchMeetingAnalyzer.analyze_paper | src/analysis/ai_analyzer_research_meeting.py
+- 功能簇: analyze_paper_detailed
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.analyze_paper_detailed | src/analysis/ai_analyzer.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.analyze_paper_detailed | archive/legacy/ai_analyzer_enhanced.py
+- 功能簇: analyzer
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - class: FallbackAnalyzer | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - class: FallbackAnalyzer | src/core/resilience.py
+  - class: ResearchMeetingAnalyzer | src/analysis/ai_analyzer_research_meeting.py
+  - class: ResultAnalyzer | src/analysis/result_analyzer.py
+- 功能簇: build_analysis_from_json
+  - function: AIAnalyzer._build_analysis_from_json | src/analysis/ai_analyzer.py
+  - function: ResearchMeetingAnalyzer._build_analysis_from_json | src/analysis/ai_analyzer_research_meeting.py
+- 功能簇: paper
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - class: DetailedPaperAnalysis | archive/legacy/ai_analyzer_enhanced.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - class: PaperAnalysis | archive/legacy/ai_analyzer_v1.py
+  - class: PaperAnalysis | src/analysis/ai_analyzer.py
+- 功能簇: quick_analysis
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.quick_analysis | src/analysis/ai_analyzer.py
+  - function: ResearchMeetingAnalyzer.quick_analysis | src/analysis/ai_analyzer_research_meeting.py
+- 功能簇: result
+  - class: ComparisonResult | src/analysis/result_analyzer.py
+  - class: NumericResult | src/analysis/result_analyzer.py
+  - class: ResultAnalyzer | src/analysis/result_analyzer.py
+  - class: ValidationResult | .claude/worktrees/agent-a2d73f51/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-a54a5bae/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-ab6bb737/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-ab87a90d/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_validator.py
+  - class: ValidationResult | .claude/worktrees/agent-adbffd55/src/parser/pdf_validator.py
+  - class: ValidationResult | src/parser/pdf_validator.py
+- 功能簇: show_summary
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.show_summary | src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.show_summary | src/core/progress_reporter.py
+[Cache/Pipeline]
+- 功能簇: cache
+  - class: CacheManager | .claude/worktrees/agent-a2d73f51/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-a54a5bae/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-a5d3ed6f/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-a68dbaf4/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-a7cf8aea/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-a9f1dfa4/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-ab6bb737/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-ab87a90d/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-ac2fa99a/src/core/cache_manager.py
+  - class: CacheManager | .claude/worktrees/agent-adbffd55/src/core/cache_manager.py
+  - class: CacheManager | src/core/cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a2d73f51/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a54a5bae/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a5d3ed6f/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a68dbaf4/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a7cf8aea/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-a9f1dfa4/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-ab6bb737/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-ab87a90d/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-ac2fa99a/tests/test_cache_manager.py
+  - class: TestCacheManager | .claude/worktrees/agent-adbffd55/tests/test_cache_manager.py
+  - class: TestCacheManager | tests/test_cache_manager.py
+- 功能簇: clear_cache
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a2d73f51/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a54a5bae/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a5d3ed6f/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a68dbaf4/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a7cf8aea/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-a9f1dfa4/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-ab6bb737/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-ab87a90d/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-ac2fa99a/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | .claude/worktrees/agent-adbffd55/src/core/cache_manager.py
+  - function: CacheManager.clear_cache | src/core/cache_manager.py
+  - function: clear_cache | .claude/worktrees/agent-a2d73f51/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a2d73f51/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-a54a5bae/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a54a5bae/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-a5d3ed6f/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a5d3ed6f/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-a68dbaf4/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a68dbaf4/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-a7cf8aea/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a7cf8aea/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-a9f1dfa4/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-a9f1dfa4/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-ab6bb737/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-ab6bb737/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-ab87a90d/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-ab87a90d/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-ac2fa99a/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-ac2fa99a/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | .claude/worktrees/agent-adbffd55/cli/main.py
+  - function: clear_cache | .claude/worktrees/agent-adbffd55/docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+  - function: clear_cache | cli/main.py
+  - function: clear_cache | docs/archived/legacy_20260306/scripts/main_backup_enhanced_version.py
+[Generation/Export]
+- 功能簇: generate_markdown
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.generate_markdown | archive/legacy/ppt_generator_enhanced.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a2d73f51/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a54a5bae/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a5d3ed6f/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a68dbaf4/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a7cf8aea/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-a9f1dfa4/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ab6bb737/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ab87a90d/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-ac2fa99a/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | .claude/worktrees/agent-adbffd55/src/generation/ppt_generator.py
+  - function: PPTGenerator.generate_markdown | archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.generate_markdown | src/generation/ppt_generator.py
+- 功能簇: pptgenerator
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_enhanced.py
+  - class: EnhancedPPTGenerator | archive/legacy/ppt_generator_enhanced.py
+  - class: PPTGenerator | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a2d73f51/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a54a5bae/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a5d3ed6f/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a68dbaf4/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a7cf8aea/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-a9f1dfa4/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-ab6bb737/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-ab87a90d/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-ac2fa99a/src/generation/ppt_generator.py
+  - class: PPTGenerator | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | .claude/worktrees/agent-adbffd55/src/generation/ppt_generator.py
+  - class: PPTGenerator | archive/legacy/ppt_generator_v1.py
+  - class: PPTGenerator | src/generation/ppt_generator.py
+[Other]
+- 功能簇: call_claude
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._call_claude | archive/legacy/ai_analyzer_v1.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._call_claude | archive/legacy/ai_analyzer_enhanced.py
+- 功能簇: count_table_words
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_table_words | src/analysis/content_extractor.py
+  - function: PhDMeetingContentExtractorV2._count_table_words | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._count_table_words | src/analysis/content_extractor_research_meeting.py
+- 功能簇: count_words
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor._count_words | src/analysis/content_extractor.py
+  - function: PhDMeetingContentExtractorV2._count_words | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._count_words | src/analysis/content_extractor_research_meeting.py
+- 功能簇: error
+  - function: ProgressReporter.error | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.error | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.error | src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.error | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.error | src/core/progress_reporter.py
+- 功能簇: error
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - class: MaxRetriesExceededError | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - class: MaxRetriesExceededError | src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - class: RetryableError | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - class: RetryableError | src/core/resilience.py
+- 功能簇: get_stats
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.get_stats | archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.get_stats | src/analysis/ai_analyzer.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.get_stats | archive/legacy/ai_analyzer_enhanced.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - function: FallbackAnalyzer.get_stats | src/core/resilience.py
+  - function: NarrativePlanner.get_stats | src/planning/narrative_planner.py
+  - function: PaperPresentationPipeline.get_stats | src/core/pipeline.py
+  - function: ResearchMeetingAnalyzer.get_stats | src/analysis/ai_analyzer_research_meeting.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - function: ResilientAIAnalyzer.get_stats | src/core/resilience.py
+  - function: SlidePlanner.get_stats | src/planning/slide_planner.py
+- 功能簇: info
+  - function: ProgressReporter.info | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.info | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.info | src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.info | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.info | src/core/progress_reporter.py
+- 功能簇: init
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | .claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py
+  - function: AIAnalyzer.__init__ | archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer.__init__ | src/analysis/ai_analyzer.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a2d73f51/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a54a5bae/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a5d3ed6f/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a68dbaf4/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a7cf8aea/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-a9f1dfa4/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-ab6bb737/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-ab87a90d/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-ac2fa99a/src/core/cache_manager.py
+  - function: CacheManager.__init__ | .claude/worktrees/agent-adbffd55/src/core/cache_manager.py
+  - function: CacheManager.__init__ | src/core/cache_manager.py
+  - function: ChartGenerator.__init__ | src/generation/chart_generator.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor.__init__ | archive/legacy/content_extractor_v1.py
+  - function: ContentExtractor.__init__ | src/analysis/content_extractor.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer.__init__ | archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.__init__ | archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.__init__ | archive/legacy/ppt_generator_enhanced.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - function: FallbackAnalyzer.__init__ | src/core/resilience.py
+  - function: NarrativePlanner.__init__ | src/planning/narrative_planner.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a2d73f51/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a54a5bae/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-ab6bb737/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-ab87a90d/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | .claude/worktrees/agent-adbffd55/src/parser/pdf_image_extractor.py
+  - function: PDFImageExtractor.__init__ | src/parser/pdf_image_extractor.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a2d73f51/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a54a5bae/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-ab6bb737/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-ab87a90d/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | .claude/worktrees/agent-adbffd55/src/parser/pdf_parser.py
+  - function: PDFParser.__init__ | src/parser/pdf_parser.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a2d73f51/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a54a5bae/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-ab6bb737/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-ab87a90d/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | .claude/worktrees/agent-adbffd55/src/parser/pdf_validator.py
+  - function: PDFValidator.__init__ | src/parser/pdf_validator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a2d73f51/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a54a5bae/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a5d3ed6f/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a68dbaf4/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a7cf8aea/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-a9f1dfa4/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ab6bb737/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ab87a90d/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-ac2fa99a/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | .claude/worktrees/agent-adbffd55/src/generation/ppt_generator.py
+  - function: PPTGenerator.__init__ | archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.__init__ | src/generation/ppt_generator.py
+  - function: PaperPresentationPipeline.__init__ | src/core/pipeline.py
+  - function: PhDMeetingContentExtractorV2.__init__ | src/analysis/content_extractor_phd_meeting.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.__init__ | src/core/progress_reporter.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a2d73f51/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a54a5bae/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a5d3ed6f/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a68dbaf4/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a7cf8aea/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-a9f1dfa4/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-ab6bb737/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-ab87a90d/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-ac2fa99a/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | .claude/worktrees/agent-adbffd55/scripts/refactor_repository.py
+  - function: RepositoryRefactor.__init__ | tools/refactor_repository.py
+  - function: ResearchMeetingAnalyzer.__init__ | src/analysis/ai_analyzer_research_meeting.py
+  - function: ResearchMeetingContentExtractor.__init__ | src/analysis/content_extractor_research_meeting.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a2d73f51/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a54a5bae/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a5d3ed6f/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a68dbaf4/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a7cf8aea/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-a9f1dfa4/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-ab6bb737/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-ab87a90d/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-ac2fa99a/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | .claude/worktrees/agent-adbffd55/src/core/resilience.py
+  - function: ResilientAIAnalyzer.__init__ | src/core/resilience.py
+  - function: ResultAnalyzer.__init__ | src/analysis/result_analyzer.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.__init__ | src/core/progress_reporter.py
+  - function: SlideFormatter.__init__ | src/generation/slide_formatter.py
+  - function: SlidePlanner.__init__ | src/planning/slide_planner.py
+- 功能簇: limit_bullets
+  - function: PhDMeetingContentExtractorV2._limit_bullets | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._limit_bullets | src/analysis/content_extractor_research_meeting.py
+- 功能簇: organized
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | archive/legacy/content_extractor_enhanced.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | src/analysis/content_extractor.py
+- 功能簇: parse_json_response
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_v1.py
+  - function: AIAnalyzer._parse_json_response | archive/legacy/ai_analyzer_v1.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a2d73f51/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a54a5bae/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a68dbaf4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a7cf8aea/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-ab6bb737/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-ab87a90d/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-ac2fa99a/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | .claude/worktrees/agent-adbffd55/archive/legacy/ai_analyzer_enhanced.py
+  - function: EnhancedAIAnalyzer._parse_json_response | archive/legacy/ai_analyzer_enhanced.py
+- 功能簇: parse_markdown_fallback
+  - function: AIAnalyzer._parse_markdown_fallback | src/analysis/ai_analyzer.py
+  - function: ResearchMeetingAnalyzer._parse_markdown_fallback | src/analysis/ai_analyzer_research_meeting.py
+- 功能簇: presentation
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedOrganizedPresentation | archive/legacy/content_extractor_enhanced.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: OrganizedPresentation | archive/legacy/content_extractor_v1.py
+  - class: OrganizedPresentation | src/analysis/content_extractor.py
+  - class: PhDMeetingPresentation | src/analysis/content_extractor_phd_meeting.py
+  - class: ResearchMeetingPresentation | src/analysis/content_extractor_research_meeting.py
+- 功能簇: reporter
+  - class: ProgressReporter | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - class: ProgressReporter | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - class: ProgressReporter | src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - class: SilentReporter | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - class: SilentReporter | src/core/progress_reporter.py
+- 功能簇: save_presentation
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_enhanced.py
+  - function: EnhancedPPTGenerator.save_presentation | archive/legacy/ppt_generator_enhanced.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a2d73f51/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a2d73f51/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a54a5bae/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a54a5bae/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a5d3ed6f/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a5d3ed6f/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a68dbaf4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a68dbaf4/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a7cf8aea/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a7cf8aea/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a9f1dfa4/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-a9f1dfa4/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ab6bb737/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ab6bb737/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ab87a90d/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ab87a90d/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ac2fa99a/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-ac2fa99a/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-adbffd55/archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | .claude/worktrees/agent-adbffd55/src/generation/ppt_generator.py
+  - function: PPTGenerator.save_presentation | archive/legacy/ppt_generator_v1.py
+  - function: PPTGenerator.save_presentation | src/generation/ppt_generator.py
+- 功能簇: show_panel
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.show_panel | src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.show_panel | src/core/progress_reporter.py
+- 功能簇: start
+  - function: ProgressReporter.start | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.start | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.start | src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.start | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.start | src/core/progress_reporter.py
+- 功能簇: stop
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.stop | src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.stop | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.stop | src/core/progress_reporter.py
+- 功能簇: success
+  - function: ProgressReporter.success | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.success | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.success | src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.success | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.success | src/core/progress_reporter.py
+- 功能簇: to_dict
+  - function: ComparisonResult.to_dict | src/analysis/result_analyzer.py
+  - function: NumericResult.to_dict | src/analysis/result_analyzer.py
+  - function: PresentationNarrative.to_dict | src/planning/models.py
+  - function: SlidePlan.to_dict | src/planning/models.py
+- 功能簇: update
+  - function: ProgressReporter.update | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.update | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.update | src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.update | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.update | src/core/progress_reporter.py
+- 功能簇: validate
+  - function: PDFParser.validate | .claude/worktrees/agent-a2d73f51/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-a54a5bae/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-ab6bb737/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-ab87a90d/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_parser.py
+  - function: PDFParser.validate | .claude/worktrees/agent-adbffd55/src/parser/pdf_parser.py
+  - function: PDFParser.validate | src/parser/pdf_parser.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a2d73f51/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a54a5bae/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-ab6bb737/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-ab87a90d/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | .claude/worktrees/agent-adbffd55/src/parser/pdf_validator.py
+  - function: PDFValidator.validate | src/parser/pdf_validator.py
+- 功能簇: warning
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: ProgressReporter.warning | src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a2d73f51/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a54a5bae/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a5d3ed6f/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a68dbaf4/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a7cf8aea/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-a9f1dfa4/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-ab6bb737/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-ab87a90d/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-ac2fa99a/src/core/progress_reporter.py
+  - function: SilentReporter.warning | .claude/worktrees/agent-adbffd55/src/core/progress_reporter.py
+  - function: SilentReporter.warning | src/core/progress_reporter.py
+[PDF/Parsing]
+- 功能簇: content
+  - class: ContentExtractor | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: ContentExtractor | archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | src/analysis/content_extractor.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | archive/legacy/content_extractor_enhanced.py
+  - class: PhDMeetingContentExtractorV2 | src/analysis/content_extractor_phd_meeting.py
+  - class: ResearchMeetingContentExtractor | src/analysis/content_extractor_research_meeting.py
+- 功能簇: extract_sections
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a2d73f51/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a54a5bae/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-ab6bb737/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-ab87a90d/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | .claude/worktrees/agent-adbffd55/src/parser/pdf_parser.py
+  - function: PDFParser.extract_sections | src/parser/pdf_parser.py
+  - function: PaperPresentationPipeline._extract_sections | src/core/pipeline.py
+- 功能簇: extractor
+  - class: ContentExtractor | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: ContentExtractor | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: ContentExtractor | archive/legacy/content_extractor_v1.py
+  - class: ContentExtractor | src/analysis/content_extractor.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedContentExtractor | archive/legacy/content_extractor_enhanced.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a2d73f51/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a54a5bae/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-ab6bb737/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-ab87a90d/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | .claude/worktrees/agent-adbffd55/src/parser/pdf_image_extractor.py
+  - class: PDFImageExtractor | src/parser/pdf_image_extractor.py
+  - class: PhDMeetingContentExtractorV2 | src/analysis/content_extractor_phd_meeting.py
+  - class: ResearchMeetingContentExtractor | src/analysis/content_extractor_research_meeting.py
+- 功能簇: pdfparser
+  - class: PDFParser | .claude/worktrees/agent-a2d73f51/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-a54a5bae/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-a5d3ed6f/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-a68dbaf4/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-a7cf8aea/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-a9f1dfa4/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-ab6bb737/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-ab87a90d/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-ac2fa99a/src/parser/pdf_parser.py
+  - class: PDFParser | .claude/worktrees/agent-adbffd55/src/parser/pdf_parser.py
+  - class: PDFParser | src/parser/pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a2d73f51/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a54a5bae/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a5d3ed6f/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a68dbaf4/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a7cf8aea/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-a9f1dfa4/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-ab6bb737/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-ab87a90d/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-ac2fa99a/tests/test_pdf_parser.py
+  - class: TestPDFParser | .claude/worktrees/agent-adbffd55/tests/test_pdf_parser.py
+  - class: TestPDFParser | tests/test_pdf_parser.py
+[Planning]
+- 功能簇: content
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | archive/legacy/content_extractor_enhanced.py
+  - class: SlideContent | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: SlideContent | archive/legacy/content_extractor_v1.py
+  - class: SlideContent | src/analysis/content_extractor.py
+- 功能簇: create_core_idea_slide
+  - function: PhDMeetingContentExtractorV2._create_core_idea_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_core_idea_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_experiment_setup_slide
+  - function: PhDMeetingContentExtractorV2._create_experiment_setup_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_experiment_setup_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_limitations_slide
+  - function: PhDMeetingContentExtractorV2._create_limitations_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_limitations_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_method_details_slide
+  - function: PhDMeetingContentExtractorV2._create_method_details_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_method_details_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_method_overview_slide
+  - function: PhDMeetingContentExtractorV2._create_method_overview_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_method_overview_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_motivation_slide
+  - function: PhDMeetingContentExtractorV2._create_motivation_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_motivation_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_problem_slide
+  - function: PhDMeetingContentExtractorV2._create_problem_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_problem_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_related_work_slide
+  - function: PhDMeetingContentExtractorV2._create_related_work_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_related_work_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_results_slide
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_results_slide | src/analysis/content_extractor.py
+  - function: PhDMeetingContentExtractorV2._create_results_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_results_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_takeaways_discussion_slide
+  - function: PhDMeetingContentExtractorV2._create_takeaways_discussion_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_takeaways_discussion_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: create_title_slide
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor._create_title_slide | src/analysis/content_extractor.py
+  - function: PhDMeetingContentExtractorV2._create_title_slide | src/analysis/content_extractor_phd_meeting.py
+  - function: ResearchMeetingContentExtractor._create_title_slide | src/analysis/content_extractor_research_meeting.py
+- 功能簇: extract_detailed_slides
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - function: ContentExtractor.extract_detailed_slides | src/analysis/content_extractor.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - function: EnhancedContentExtractor.extract_detailed_slides | archive/legacy/content_extractor_enhanced.py
+- 功能簇: narrative
+  - class: NarrativePlanner | src/planning/narrative_planner.py
+  - class: PresentationNarrative | src/planning/models.py
+- 功能簇: plan_slides
+  - function: PaperPresentationPipeline._plan_slides | src/core/pipeline.py
+  - function: SlidePlanner.plan_slides | src/planning/slide_planner.py
+- 功能簇: planner
+  - class: NarrativePlanner | src/planning/narrative_planner.py
+  - class: SlidePlanner | src/planning/slide_planner.py
+- 功能簇: slide
+  - class: SlideFormatter | src/generation/slide_formatter.py
+  - class: SlidePlanner | src/planning/slide_planner.py
+- 功能簇: slide
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_enhanced.py
+  - class: EnhancedSlideContent | archive/legacy/content_extractor_enhanced.py
+  - class: PhDMeetingSlide | src/analysis/content_extractor_phd_meeting.py
+  - class: ResearchMeetingSlide | src/analysis/content_extractor_research_meeting.py
+  - class: SlideContent | .claude/worktrees/agent-a2d73f51/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a2d73f51/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a54a5bae/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a54a5bae/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a5d3ed6f/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a5d3ed6f/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a68dbaf4/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a68dbaf4/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a7cf8aea/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a7cf8aea/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-a9f1dfa4/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-a9f1dfa4/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ab6bb737/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ab6bb737/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ab87a90d/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ab87a90d/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-ac2fa99a/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-ac2fa99a/src/analysis/content_extractor.py
+  - class: SlideContent | .claude/worktrees/agent-adbffd55/archive/legacy/content_extractor_v1.py
+  - class: SlideContent | .claude/worktrees/agent-adbffd55/src/analysis/content_extractor.py
+  - class: SlideContent | archive/legacy/content_extractor_v1.py
+  - class: SlideContent | src/analysis/content_extractor.py
+  - class: SlideFormatter | src/generation/slide_formatter.py
+  - class: SlidePlan | src/planning/models.py
+  - class: SlidePlanner | src/planning/slide_planner.py
+  - class: SlideTopic | src/planning/models.py
+[Testing/CLI/Tools]
+- 功能簇: test
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a2d73f51/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a54a5bae/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a5d3ed6f/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a68dbaf4/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a7cf8aea/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-a9f1dfa4/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-ab6bb737/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-ab87a90d/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-ac2fa99a/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | .claude/worktrees/agent-adbffd55/tests/test_ai_analyzer.py
+  - class: TestAIAnalyzer | tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a2d73f51/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a54a5bae/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a5d3ed6f/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a68dbaf4/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a7cf8aea/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-a9f1dfa4/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-ab6bb737/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-ab87a90d/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-ac2fa99a/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | .claude/worktrees/agent-adbffd55/tests/test_ai_analyzer.py
+  - class: TestAnalyzerMethods | tests/test_ai_analyzer.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a2d73f51/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a54a5bae/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a5d3ed6f/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a68dbaf4/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a7cf8aea/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-a9f1dfa4/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-ab6bb737/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-ab87a90d/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-ac2fa99a/tests/test_ppt_generator.py
+  - class: TestContentExtractor | .claude/worktrees/agent-adbffd55/tests/test_ppt_generator.py
+  - class: TestContentExtractor | tests/test_ppt_generator.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a2d73f51/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a54a5bae/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a5d3ed6f/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a68dbaf4/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a7cf8aea/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-a9f1dfa4/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-ab6bb737/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-ab87a90d/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-ac2fa99a/tests/test_pdf_parser.py
+  - class: TestPDFValidator | .claude/worktrees/agent-adbffd55/tests/test_pdf_parser.py
+  - class: TestPDFValidator | tests/test_pdf_parser.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a2d73f51/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a54a5bae/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a5d3ed6f/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a68dbaf4/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a7cf8aea/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-a9f1dfa4/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-ab6bb737/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-ab87a90d/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-ac2fa99a/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | .claude/worktrees/agent-adbffd55/tests/test_ppt_generator.py
+  - class: TestPPTGenerator | tests/test_ppt_generator.py
+
+6. 死代码检测
+--------------------------------------------------------------------------------
+6.1 连续 5 行以上的注释代码块
+未发现满足条件的注释代码块
+
+6.2 TODO / FIXME / HACK / XXX 统计
+文件路径 | TODO | FIXME | HACK | XXX | 合计
+.claude/worktrees/agent-a2d73f51/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a2d73f51/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a54a5bae/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a54a5bae/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a5d3ed6f/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a5d3ed6f/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a68dbaf4/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a68dbaf4/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a7cf8aea/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a7cf8aea/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a9f1dfa4/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-a9f1dfa4/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ab6bb737/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ab6bb737/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ab87a90d/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ab87a90d/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ac2fa99a/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-ac2fa99a/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-adbffd55/archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+.claude/worktrees/agent-adbffd55/src/analysis/ai_analyzer.py | 1 | 0 | 0 | 0 | 1
+archive/experiments/generate_v3_pptx.py | 1 | 0 | 0 | 0 | 1
+
+7. 最后修改时间分布
+--------------------------------------------------------------------------------
+目录 | 最近1天 | 最近7天 | 最近30天 | 最近90天 | 更早
+. | 3 | 5 | 3 | 0 | 0
+.claude | 751 | 500 | 0 | 0 | 0
+archive | 0 | 12 | 0 | 0 | 0
+cli | 0 | 1 | 0 | 0 | 0
+docs | 0 | 40 | 33 | 0 | 0
+examples | 0 | 1 | 0 | 0 | 0
+outputs | 269 | 6 | 1 | 0 | 0
+papers | 0 | 0 | 2 | 0 | 0
+runtime | 1 | 0 | 3 | 0 | 0
+scripts | 0 | 1 | 0 | 0 | 0
+src | 9 | 23 | 1 | 0 | 0
+templates | 0 | 0 | 1 | 0 | 0
+tests | 1 | 4 | 1 | 0 | 0
+tools | 1 | 7 | 1 | 0 | 0
+
+附注
+--------------------------------------------------------------------------------
+1) 本报告遵循用户指定的忽略规则，仅忽略: .git, __pycache__, .venv, .pytest_cache, .idea, .vscode。
+2) 所有路径均为相对项目根目录路径。
+3) 重复功能检测基于 Python 类名与函数名的启发式匹配，结果用于人工复核。
+4) 死代码检测中的“注释代码块”仅统计 Python 文件中连续 5 行以上、形似代码的注释行。

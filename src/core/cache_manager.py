@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class CacheManager:
     """Manages caching of AI analysis results"""
 
-    def __init__(self, cache_dir: str = "./cache", ttl: int = 604800):
+    def __init__(self, cache_dir: str = "./runtime/cache", ttl: int = 604800):
         """
         Initialize cache manager
 

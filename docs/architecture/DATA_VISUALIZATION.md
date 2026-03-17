@@ -50,7 +50,7 @@
 │  ──────────────────────────────────────────────────────────────────  │
 │  计算PDF哈希: MD5(pdf文件) → "e3b0c44298fc..."                       │
 │                                                                       │
-│  检查缓存: cache/e3b0c44298fc...json                                 │
+│  检查缓存: runtime/cache/e3b0c44298fc...json                         │
 │  ┌────────────────────────────────────────────────────────────┐     │
 │  │ 缓存存在?                                                    │     │
 │  │  ├─ YES → 加载缓存，跳到阶段7                                │     │
@@ -111,7 +111,7 @@
 │  ──────────────────────────────────────────────────────────────────  │
 │  CacheManager.save_analysis()                                        │
 │                                                                       │
-│  保存到: cache/e3b0c44298fc...json                                   │
+│  保存到: runtime/cache/e3b0c44298fc...json                           │
 │  ┌────────────────────────────────────────────────────────────┐     │
 │  │ {                                                           │     │
 │  │   "hash": "e3b0c44298fc...",                                │     │
@@ -189,14 +189,14 @@
 │  阶段 9: 文件保存和转换                                                │
 │  ──────────────────────────────────────────────────────────────────  │
 │  PPTGenerator.save_presentation()                                    │
-│  ├─ 保存Markdown: output/markdown/example.md                        │
+│  ├─ 保存Markdown: outputs/markdown/example.md                       │
 │  └─ 转换格式 (可选)                                                   │
-│      ├─ convert_to_html() → output/slides/example.html              │
-│      └─ convert_to_pdf()  → output/slides/example.pdf               │
+│      ├─ convert_to_html() → outputs/slides/example.html             │
+│      └─ convert_to_pdf()  → outputs/slides/example.pdf              │
 │                                                                       │
 │  最终输出文件:                                                        │
 │  ┌────────────────────────────────────────────────────────────┐     │
-│  │ output/                                                     │     │
+│  │ outputs/                                                    │     │
 │  │ ├── markdown/                                               │     │
 │  │ │   └── example.md          (20-40 KB)                     │     │
 │  │ └── slides/                                                 │     │
@@ -229,7 +229,7 @@ PDF文件 (1-5 MB)
     │   PresentationContent (10-20 KB)
     │
     ├─→ [缓存]
-    │   cache.json (15-30 KB)
+    │   runtime/cache.json (15-30 KB)
     │
     ├─→ [生成]
     │   Markdown (20-40 KB)
@@ -360,25 +360,25 @@ PDF文件 (1-5 MB)
 ## 文件依赖关系
 
 ```
-main.py
+cli/main.py
 ├─ config.yaml (配置)
 ├─ .env (API密钥)
 │
-├─ src/pdf_parser.py
-│  └─ src/pdf_validator.py
+├─ src/parser/pdf_parser.py
+│  └─ src/parser/pdf_validator.py
 │
-├─ src/ai_analyzer.py
-│  ├─ src/resilience.py
+├─ src/analysis/ai_analyzer.py
+│  ├─ src/core/resilience.py
 │  └─ anthropic (外部库)
 │
-├─ src/content_extractor.py
+├─ src/analysis/content_extractor.py
 │
-├─ src/ppt_generator.py
+├─ src/generation/ppt_generator.py
 │  └─ templates/ppt_template.md
 │
-├─ src/cache_manager.py
+├─ src/core/cache_manager.py
 │
-└─ src/progress_reporter.py
+└─ src/core/progress_reporter.py
    └─ rich (外部库)
 ```
 

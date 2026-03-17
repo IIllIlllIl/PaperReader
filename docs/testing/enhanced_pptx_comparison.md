@@ -117,5 +117,5 @@
 
 **文件位置**:
 - 增强版工具: `tools/generate_enhanced_pptx.py`
-- 增强版 Markdown: `output/markdown/[PaperName]_enhanced.md`
-- 增强版 PPTX: `output/slides/[PaperName]_enhanced.pptx`
+- 增强版 Markdown: `outputs/markdown/[PaperName]_enhanced.md`
+- 增强版 PPTX: `outputs/slides/[PaperName]_enhanced.pptx`

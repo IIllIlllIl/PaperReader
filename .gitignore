@@ -35,24 +35,26 @@ env/
 # Environment variables
 .env
 
-# Cache
-cache/
+# Runtime data
+runtime/cache/
+runtime/logs/
 *.cache
-
-# Logs
-logs/
 *.log
 
-# Output
-output/slides/*.html
-output/slides/*.pdf
-output/markdown/*.md
+# Generated outputs
+outputs/slides/*.html
+outputs/slides/*.pdf
+outputs/slides/*.pptx
+outputs/images/*.png
+outputs/markdown/*.md
+outputs/charts/*.png
+outputs/plans/*.md
 
-# Keep empty directories
-!output/slides/.gitkeep
-!output/markdown/.gitkeep
-!cache/.gitkeep
-!logs/.gitkeep
+# Keep empty canonical directories
+!runtime/cache/.gitkeep
+!runtime/logs/.gitkeep
+!outputs/slides/.gitkeep
+!outputs/markdown/.gitkeep
 
 # OS
 .DS_Store
@@ -66,13 +68,3 @@ htmlcov/
 # Temporary files
 *.tmp
 *.bak
-
-
-# Added by refactor script
-# Runtime data
-runtime/cache/
-runtime/logs/
-# Outputs
-outputs/slides/*.pptx
-outputs/images/*.png
-outputs/markdown/*.md

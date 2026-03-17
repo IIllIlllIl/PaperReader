@@ -9,16 +9,16 @@
 ===========
 
 ### 主要输出文件
-1. **PPTX**: `output/slides/Human-In-the-Loop_v3.pptx`
+1. **PPTX**: `outputs/slides/Human-In-the-Loop_v3.pptx`
    - 17张幻灯片
    - 包含3张关键图片
    - 文件大小: ~20KB
 
-2. **Markdown**: `output/markdown/Human-In-the-Loop_v3.md`
+2. **Markdown**: `outputs/markdown/Human-In-the-Loop_v3.md`
    - 7.4KB
    - 完整的Marp格式
 
-3. **图片**: `output/images/`
+3. **图片**: `outputs/images/`
    - Human-In-the-Loop_figure_1.png (15KB)
    - Human-In-the-Loop_figure_2.png (13KB)
    - Human-In-the-Loop_figure_3.png (11KB)
@@ -149,13 +149,13 @@
 ### Slide 13-15: Figures
 ```markdown
 ## Figure 1
-- ![Figure 1](output/images/Human-In-the-Loop_figure_1.png)
+- ![Figure 1](outputs/images/Human-In-the-Loop_figure_1.png)
 
 ## Figure 2
-- ![Figure 2](output/images/Human-In-the-Loop_figure_2.png)
+- ![Figure 2](outputs/images/Human-In-the-Loop_figure_2.png)
 
 ## Figure 3
-- ![Figure 3](output/images/Human-In-the-Loop_figure_3.png)
+- ![Figure 3](outputs/images/Human-In-the-Loop_figure_3.png)
 ```
 **字数**: 各5 words ✅
 
@@ -314,16 +314,16 @@
 ===============
 
 **必需审核**:
-- [ ] `output/slides/Human-In-the-Loop_v3.pptx` (主文件)
-- [ ] `output/markdown/Human-In-the-Loop_v3.md` (源文件)
+- [ ] `outputs/slides/Human-In-the-Loop_v3.pptx` (主文件)
+- [ ] `outputs/markdown/Human-In-the-Loop_v3.md` (源文件)
 
 **参考文件**:
-- [ ] `output/images/Human-In-the-Loop_figure_*.png` (图片)
+- [ ] `outputs/images/Human-In-the-Loop_figure_*.png` (图片)
 - [ ] `docs/testing/v3_optimized_final_review.md` (技术报告)
 
 **对比文件**:
-- [ ] `output/slides/Human-In-the-Loop_enhanced.pptx` (V2旧版)
-- [ ] `output/slides/Human-In-the-Loop_v3.pptx` (V3新版)
+- [ ] `outputs/slides/Human-In-the-Loop_enhanced.pptx` (V2旧版)
+- [ ] `outputs/slides/Human-In-the-Loop_v3.pptx` (V3新版)
 
 ---
 

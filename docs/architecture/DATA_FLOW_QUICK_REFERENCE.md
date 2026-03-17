@@ -10,12 +10,12 @@
 | 2 | 提取 | sections | Dict | 10-50 KB | ❌ | 内存 |
 | 2 | 提取 | PaperMetadata | dataclass | ~1 KB | ❌ | 内存 |
 | 3 | 哈希 | pdf_hash | 字符串 | 32 B | ❌ | 内存 |
-| 4 | AI分析 | PaperAnalysis | dataclass | 5-10 KB | ✅ | cache/ |
-| 5 | 内容生成 | PresentationContent | dataclass | 10-20 KB | ✅ | cache/ |
-| 6 | 缓存 | {hash}.json | JSON | 15-30 KB | ✅ | cache/ |
+| 4 | AI分析 | PaperAnalysis | dataclass | 5-10 KB | ✅ | runtime/cache/ |
+| 5 | 内容生成 | PresentationContent | dataclass | 10-20 KB | ✅ | runtime/cache/ |
+| 6 | 缓存 | {hash}.json | JSON | 15-30 KB | ✅ | runtime/cache/ |
 | 7 | 组织 | OrganizedPresentation | dataclass | 10-15 KB | ❌ | 内存 |
-| 8 | 生成 | Markdown | 文本 | 20-40 KB | ✅ | output/markdown/ |
-| 9 | 转换 | HTML/PDF | 文件 | 50KB-2MB | ✅ | output/slides/ |
+| 8 | 生成 | Markdown | 文本 | 20-40 KB | ✅ | outputs/markdown/ |
+| 9 | 转换 | HTML/PDF | 文件 | 50KB-2MB | ✅ | outputs/slides/ |
 
 ## 🔄 数据流转示意图
 
@@ -47,7 +47,7 @@ PDF文件 (papers/example.pdf)
     ├─→ [内容生成] → PresentationContent
     │    适合幻灯片的结构化内容
     │
-    ├─→ [缓存保存] → cache/{hash}.json
+    ├─→ [缓存保存] → runtime/cache/{hash}.json
     │
     ├─→ [组织] → OrganizedPresentation
     │    18个 SlideContent 对象
@@ -55,7 +55,7 @@ PDF文件 (papers/example.pdf)
     ├─→ [生成] → Markdown字符串
     │    包含Marp配置
     │
-    └─→ [输出] → output/
+    └─→ [输出] → outputs/
          ├── markdown/example.md (20-40 KB)
          └── slides/example.html (50-100 KB)
 ```
@@ -177,9 +177,9 @@ PDF文件 (papers/example.pdf)
 
 ### 磁盘存储（持久）
 - **papers/**: 原始PDF文件
-- **cache/**: AI分析结果（7天TTL）
-- **output/markdown/**: Markdown文件
-- **output/slides/**: 最终演示文件
+- **runtime/cache/**: AI分析结果（7天TTL）
+- **outputs/markdown/**: Markdown文件
+- **outputs/slides/**: 最终演示文件
 
 ### 缓存策略
 - **键**: PDF文件MD5哈希
@@ -207,22 +207,22 @@ PDF文件 (papers/example.pdf)
 python tools/debug_data_flow.py papers/example.pdf --skip-ai
 
 # 查看缓存内容
-cat cache/{hash}.json | jq .
+cat runtime/cache/{hash}.json | jq .
 
 # 查看生成的Markdown
-cat output/markdown/example.md
+cat outputs/markdown/example.md
 ```
 
 ### 验证数据完整性
 ```python
 # 检查缓存文件
-from src.cache_manager import CacheManager
+from src.core.cache_manager import CacheManager
 cache = CacheManager()
 stats = cache.get_cache_stats()
 print(stats)
 
 # 检查AI分析结果
-from src.ai_analyzer import AIAnalyzer
+from src.analysis.ai_analyzer import AIAnalyzer
 stats = analyzer.get_stats()
 print(f"Cost: ${stats['total_cost']:.4f}")
 ```
@@ -271,7 +271,7 @@ python tools/debug_data_flow.py papers/example.pdf --skip-ai
 python cli/main.py process --paper papers/example.pdf --verbose
 
 # 3. 查看输出
-ls output/
-cat output/markdown/example.md
-open output/slides/example.html
+ls outputs/
+cat outputs/markdown/example.md
+open outputs/slides/example.html
 ```

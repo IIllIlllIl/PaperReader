@@ -114,7 +114,7 @@
 │    - analysis: PaperAnalysis                           │
 │    - presentation_content: PresentationContent         │
 │  处理: CacheManager.save_analysis()                    │
-│  输出: cache/{pdf_hash}.json文件                        │
+│  输出: runtime/cache/{pdf_hash}.json文件                        │
 │  文件内容结构:                                          │
 │    {                                                   │
 │      "hash": "abc123...",                              │
@@ -162,11 +162,11 @@
 │  输入: markdown字符串                                   │
 │  处理:                                                 │
 │    9.1 PPTGenerator.save_presentation()                │
-│        → 保存到output/markdown/{paper_name}.md         │
+│        → 保存到outputs/markdown/{paper_name}.md         │
 │    9.2 PPTGenerator.convert_to_html() 或               │
 │        PPTGenerator.convert_to_pdf()                   │
 │        → 调用Marp CLI                                  │
-│        → 输出到output/slides/{paper_name}.html/.pdf    │
+│        → 输出到outputs/slides/{paper_name}.html/.pdf    │
 │  输出:                                                 │
 │    - Markdown文件 (.md)                                │
 │    - HTML文件 (.html) 或 PDF文件 (.pdf)                │
@@ -384,7 +384,7 @@ OrganizedPresentation(
 
 ### 9. Markdown字符串
 
-**位置**: 内存 + output/markdown/
+**位置**: 内存 + outputs/markdown/
 **格式**: Markdown with Marp front matter
 **完整示例**:
 ```markdown
@@ -477,7 +477,7 @@ style: |
 
 ### 10. 缓存文件
 
-**位置**: cache/{pdf_hash}.json
+**位置**: runtime/cache/{pdf_hash}.json
 **格式**: JSON
 **完整示例**:
 ```json
@@ -529,11 +529,11 @@ style: |
 ### 11. 最终输出文件
 
 #### Markdown文件
-**位置**: `output/markdown/{paper_name}.md`
+**位置**: `outputs/markdown/{paper_name}.md`
 **格式**: Markdown (同中间产物9)
 
 #### HTML文件
-**位置**: `output/slides/{paper_name}.html`
+**位置**: `outputs/slides/{paper_name}.html`
 **格式**: HTML (Marp生成的演示文稿)
 **特点**:
 - 包含所有幻灯片
@@ -542,7 +542,7 @@ style: |
 - 包含样式
 
 #### PDF文件
-**位置**: `output/slides/{paper_name}.pdf`
+**位置**: `outputs/slides/{paper_name}.pdf`
 **格式**: PDF
 **特点**:
 - 每页一个幻灯片
@@ -588,7 +588,7 @@ style: |
    - technical_details: ["Multi-head attention", "Positional encoding", ...]
 
 7. 缓存保存:
-   - 保存到 cache/e3b0c44298fc1c149afbf4c8996fb924.json
+   - 保存到 runtime/cache/e3b0c44298fc1c149afbf4c8996fb924.json
 
 8. 幻灯片组织:
    - 18个幻灯片
@@ -599,8 +599,8 @@ style: |
    - 包含Marp配置
 
 10. 文件保存:
-    - output/markdown/attention_is_all_you_need.md
-    - output/slides/attention_is_all_you_need.html
+    - outputs/markdown/attention_is_all_you_need.md
+    - outputs/slides/attention_is_all_you_need.html
 ```
 
 ## 关键数据大小估算
@@ -614,10 +614,10 @@ style: |
 | 元数据 | ~1 KB | 内存 | 临时 |
 | AI分析结果 | 5-10 KB | 内存+缓存 | 缓存7天 |
 | 演示内容 | 10-20 KB | 内存+缓存 | 缓存7天 |
-| 缓存文件 | 15-30 KB | cache/ | 7天TTL |
-| Markdown | 20-40 KB | output/markdown/ | 永久 |
-| HTML | 50-100 KB | output/slides/ | 永久 |
-| PDF输出 | 500 KB-2 MB | output/slides/ | 永久 |
+| 缓存文件 | 15-30 KB | runtime/cache/ | 7天TTL |
+| Markdown | 20-40 KB | outputs/markdown/ | 永久 |
+| HTML | 50-100 KB | outputs/slides/ | 永久 |
+| PDF输出 | 500 KB-2 MB | outputs/slides/ | 永久 |
 
 ## 性能和成本追踪
 

@@ -18,7 +18,7 @@
          │
          ▼
 ┌─────────────────────────┐
-│  output/images/         │
+│  outputs/images/         │
 │  ├── figure_1.png 16KB  │ ← HULA Framework (IMPORTANT!)
 │  ├── figure_2.png 15KB  │ ← Results Chart
 │  └── figure_3.png 13KB  │ ← System Diagram
@@ -32,11 +32,11 @@
          │
          ▼
 ┌─────────────────────────────────────┐
-│  output/markdown/                   │
+│  outputs/markdown/                   │
 │  Human-In-the-Loop_v3.md            │
 │  ...                                │
 │  ## Figure 1                        │
-│  - ![Figure 1](output/images/...)  │ ← Image reference
+│  - ![Figure 1](outputs/images/...)  │ ← Image reference
 │  ...                                │
 └────────┬────────────────────────────┘
          │
@@ -50,7 +50,7 @@
          │
          ▼
 ┌─────────────────────────────────────┐
-│  output/slides/                     │
+│  outputs/slides/                     │
 │  Human-In-the-Loop_v3.pptx          │
 │  ❌ Slide 14: "Figure 1"            │
 │     Content: "![Figure 1](...)"     │ ← TEXT, NOT IMAGE!
@@ -79,7 +79,7 @@
          │
          ▼
 ┌─────────────────────────────────────┐
-│  output/images/                     │
+│  outputs/images/                     │
 │  ├── figure_1.png 16KB              │
 │  │   📊 Type: Framework Diagram    │
 │  │   🎯 Priority: HIGH (score: 8)  │
@@ -100,11 +100,11 @@
          │
          ▼
 ┌─────────────────────────────────────────────┐
-│  output/markdown/                           │
+│  outputs/markdown/                           │
 │  Human-In-the-Loop_v3.md                    │
 │  ...                                        │
 │  ## Figure 1: Framework Overview           │
-│  - ![Framework](output/images/...)         │
+│  - ![Framework](outputs/images/...)         │
 │  - Priority: HIGH                          │
 │  ...                                        │
 └────────┬────────────────────────────────────┘
@@ -122,7 +122,7 @@
          │
          ▼
 ┌─────────────────────────────────────────────┐
-│  output/slides/                             │
+│  outputs/slides/                             │
 │  Human-In-the-Loop_v3.pptx ✨               │
 │                                             │
 │  ✅ Slide 14: Figure 1 - Framework         │
@@ -226,7 +226,7 @@ elif line.startswith('- ') or line.startswith('* '):
     bullets.append(line[2:].strip())
 
 # Result:
-# bullets = ['![Figure 1](output/images/figure_1.png)']  ← Just text!
+# bullets = ['![Figure 1](outputs/images/figure_1.png)']  ← Just text!
 ```
 
 ### After (Fixed)
@@ -251,7 +251,7 @@ elif line.startswith('- ') or line.startswith('* '):
         })
 
 # Result:
-# bullets = [{'type': 'image', 'alt': 'Figure 1', 'path': 'output/images/figure_1.png'}]
+# bullets = [{'type': 'image', 'alt': 'Figure 1', 'path': 'outputs/images/figure_1.png'}]
 ```
 
 ### Slide Creation: Before (Text Only)
@@ -308,7 +308,7 @@ else:
 ```
 Open Human-In-the-Loop_v3.pptx
   → Slide 14: "Figure 1"
-  → Content: "![Figure 1](output/images/Human-In-the-Loop_figure_1.png)"
+  → Content: "![Figure 1](outputs/images/Human-In-the-Loop_figure_1.png)"
   → User sees: Plain text (confusing!)
 ```
 
