@@ -4,15 +4,15 @@
 
 ## Research Narrative
 
-**Hook:** Coding agents promise to automate software work, but real enterprise development is less about generating code than producing plans developers trust and pull requests teams will merge.
+**Hook:** While autonomous coding agents excel in benchmarks, they struggle to deliver reliable results in complex, real-world software development environments.
 
-**Problem:** This paper asks how to make LLM agents useful for enterprise issue resolution beyond benchmarks, with stage-wise human collaboration inside production workflows. That matters because issue automation must fit real JIRA and Bitbucket processes and earn practitioner acceptance.
+**Problem:** Existing LLM-based agents lack human feedback mechanisms and have not been validated in industry deployments, limiting their ability to handle the nuance of enterprise software tasks.
 
-**Key Idea:** HULA is a human-in-the-loop multi-agent system where a planner localizes files and drafts a fix, a human approves or edits the plan, and a coder generates validated code before opening a pull request.
+**Key Idea:** HULA introduces the first industry-deployed Human-in-the-Loop framework that integrates iterative developer feedback directly into the planning and coding lifecycle of LLM agents.
 
-**Evidence:** Across 663 real production issues, HULA achieved 82% plan approval, a 59% merged PR rate, and 8% end-to-end issue-to-merge. Offline, it reached 86% file recall and 31% test pass on SWE-bench Verified, but only 30% code similarity on Atlassian internal tasks, revealing a remaining code-quality gap.
+**Evidence:** Deployed at scale with 2,600 Atlassian practitioners, HULA achieved an 82% plan approval rate and a 59% merged pull request rate, demonstrating effective human-AI synergy.
 
-**Implications:** The results suggest the near-term future of software agents is human-AI co-development, with humans steering planning and AI accelerating execution inside existing engineering tools. They also highlight that better context and documentation will be critical for reliable enterprise automation.
+**Implications:** This successful enterprise deployment proves that human-AI collaboration is viable for software engineering, significantly reducing development effort while highlighting the need for improved code quality in future iterations.
 
 
 ---
@@ -21,139 +21,130 @@
 
 ### Slide 1: Human-In-the-Loop Software Development Agents
 
-**Purpose:** Paper identity and presentation framing
+**Purpose:** Set the stage for the presentation - emphasize this is pioneering industry work
 
 **Key Points:**
-- Wannita Takerngsaksiri et al.
-- 2025
-- HULA framework
-- Atlassian JIRA + Bitbucket deployment
+- Paper title and research focus
+- Authors: Wannita Takerngsaksiri et al.
+- Year: 2025
+- First industry deployment of human-in-the-loop software agents
 
 ### Slide 2: Motivation
 
-**Purpose:** Why enterprise human-AI coding matters
+**Purpose:** Explain WHY this problem is important for real-world software development
 
 **Key Points:**
-- Enterprise software maintenance burden
-- Benchmark-to-production mismatch
-- Risks of unsupervised code changes
-- Need for stage-wise human oversight
-- Missing practitioner adoption evidence
+- Growing adoption of LLM-based multi-agent paradigms in software development
+- Demand for automated software development tasks in enterprise settings
+- Gap between benchmark performance and real-world deployment needs
+- Potential of human-AI synergy to overcome autonomous agent limitations
 
 ### Slide 3: Research Questions
 
 **Purpose:** Main research questions this paper addresses
 
 **Key Points:**
-- RQ1: 🔥 JIRA deployment
-- RQ2: How does the proposed approach address 🔥 **82%** plan approval...?
+- RQ1: 💡 Human-in-the-loop enhances AI planning
+- RQ2: How does the proposed approach address 🔥 **59%** merged PR rate with human feedback...?
 - RQ3: How does the method improve over prior work?
 
 ### Slide 4: Problem Definition
 
-**Purpose:** Define the paper's target problem precisely
+**Purpose:** Define the specific gap this paper addresses
 
 **Key Points:**
-- JIRA issue-to-PR automation task
-- Human-guided planning and coding stages
-- File localization, plan generation, code synthesis
-- Enterprise repositories across 10+ languages
-- Success criteria from plan approval to PR merge
+- Existing agents lack human feedback integration mechanisms
+- Current systems rely solely on historical benchmark datasets
+- Limited industry deployment and validation of software agents
+- Need for practical human-in-the-loop solutions in enterprise environments
 
 ### Slide 5: Related Work
 
-**Purpose:** Contrast prior agent designs with HULA
+**Purpose:** Compare approaches and highlight limitations of previous work
 
 **Key Points:**
-- SWE-agent-style autonomous coding agents
-- Benchmark-centric evaluation on SWE-bench
-- Multi-agent coding without human feedback loops
-- Limited enterprise deployment and user studies
-- HULA advantage: stage-wise collaboration + production validation
+- SWE-agent Claude: 6th ranked on SWE-bench - fully autonomous approach
+- Existing multi-agent systems: lack human feedback loop
+- Benchmark-focused approaches: no industrial deployment validation
+- HULA advantage: human-in-the-loop + real-world enterprise evaluation
 
 ### Slide 6: Core Idea
 
-**Purpose:** One-line contribution distilled into core elements
+**Purpose:** Main contribution in clear, focused points
 
 **Key Points:**
-- Planner-coder-human triad
-- Approve plans before writing code
-- Editable code with tool-guided refinement
-- JIRA-native workflow to Bitbucket PRs
+- Human-in-the-loop integration enhances AI planning and execution
+- Multi-stage workflow with iterative human feedback checkpoints
+- Cooperative coordination between AI agents and human practitioners
+- Enterprise-scale deployment validation in production environment
 
-### Slide 7: Method Overview
+### Slide 7: Method Overview: HULA Framework
 
-**Purpose:** End-to-end workflow at a glance
+**Purpose:** High-level architecture and key components
 
 **Key Points:**
-- Issue and repository selection
-- Planner file localization
-- Draft implementation plan
-- Human review, edits, approval
-- Code generation, refinement, PR raising
+- AI Planner Agent: File localization and task planning
+- AI Coding Agent: Code generation and refinement
+- Human Agent: Feedback provision and approval decisions
+- Shared memory: JIRA integration and repository context
 
 ### Slide 8: Method Details
 
-**Purpose:** Technical mechanisms and implementation insights
+**Purpose:** Technical details and implementation insights
 
 **Key Points:**
-- DPDE coordination
-- Shared repository memory
-- LLM-based file localization and plan generation
-- Code synthesis with compiler/linter-guided self-refinement
-- Human feedback insertion points
+- DPDE: Decentralized planning and execution algorithm
+- LLM-as-a-Judge: Code similarity scoring mechanism
+- Self-refinement: Compiler and linter feedback integration
+- Multi-stage task dissection and context augmentation techniques
 
 ### Slide 9: Experiment Setup
 
-**Purpose:** Offline, online, and practitioner evaluation design
+**Purpose:** Comprehensive experimental configuration
 
 **Key Points:**
-- GPT-4 backbone; Atlassian JIRA + Bitbucket environment
-- SWE-bench Verified: 500 Python issues
-- Atlassian internal offline set: 369 issues, 94 repos, 10+ languages
-- Online deployment + survey: 663 issues; 109/146 responses
-- Baselines and metrics: offline HULA, human PRs, SWE-agent; recall, test pass, similarity, PR outcomes
+- Datasets: SWE-bench Verified (500 issues) + Internal Atlassian (369 issues)
+- Baseline: SWE-agent Claude (6th ranked on SWE-bench)
+- Metrics: Plan approval rate, merged PR rate, file recall
+- Deployment: GPT-4 backbone, 2,600 practitioners, 75% survey response
 
 ### Slide 10: Results
 
-**Purpose:** Headline numbers with brief interpretation
+**Purpose:** Key findings with brief interpretations
 
 **Key Points:**
-- 82% plan approval: planning alignment
-- 59% merged PR rate: practical utility
-- 8% issue-to-merge: end-to-end production success
-- 86% file recall vs 31% test pass: localization strength, execution gap
-- 30% internal code similarity: code-quality gap to human PRs
+- 59% merged PR rate demonstrating industry success
+- 82% plan approval rate showing human-AI alignment
+- 8% full end-to-end automation success rate
+- 86% file recall on SWE-bench, 61% code readability rating
 
 ### Slide 11: Limitations
 
-**Purpose:** Critical analysis beyond positive deployment results
+**Purpose:** Honest weaknesses and critical analysis
 
 **Key Points:**
-- Code-quality inconsistency across generated PRs
-- Sparse or ambiguous issue descriptions
-- Single-backbone dependence on GPT-4
-- Atlassian-specific tooling and workflow bias
-- Limited correctness evaluation and missing test generation
+- Code functionality issues in generated solutions
+- Incomplete code changes for complex tasks
+- High input effort required from human practitioners
+- Performance degradation on complex multi-file tasks
 
 ### Slide 12: Future Work
 
 **Purpose:** Future research directions and opportunities
 
 **Key Points:**
-- Address: Code-quality inconsistency
-- Address: Short issue descriptions
+- Address: Code functionality issues
+- Address: Incomplete code changes
 - Reduce input effort required
 - Explore other domains
 - Long-term impact studies
 
 ### Slide 13: Takeaways & Discussion
 
-**Purpose:** Key insights and open discussion directions
+**Purpose:** Key insights and discussion questions for the group
 
 **Key Points:**
-- Humans-in-the-loop as default design pattern
-- Planning-stage approval over full autonomy
-- Deployment feasibility for simple enterprise tasks
-- Documentation quality as a performance lever
-- Discussion: context augmentation, richer evaluation, broader transfer
+- Human-in-the-loop proven effective for enterprise deployment
+- Input quality and documentation practices are critical success factors
+- Code quality enhancement remains key area for future work
+- Discussion: How to balance automation vs. human oversight?

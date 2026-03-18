@@ -134,7 +134,15 @@
       "Bash(for dir:*)",
       "Bash(wc:*)",
       "Bash(chmod:*)",
-      "Bash(./tools/cleanup_abandoned_files.sh << 'INPUT'\ny\nn\nINPUT)"
+      "Bash(./tools/cleanup_abandoned_files.sh << 'INPUT'\ny\nn\nINPUT)",
+      "Bash(grep -E \"\\\\.md$|\\\\.yaml$|requirements\\\\.txt|paperreader\")",
+      "Bash(./scripts/health_check.sh)",
+      "Bash(./scripts/auto_clean.sh)",
+      "Bash(ls -lh outputs/test_pymupdf/page4*)",
+      "Bash(grep -E \"figure_[0-9]+\\\\.png$\")",
+      "Bash(grep \"\\\\.png$\")",
+      "Bash(ls -lh outputs/test_all_figures/*figure*.png)",
+      "Bash(ls -lh outputs/images/*figure*.png)"
     ]
   }
 }

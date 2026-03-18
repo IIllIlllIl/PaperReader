@@ -50,6 +50,22 @@ outputs/markdown/*.md
 outputs/charts/*.png
 outputs/plans/*.md
 
+# Temporary outputs (test/debug/backup)
+outputs/test_*/
+outputs/debug_*/
+outputs/*_old_*/
+outputs/*_backup_*/
+outputs/validation_*.md
+outputs/debug_bbox/
+outputs/debug_detailed/
+outputs/debug_figures/
+outputs/test_all_figures/
+outputs/test_detailed/
+outputs/test_fix*/
+outputs/test_max_*/
+outputs/test_pymupdf/
+outputs/images_old_*/
+
 # Keep empty canonical directories
 !runtime/cache/.gitkeep
 !runtime/logs/.gitkeep

@@ -4,14 +4,9 @@
 
 PaperReader generates academic presentation slides from PDF papers.
 
-Pipeline:
+Pipeline (8 stages):
 
-PDF
-→ parser
-→ analysis
-→ planning
-→ generation
-→ outputs (markdown / pptx)
+PDF → Parse → Analyze → Plan (slide + narrative) → Generate → Export → outputs
 
 Main goal:
 produce academic slides with figures extracted from papers.
@@ -32,31 +27,23 @@ prompts/       LLM prompts
 
 Outputs:
 
-outputs/images/
-outputs/markdown/
-outputs/slides/
+outputs/images/    # extracted figures
+outputs/markdown/  # slide markdown
+outputs/slides/    # PPTX files
+outputs/scripts/   # presentation scripts
+outputs/plans/     # slide plans (JSON)
 
 ---
 
 ## Important Modules
 
-PDF parsing
-src/parser/pdf_parser.py
-
-Figure extraction
-src/parser/pdf_image_extractor.py
-
-Content extraction
-src/analysis/content_extractor.py
-
-Slide planning
-src/planning/slide_planner.py
-
-Markdown generation
-src/generation/ppt_generator.py
-
-PPTX export
-src/generation/pptx_exporter.py
+PDF parsing: src/parser/pdf_parser.py
+Figure extraction: src/parser/pdf_image_extractor.py
+Content extraction: src/analysis/content_extractor.py
+Slide planning: src/planning/slide_planner.py
+Narrative planning: src/planning/narrative_planner.py
+Markdown generation: src/generation/ppt_generator.py
+PPTX export: src/generation/pptx_exporter.py
 
 ---
 
@@ -92,9 +79,9 @@ pptx_exporter.py parses this and renders images in PPTX.
 
 ## Common Commands
 
-Generate enhanced presentation:
+Run full pipeline:
 
-python tools/generate_enhanced_pptx.py papers/example.pdf
+python cli/main.py pipeline --paper papers/example.pdf
 
 Run tests:
 

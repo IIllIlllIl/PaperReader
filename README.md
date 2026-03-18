@@ -14,7 +14,6 @@ PaperReader uses a clear, layered structure:
 | `cli/` | Command-line interface |
 | `tools/` | Utility scripts and tools |
 | `docs/` | Detailed documentation |
-| `skills/` | Claude Skills integration |
 | `tests/` | Test suite |
 | `tools/manual_tests/` | Manual test scripts |
 
@@ -76,29 +75,23 @@ export ANTHROPIC_API_KEY=your-api-key-here
 
 ## Quick Start
 
-### Method 1: Using Claude Skill (Recommended) ⭐
+### Method 1: Using Full Pipeline (Recommended) ⭐
 
-The easiest way to use PaperReader is through Claude's skill system:
+Generate complete presentation with all outputs:
 
 ```bash
-# 1. Install the skill
-./tools/install_skill.sh
-
-# 2. In Claude chat, simply type:
-/paper                    # Process latest PDF
-/paper attention.pdf      # Process specific file
-/papers                   # Batch process all papers
+python cli/main.py pipeline --paper papers/example.pdf
 ```
 
 **Benefits**:
-- ✅ Simplest commands (just `/paper`)
-- ✅ Natural language support
-- ✅ Auto-completion
-- ✅ Intelligent defaults
+- ✅ Complete 8-stage pipeline
+- ✅ Generates PPTX, Markdown, Script, and Plan
+- ✅ Includes research narrative
+- ✅ Best for academic presentations
 
-**See**: [skills/README.md](skills/README.md) for details
+### Method 2: Using Basic Process
 
-### Method 2: Using Command Line
+For quick analysis without full pipeline:
 
 ```bash
 python cli/main.py process --paper papers/example.pdf
@@ -172,15 +165,18 @@ python cli/main.py cleanup
 ```
 outputs/
 ├── markdown/
-│   └── paper_name.md       # Generated Markdown slides
-└── slides/
-    ├── paper_name.html     # HTML presentation
-    └── paper_name.pdf      # PDF presentation
+│   └── paper_name.md                    # Generated Markdown slides
+├── slides/
+│   └── paper_name.pptx                  # PowerPoint presentation
+├── scripts/
+│   └── paper_name_presentation_script.md # Presentation script
+└── plans/
+    └── paper_name_plan.json             # Slide plan (JSON)
 ```
 
 ## Generated Presentation Structure
 
-The tool generates a 15-20 slide presentation with the following structure:
+The tool generates a 12-15 slide presentation (depending on paper content) with the following structure:
 
 1. **Title Slide** - Paper title, authors, venue, year
 2. **Background & Motivation** - Research context and motivation

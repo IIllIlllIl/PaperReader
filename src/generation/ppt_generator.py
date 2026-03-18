@@ -160,7 +160,7 @@ class PPTGenerator:
             if isinstance(line, str)
         ):
             figure_filename = os.path.basename(figure_path)
-            correct_path = f"images/{figure_filename}"
+            correct_path = f"../images/{figure_filename}"
             content_lines.append(f"![{figure_caption or slide.title}]({correct_path})")
 
         if has_figure and figure_caption and not any(

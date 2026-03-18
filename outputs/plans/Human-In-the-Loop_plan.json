@@ -4,31 +4,30 @@
     {
       "title": "Human-In-the-Loop Software Development Agents",
       "key_points": [
-        "Wannita Takerngsaksiri et al.",
-        "2025",
-        "HULA framework",
-        "Atlassian JIRA + Bitbucket deployment"
+        "Paper title and research focus",
+        "Authors: Wannita Takerngsaksiri et al.",
+        "Year: 2025",
+        "First industry deployment of human-in-the-loop software agents"
       ],
       "slide_type": "title",
-      "notes": "Paper identity and presentation framing"
+      "notes": "Set the stage for the presentation - emphasize this is pioneering industry work"
     },
     {
       "title": "Motivation",
       "key_points": [
-        "Enterprise software maintenance burden",
-        "Benchmark-to-production mismatch",
-        "Risks of unsupervised code changes",
-        "Need for stage-wise human oversight",
-        "Missing practitioner adoption evidence"
+        "Growing adoption of LLM-based multi-agent paradigms in software development",
+        "Demand for automated software development tasks in enterprise settings",
+        "Gap between benchmark performance and real-world deployment needs",
+        "Potential of human-AI synergy to overcome autonomous agent limitations"
       ],
       "slide_type": "content",
-      "notes": "Why enterprise human-AI coding matters"
+      "notes": "Explain WHY this problem is important for real-world software development"
     },
     {
       "title": "Research Questions",
       "key_points": [
-        "RQ1: 🔥 JIRA deployment",
-        "RQ2: How does the proposed approach address 🔥 **82%** plan approval...?",
+        "RQ1: 💡 Human-in-the-loop enhances AI planning",
+        "RQ2: How does the proposed approach address 🔥 **59%** merged PR rate with human feedback...?",
         "RQ3: How does the method improve over prior work?"
       ],
       "slide_type": "content",
@@ -37,103 +36,96 @@
     {
       "title": "Problem Definition",
       "key_points": [
-        "JIRA issue-to-PR automation task",
-        "Human-guided planning and coding stages",
-        "File localization, plan generation, code synthesis",
-        "Enterprise repositories across 10+ languages",
-        "Success criteria from plan approval to PR merge"
+        "Existing agents lack human feedback integration mechanisms",
+        "Current systems rely solely on historical benchmark datasets",
+        "Limited industry deployment and validation of software agents",
+        "Need for practical human-in-the-loop solutions in enterprise environments"
       ],
       "slide_type": "content",
-      "notes": "Define the paper's target problem precisely"
+      "notes": "Define the specific gap this paper addresses"
     },
     {
       "title": "Related Work",
       "key_points": [
-        "SWE-agent-style autonomous coding agents",
-        "Benchmark-centric evaluation on SWE-bench",
-        "Multi-agent coding without human feedback loops",
-        "Limited enterprise deployment and user studies",
-        "HULA advantage: stage-wise collaboration + production validation"
+        "SWE-agent Claude: 6th ranked on SWE-bench - fully autonomous approach",
+        "Existing multi-agent systems: lack human feedback loop",
+        "Benchmark-focused approaches: no industrial deployment validation",
+        "HULA advantage: human-in-the-loop + real-world enterprise evaluation"
       ],
       "slide_type": "content",
-      "notes": "Contrast prior agent designs with HULA"
+      "notes": "Compare approaches and highlight limitations of previous work"
     },
     {
       "title": "Core Idea",
       "key_points": [
-        "Planner-coder-human triad",
-        "Approve plans before writing code",
-        "Editable code with tool-guided refinement",
-        "JIRA-native workflow to Bitbucket PRs"
+        "Human-in-the-loop integration enhances AI planning and execution",
+        "Multi-stage workflow with iterative human feedback checkpoints",
+        "Cooperative coordination between AI agents and human practitioners",
+        "Enterprise-scale deployment validation in production environment"
       ],
       "slide_type": "content",
-      "notes": "One-line contribution distilled into core elements"
+      "notes": "Main contribution in clear, focused points"
     },
     {
-      "title": "Method Overview",
+      "title": "Method Overview: HULA Framework",
       "key_points": [
-        "Issue and repository selection",
-        "Planner file localization",
-        "Draft implementation plan",
-        "Human review, edits, approval",
-        "Code generation, refinement, PR raising"
+        "AI Planner Agent: File localization and task planning",
+        "AI Coding Agent: Code generation and refinement",
+        "Human Agent: Feedback provision and approval decisions",
+        "Shared memory: JIRA integration and repository context"
       ],
       "slide_type": "content",
-      "notes": "End-to-end workflow at a glance"
+      "notes": "High-level architecture and key components"
     },
     {
       "title": "Method Details",
       "key_points": [
-        "DPDE coordination",
-        "Shared repository memory",
-        "LLM-based file localization and plan generation",
-        "Code synthesis with compiler/linter-guided self-refinement",
-        "Human feedback insertion points"
+        "DPDE: Decentralized planning and execution algorithm",
+        "LLM-as-a-Judge: Code similarity scoring mechanism",
+        "Self-refinement: Compiler and linter feedback integration",
+        "Multi-stage task dissection and context augmentation techniques"
       ],
       "slide_type": "content",
-      "notes": "Technical mechanisms and implementation insights"
+      "notes": "Technical details and implementation insights"
     },
     {
       "title": "Experiment Setup",
       "key_points": [
-        "GPT-4 backbone; Atlassian JIRA + Bitbucket environment",
-        "SWE-bench Verified: 500 Python issues",
-        "Atlassian internal offline set: 369 issues, 94 repos, 10+ languages",
-        "Online deployment + survey: 663 issues; 109/146 responses",
-        "Baselines and metrics: offline HULA, human PRs, SWE-agent; recall, test pass, similarity, PR outcomes"
+        "Datasets: SWE-bench Verified (500 issues) + Internal Atlassian (369 issues)",
+        "Baseline: SWE-agent Claude (6th ranked on SWE-bench)",
+        "Metrics: Plan approval rate, merged PR rate, file recall",
+        "Deployment: GPT-4 backbone, 2,600 practitioners, 75% survey response"
       ],
       "slide_type": "content",
-      "notes": "Offline, online, and practitioner evaluation design"
+      "notes": "Comprehensive experimental configuration"
     },
     {
       "title": "Results",
       "key_points": [
-        "82% plan approval: planning alignment",
-        "59% merged PR rate: practical utility",
-        "8% issue-to-merge: end-to-end production success",
-        "86% file recall vs 31% test pass: localization strength, execution gap",
-        "30% internal code similarity: code-quality gap to human PRs"
+        "59% merged PR rate demonstrating industry success",
+        "82% plan approval rate showing human-AI alignment",
+        "8% full end-to-end automation success rate",
+        "86% file recall on SWE-bench, 61% code readability rating"
       ],
       "slide_type": "content",
-      "notes": "Headline numbers with brief interpretation"
+      "notes": "Key findings with brief interpretations"
     },
     {
       "title": "Limitations",
       "key_points": [
-        "Code-quality inconsistency across generated PRs",
-        "Sparse or ambiguous issue descriptions",
-        "Single-backbone dependence on GPT-4",
-        "Atlassian-specific tooling and workflow bias",
-        "Limited correctness evaluation and missing test generation"
+        "Code functionality issues in generated solutions",
+        "Incomplete code changes for complex tasks",
+        "High input effort required from human practitioners",
+        "Performance degradation on complex multi-file tasks"
       ],
       "slide_type": "content",
-      "notes": "Critical analysis beyond positive deployment results"
+      "notes": "Honest weaknesses and critical analysis"
     },
     {
       "title": "Future Work",
       "key_points": [
-        "Address: Code-quality inconsistency",
-        "Address: Short issue descriptions",
+        "Address: Code functionality issues",
+        "Address: Incomplete code changes",
         "Reduce input effort required",
         "Explore other domains",
         "Long-term impact studies"
@@ -144,14 +136,13 @@
     {
       "title": "Takeaways & Discussion",
       "key_points": [
-        "Humans-in-the-loop as default design pattern",
-        "Planning-stage approval over full autonomy",
-        "Deployment feasibility for simple enterprise tasks",
-        "Documentation quality as a performance lever",
-        "Discussion: context augmentation, richer evaluation, broader transfer"
+        "Human-in-the-loop proven effective for enterprise deployment",
+        "Input quality and documentation practices are critical success factors",
+        "Code quality enhancement remains key area for future work",
+        "Discussion: How to balance automation vs. human oversight?"
       ],
       "slide_type": "content",
-      "notes": "Key insights and open discussion directions"
+      "notes": "Key insights and discussion questions for the group"
     }
   ]
 }
