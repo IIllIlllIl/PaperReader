@@ -1,52 +1,92 @@
-# 🎯 PaperReader 增强版 PPTX 生成指南
+# 🎯 PaperReader PPTX 生成指南
 
-**版本**: 2.0  
-**更新日期**: 2026-03-06  
-
----
-
-## 📖 概述
-
-PaperReader 现在支持**增强版 PPTX 生成**，可以从学术论文自动生成包含 **30+ 张幻灯片**的详细演示文稿。
+**版本**: 当前主流程
+**更新日期**: 2026-03-20
 
 ---
 
-## 🚀 快速开始
+## 概述
 
-### 使用增强版生成器
+当前推荐使用 `pipeline` 命令，从论文 PDF 直接生成汇报用 `.pptx`，并在需要时保留 markdown、plan、script 等中间产物。
+
+## 快速开始
 
 ```bash
-# 生成增强版 PPTX
-python tools/generate_enhanced_pptx.py papers/your-paper.pdf
+python cli/main.py pipeline --paper papers/your-paper.pdf
 ```
 
-### 输出文件
-- 📝 Markdown: `outputs/markdown/[PaperName]_enhanced.md`
-- 📊 PPTX: `outputs/slides/[PaperName]_enhanced.pptx`
+常见变体：
 
----
+```bash
+# 保留中间文件用于调试
+python cli/main.py pipeline --paper papers/your-paper.pdf --no-clean
 
-## 📊 版本对比
+# 启用引用分析
+python cli/main.py pipeline --paper papers/your-paper.pdf --include-citations
+```
 
-| 特性 | 标准版 | 增强版 |
-|------|--------|--------|
-| 幻灯片数量 | 16 | **30** |
-| 内容详细度 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| API 成本 | ~$0.06 | ~$0.11 |
-| 适用场景 | 快速概览 | **学术演讲** |
+## 输出文件
 
-**推荐使用增强版用于任何正式的学术演讲场合！**
+```text
+outputs/
+├── slides/
+│   └── {paper_name}.pptx
+└── intermediates/
+    ├── markdown/
+    │   └── {paper_name}.md
+    ├── plans/
+    │   └── {paper_name}_plan.json
+    ├── scripts/
+    │   └── {paper_name}_presentation_script.md
+    ├── images/
+    └── citations/
+```
 
----
+说明：
 
-## 💰 成本分析
+- 最终交付物是 `outputs/slides/{paper_name}.pptx`
+- 默认成功后会清理中间文件
+- 如需保留中间文件，请使用 `--no-clean`
 
-- **API 成本**: $0.11 (~¥0.81)
-- **处理时间**: ~2 分钟
-- **性价比**: 优秀
+## 当前主流程阶段
 
----
+`src/core/pipeline.py` 当前执行：
 
-**文件位置**:
-- 增强版工具: `tools/generate_enhanced_pptx.py`
-- 对比报告: `docs/testing/enhanced_pptx_comparison.md`
+1. Parse PDF
+2. Extract structured sections
+3. Run AI analysis
+4. Optional citation analysis
+5. Generate slide plan
+6. Generate narrative
+7. Generate slides markdown
+8. Export PPTX
+9. Generate presentation script
+
+实现日志中可选引用分析显示为阶段 `3.5`。
+
+## 默认演示结构
+
+`src/planning/slide_planner.py` 默认使用结构化 10 页模板：
+
+1. Title
+2. Why Human-in-the-Loop?
+3. Research Questions
+4. HULA Framework Overview
+5. Workflow: Human Feedback Integration
+6. Three-Stage Evaluation
+7. Offline & Online Results
+8. User Survey Results
+9. Discussion: Pros & Cons
+10. Conclusions & Future Work
+
+## 相关文档
+
+- [Pipeline Implementation](../architecture/PIPELINE_IMPLEMENTATION.md)
+- [Data Flow](../architecture/DATA_FLOW.md)
+- [Quick Reference](../architecture/DATA_FLOW_QUICK_REFERENCE.md)
+
+## 注意
+
+- 当前推荐路径是 `python cli/main.py pipeline ...`
+- 当前最终推荐输出是 `.pptx`
+- 不要再把 `outputs/markdown/` 或旧的增强版脚本当作当前主路径

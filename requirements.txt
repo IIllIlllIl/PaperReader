@@ -22,6 +22,11 @@ python-dotenv==1.0.0
 click==8.1.7
 rich==13.7.0
 
+# Citation Analysis
+pyalex>=1.0.0
+requests>=2.28.0
+semanticscholar>=0.5.0
+
 # Image Processing (for OCR support)
 Pillow==10.2.0
 pytesseract==0.3.10

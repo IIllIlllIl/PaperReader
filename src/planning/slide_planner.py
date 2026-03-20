@@ -35,18 +35,25 @@ class SlidePlanner:
             "claude-sonnet-4-6": {"input": 0.003, "output": 0.015}
         }
 
-    def plan_slides(self, paper_analysis) -> SlidePlan:
+    def plan_slides(self, paper_analysis, use_structured_template: bool = True) -> SlidePlan:
         """
         Generate slide plan from PaperAnalysis
 
         Args:
             paper_analysis: PaperAnalysis or ResearchMeetingAnalysis object
+            use_structured_template: If True, use structured 4-part template (10 slides)
 
         Returns:
-            SlidePlan with 13 slides (including Research Questions and Future Work)
+            SlidePlan with structured slides
         """
         logger.info("Planning slides from paper analysis")
 
+        # NEW: Use structured template for better organization
+        if use_structured_template:
+            logger.info("Using structured template (10 slides)")
+            return self._create_structured_plan(paper_analysis)
+
+        # Legacy: Use LLM to generate slide plan
         # Convert analysis to dict for prompt
         analysis_dict = self._analysis_to_dict(paper_analysis)
 
@@ -98,6 +105,198 @@ class SlidePlanner:
         logger.info(f"Generated slide plan with {slide_plan.total_slides} slides")
 
         return slide_plan
+
+    def _create_structured_plan(self, analysis) -> SlidePlan:
+        """
+        Create structured slide plan with four-part organization (NEW)
+
+        Structure (10 slides):
+        1. Title (1 page)
+        2. Problem Definition (2 pages)
+           - Why Human-in-the-Loop?
+           - Research Questions (RQ1-3)
+        3. Method: HULA Framework (2 pages)
+           - Framework Overview
+           - Workflow
+        4. Experiments & Results (3 pages)
+           - Experimental Design
+           - Offline & Online Results
+           - User Survey Results
+        5. Discussion & Conclusions (2 pages)
+           - Discussion: Pros & Cons
+           - Conclusions & Future Work
+
+        Args:
+            analysis: Paper analysis object
+
+        Returns:
+            SlidePlan with structured 4-part organization
+        """
+        slides = [
+            # Part 1: Title (1 slide)
+            SlideTopic(
+                title="Title",
+                key_points=["Paper title", "Authors", "Affiliation", "Year", "Research context"],
+                slide_type="title",
+                notes="NO figures on title slide"
+            ),
+
+            # Part 2: Problem Definition (2 slides)
+            SlideTopic(
+                title="Why Human-in-the-Loop?",
+                key_points=[
+                    "Limitation 1: Dependence on historical benchmarks",
+                    "Limitation 2: Lack of human feedback mechanisms",
+                    "Limitation 3: No industrial deployment validation",
+                    "Core insight: Human-AI collaboration is key"
+                ],
+                slide_type="content",
+                notes="Explain three key limitations of existing LLM agents"
+            ),
+            SlideTopic(
+                title="Research Questions",
+                key_points=[
+                    "RQ1: Can human feedback improve planning? (Offline evaluation)",
+                    "RQ2: Real-world deployment effectiveness? (Online evaluation)",
+                    "RQ3: User-perceived benefits & challenges? (Survey)"
+                ],
+                slide_type="content",
+                notes="Clear research questions aligned with evaluation stages"
+            ),
+
+            # Part 3: Method (2 slides)
+            SlideTopic(
+                title="HULA Framework Overview",
+                key_points=[
+                    "Agent 1: AI Planner - file localization & planning",
+                    "Agent 2: AI Coder - code generation & refinement",
+                    "Agent 3: Human - approval & feedback",
+                    "Integration: JIRA + Shared Memory"
+                ],
+                slide_type="diagram",
+                notes="Framework architecture diagram (Fig.1)"
+            ),
+            SlideTopic(
+                title="Workflow: Human Feedback Integration",
+                key_points=[
+                    "Step 1: Planning → Human approval",
+                    "Step 2: Coding → Self-refinement",
+                    "Step 3: PR submission → Code review",
+                    "Feedback loop: Iterative refinement"
+                ],
+                slide_type="content",
+                notes="Workflow showing human intervention points"
+            ),
+
+            # Part 4: Experiments & Results (3 slides)
+            SlideTopic(
+                title="Three-Stage Evaluation",
+                key_points=[
+                    "Stage 1 (Offline): SWE-bench (500) + Internal (369)",
+                    "Stage 2 (Online): Initial (45 PRs) → Deployment (260-2600 PRs)",
+                    "Stage 3 (Survey): 2,600 users, **75%** response rate",
+                    "Timeline: Pre-deployment → June-Sept deployment → Survey"
+                ],
+                slide_type="diagram",
+                notes="Evaluation flow diagram (Fig.3)"
+            ),
+            SlideTopic(
+                title="Offline & Online Results",
+                key_points=[
+                    "Offline (RQ1): File recall **86%**, Code similarity **45%** vs **30%** baseline",
+                    "Online (RQ2): Plan approval **82%**, Merged PR rate **59%**, End-to-end **8%**",
+                    "Key insight: Human-in-the-loop significantly improves quality",
+                    "Comparison: Baseline vs proposed method"
+                ],
+                slide_type="table",
+                notes="Results table with bold numbers"
+            ),
+            SlideTopic(
+                title="User Survey Results",
+                key_points=[
+                    "Benefits: Time reduction (**24%**), Simple tasks (**18%**), Convenience (**16%**)",
+                    "Challenges: Code quality (**25%**), Incomplete changes (**17%**), Input effort (**14%**)",
+                    "Satisfaction: Overall positive feedback (**3.8/5.0**)",
+                    "Insight: Input quality is critical success factor"
+                ],
+                slide_type="diagram",
+                notes="Use Fig.6 (satisfaction), Fig.7 (benefits), Fig.8 (challenges)"
+            ),
+
+            # Part 5: Citation Analysis (optional, if data available)
+            # Inserted before Discussion if paper has citation data
+        ]
+
+        # Check if analysis has citation data
+        if hasattr(analysis, 'has_citation_data') and analysis.has_citation_data:
+            citation_data = analysis.citation_data
+
+            # Build key points for citation slide
+            citation_key_points = [
+                f"Total verified citations: **{citation_data['total_citations']}**",
+                f"Data sources: {', '.join(citation_data['sources_used'])}",
+                f"Verification: ≥{citation_data['min_sources_required']} sources required"
+            ]
+
+            # Add year range if available
+            if citation_data.get('by_year'):
+                years = sorted(citation_data['by_year'].keys())
+                if years:
+                    citation_key_points.append(f"Year span: **{years[0]}-{years[-1]}**")
+
+            # Add recent citations count
+            if citation_data.get('by_year'):
+                current_year = 2026  # Current year
+                recent_years = [y for y in citation_data['by_year'].keys() if y >= current_year - 2]
+                if recent_years:
+                    recent_count = sum(citation_data['by_year'][y] for y in recent_years)
+                    citation_key_points.append(f"Recent citations ({current_year-2}-): **{recent_count}**")
+
+            # Add top 3 representative citations
+            if citation_data.get('citations') and len(citation_data['citations']) > 0:
+                citation_key_points.append("**Representative works:**")
+                for cit in citation_data['citations'][:3]:
+                    authors = cit.get('authors', ['Unknown'])[:2]
+                    author_str = f"{authors[0]} et al." if len(authors) > 1 else authors[0]
+                    title_short = cit['title'][:50] + '...' if len(cit['title']) > 50 else cit['title']
+                    citation_key_points.append(f"• {title_short} ({author_str}, {cit['year']})")
+
+            # Add citation slide
+            slides.insert(len(slides) - 2, SlideTopic(
+                title="Citation Analysis",
+                key_points=citation_key_points,
+                slide_type="content",
+                notes=f"Verified citations from {', '.join(citation_data['sources_used'])}. Last updated: {citation_data.get('last_updated', 'N/A')}"
+            ))
+
+            logger.info(f"Added Citation Analysis slide: {citation_data['total_citations']} verified citations")
+
+        # Part 6: Discussion (2 slides)
+        slides.extend([
+            SlideTopic(
+                title="Discussion: Pros & Cons",
+                key_points=[
+                    "✅ First industrial deployment, **75%** response rate, **59%** merged PR",
+                    "❌ Code quality issues (**25%**), Only **8%** end-to-end automation",
+                    "Lessons: Input quality matters, Evaluation beyond test cases"
+                ],
+                slide_type="content",
+                notes="Balanced discussion with pros/cons using ✅/❌"
+            ),
+            SlideTopic(
+                title="Conclusions & Future Work",
+                key_points=[
+                    "First industrial deployment of human-in-the-loop agents",
+                    "**59%** merged PR rate demonstrates practical utility",
+                    "User feedback reveals key challenges",
+                    "Future: Input augmentation, code quality, beyond test cases"
+                ],
+                slide_type="content",
+                notes="Final takeaways and future directions"
+            )
+        ])
+
+        return SlidePlan(slides=slides)
 
     def _ensure_research_questions(self, slide_plan: SlidePlan, analysis) -> SlidePlan:
         """

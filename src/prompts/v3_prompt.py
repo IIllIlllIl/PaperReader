@@ -85,12 +85,26 @@ Provide analysis in this EXACT JSON format:
     ],
 
     "main_results_keywords": [
-        "🔥 **59%** PR merge rate - Industry-first",
-        "**82%** plan approval - Human-AI aligned",
-        "**8%** end-to-end success - Full automation",
-        "**31%** test pass rate - Benchmark result",
-        "Max 6 results, bold ALL numbers, mark breakthroughs with 🔥"
+        "🔥 **59%** merged PR rate - Industry-first",
+        "🔥 **82%** plan approval - Human-AI aligned",
+        "🔥 **8%** end-to-end success - Full automation",
+        "**86%** file recall on SWE-bench",
+        "**45%** code similarity vs **30%** baseline",
+        "Max 6 results, bold ALL numbers, use 'vs' for comparisons"
     ],
+
+    "key_numbers": {{
+        "plan_approval_rate": "**82%**",
+        "merged_pr_rate": "**59%**",
+        "end_to_end_success": "**8%**",
+        "file_recall": "**86%**",
+        "code_similarity_proposed": "**45%**",
+        "code_similarity_baseline": "**30%**",
+        "survey_response_rate": "**75%**",
+        "user_satisfaction": "3.8/5.0",
+        "benefits_time_reduction": "**24%**",
+        "challenges_code_quality": "**25%**"
+    }},
 
     "key_findings_keywords": [
         "Finding 1: 2-3 keywords",
@@ -99,15 +113,18 @@ Provide analysis in this EXACT JSON format:
     ],
 
     "advantages_keywords": [
-        "Advantage 1: 2-3 keywords",
-        "Advantage 2: 2-3 keywords",
-        "Max 4 advantages, total ≤30 words"
+        "✅ First industrial deployment of human-in-the-loop agents",
+        "✅ **75%** survey response rate - real user feedback",
+        "✅ **59%** merged PR rate - practical utility",
+        "✅ **82%** plan approval - human-AI collaboration effective",
+        "Max 4 advantages, use ✅ emoji"
     ],
 
     "limitations_keywords": [
-        "Limitation 1: 2-3 keywords",
-        "Limitation 2: 2-3 keywords",
-        "Max 3 limitations, total ≤30 words"
+        "❌ Code quality issues: **25%** user feedback",
+        "❌ Only **8%** end-to-end automation",
+        "❌ Requires detailed input - high effort (**14%** feedback)",
+        "Max 3 limitations, use ❌ emoji"
     ],
 
     "future_work_keywords": [
@@ -124,7 +141,10 @@ Provide analysis in this EXACT JSON format:
 - Use 🔥 emoji for 3-5 BIGGEST breakthroughs
 - Use Markdown tables for: datasets, baselines, metrics, experimental setup
 - NO Chinese characters anywhere
-- Use these emojis: 💡 (insights), 🔥 (breakthroughs), ⚡ (challenges)
+- Use these emojis: 💡 (insights), 🔥 (breakthroughs), ⚡ (challenges), ✅ (advantages), ❌ (limitations)
+- NEW: Extract ALL key numbers into "key_numbers" dict
+- NEW: Use "vs" for comparisons: "**45%** vs **30%** baseline"
+- NEW: Use ✅/❌ emoji for advantages/limitations
 
 **TABLE FORMAT:**
 Use Markdown table syntax:

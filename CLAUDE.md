@@ -4,97 +4,84 @@
 
 PaperReader generates academic presentation slides from PDF papers.
 
-Pipeline (8 stages):
-
-PDF → Parse → Analyze → Plan (slide + narrative) → Generate → Export → outputs
-
-Main goal:
-produce academic slides with figures extracted from papers.
+Pipeline: PDF → Parse → Analyze → Plan → Generate → Export
 
 ---
 
-## Key Architecture
+## Architecture
 
-Source structure:
-
+```
 src/
-parser/        PDF parsing + figure extraction
-analysis/      AI analysis and slide content extraction
-planning/      slide planning
-generation/    markdown + PPTX generation
-core/          cache, pipeline orchestration
-prompts/       LLM prompts
+  parser/        PDF parsing + figure extraction
+  analysis/      AI analysis and content extraction
+  planning/      slide planning
+  generation/    markdown + PPTX generation
+  core/          cache, pipeline orchestration
+  prompts/       LLM prompts
 
-Outputs:
-
-outputs/images/    # extracted figures
-outputs/markdown/  # slide markdown
-outputs/slides/    # PPTX files
-outputs/scripts/   # presentation scripts
-outputs/plans/     # slide plans (JSON)
-
----
-
-## Important Modules
-
-PDF parsing: src/parser/pdf_parser.py
-Figure extraction: src/parser/pdf_image_extractor.py
-Content extraction: src/analysis/content_extractor.py
-Slide planning: src/planning/slide_planner.py
-Narrative planning: src/planning/narrative_planner.py
-Markdown generation: src/generation/ppt_generator.py
-PPTX export: src/generation/pptx_exporter.py
+outputs/
+  slides/        PPTX files
+  markdown/      slide markdown
+  images/        extracted figures
+  scripts/       presentation scripts
+  plans/         slide plans (JSON)
+```
 
 ---
 
-## Important Constraints
+## Key Modules
 
-Do not create versioned files:
-
-❌ *_v2.py
-❌ *_enhanced.py
-❌ *_optimized.py
-
-Always update existing modules.
-
-Experimental code goes to:
-
-archive/experiments/
+- **PDF parsing**: `src/parser/pdf_parser.py`
+- **Figure extraction**: `src/parser/pdf_image_extractor.py`
+- **Content extraction**: `src/analysis/content_extractor.py`
+- **Slide planning**: `src/planning/slide_planner.py`
+- **PPTX export**: `src/generation/pptx_exporter.py`
 
 ---
 
-## Figure Pipeline
+## Pipeline Features
 
-Figures are extracted during parsing and saved to:
+### Structured Template (Default)
 
-outputs/images/
+10-page academic presentation:
+1. Title (1 page)
+2. Problem Definition (2 pages)
+3. Method (2 pages)
+4. Experiments & Results (3 pages)
+5. Discussion & Conclusions (2 pages)
 
-Slides reference figures via Markdown syntax:
+### Intelligent Features
 
-![caption](path)
+**Figure Matching** (100% accuracy):
+- Fig.1 → Framework slides
+- Fig.3 → Evaluation slides
+- Fig.7 → Survey results
+- Fig.9 → Discussion slides
+- Rules: Title slides NO figures, Workflow slides NO survey results
 
-pptx_exporter.py parses this and renders images in PPTX.
+**Content Extraction**:
+- Auto-bold numbers: `**86%**`
+- Comparison format: `**45%** vs **30%**`
+- Pros/Cons: ✅ advantages, ❌ limitations
 
 ---
 
-## Common Commands
+## Commands
 
-Run full pipeline:
-
+```bash
+# Basic pipeline (recommended)
 python cli/main.py pipeline --paper papers/example.pdf
 
-Run tests:
-
+# Tests
 pytest
+```
 
 ---
 
 ## Development Rules
 
-Follow existing pipeline architecture.
-
-Avoid large refactors unless explicitly requested.
-
-Modify minimal code when fixing bugs.
-
-Prefer small patches over full rewrites.
+- ❌ No versioned files (`*_v2.py`, `*_enhanced.py`)
+- ✅ Update existing modules
+- ✅ Minimal code changes
+- ✅ Small patches over rewrites
+- Experimental code → `archive/experiments/`

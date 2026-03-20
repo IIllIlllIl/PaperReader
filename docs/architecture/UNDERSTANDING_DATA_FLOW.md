@@ -1,231 +1,87 @@
 # 📚 PaperReader 数据流程文档索引
 
-本项目的数据流程文档已经齐全，帮助您深入理解系统的每个环节。
+这组文档描述当前推荐的 `pipeline` 主流程，以及调试时应关注的中间产物。
 
-## 📖 文档导航
+## 推荐阅读顺序
 
-### 1. 快速入门
-- **[DATA_VISUALIZATION.md](DATA_VISUALIZATION.md)** ⭐ **从这里开始**
-  - 完整的流程图可视化
-  - 时间和成本分析
-  - 关键决策点
-  - 适合快速了解整体流程
+### 1. 先看整体流程
+- **[PIPELINE_IMPLEMENTATION.md](PIPELINE_IMPLEMENTATION.md)**
+  - 当前推荐命令
+  - 8 个阶段 + 可选引用分析
+  - CLI 参数与输出结构
 
-### 2. 详细参考
+### 2. 再看详细数据流
 - **[DATA_FLOW.md](DATA_FLOW.md)**
-  - 详细的9个阶段说明
-  - 每个中间产物的完整描述
-  - 数据格式和结构
-  - 真实案例演示
-  - 适合深入理解每个细节
+  - 每个阶段的输入与输出
+  - 中间产物与持久化位置
+  - `PaperAnalysis` / `SlidePlan` / `OrganizedPresentation` 等关键对象
 
+### 3. 日常速查
 - **[DATA_FLOW_QUICK_REFERENCE.md](DATA_FLOW_QUICK_REFERENCE.md)**
-  - 快速参考卡片
-  - 中间产物一览表
-  - 核心数据结构
-  - 调试技巧
-  - 适合日常查阅
+  - 快速命令
+  - 目录速查
+  - 排查时优先检查的位置
 
-### 3. 示例代码
-- **[examples/middle_products_example.py](examples/middle_products_example.py)**
-  - 所有中间产物的完整示例
-  - 基于"Attention Is All You Need"论文
-  - 可直接运行查看
-  - 适合学习数据格式
+### 4. 可视化理解
+- **[DATA_VISUALIZATION.md](DATA_VISUALIZATION.md)**
+  - 当前流水线的文本流程图
+  - 关键目录与常见排查路径
 
-- **[EXAMPLES_ARCHIVED](../project/EXAMPLES_ARCHIVED_20260317.md)**
-  - 示例文件使用指南
-  - 学习路径建议
-
-### 4. 调试工具
-- **[debug_data_flow.py](debug_data_flow.py)**
-  - 交互式数据流程追踪
-  - 实时显示中间产物
-  - 支持示例数据模式
-  - 适合调试和学习
-
-## 🎯 学习路径推荐
-
-### 路径1: 快速理解（15分钟）
-```
-1. 阅读 DATA_VISUALIZATION.md (5分钟)
-   └─> 了解整体流程和关键概念
-
-2. 运行 debug_data_flow.py --skip-ai (5分钟)
-   └─> 查看真实论文的中间产物
-
-3. 浏览 DATA_FLOW_QUICK_REFERENCE.md (5分钟)
-   └─> 掌握关键数据结构
-```
-
-### 路径2: 深入学习（1小时）
-```
-1. 阅读路径1的所有内容 (15分钟)
-
-2. 运行 middle_products_example.py (5分钟)
-   └─> 查看完整示例数据
-
-3. 阅读 DATA_FLOW.md (20分钟)
-   └─> 理解每个阶段的详细处理
-
-4. 真实处理一篇论文 (15分钟)
-   python cli/main.py process -p papers/example.pdf -v
-
-5. 检查缓存文件 (5分钟)
-   cat runtime/cache/{hash}.json | jq .
-```
-
-### 路径3: 开发者深入（2小时）
-```
-1. 完成路径2的所有内容 (1小时)
-
-2. 阅读源代码 (30分钟)
-   ├─ src/parser/pdf_parser.py
-   ├─ src/analysis/ai_analyzer.py
-   └─ src/generation/ppt_generator.py
-
-3. 修改和实验 (30分钟)
-   └─ 调整prompt、模板等
-```
-
-## 🔍 按需求查找
-
-### 我想了解...
-
-**"整个系统是如何工作的？"**
-→ 从 [DATA_VISUALIZATION.md](DATA_VISUALIZATION.md) 开始
-
-**"AI分析输出了什么？"**
-→ 查看 [DATA_FLOW.md](DATA_FLOW.md) 的阶段4和5
-
-**"中间产物的格式是什么？"**
-→ 运行 `python examples/middle_products_example.py`
-
-**"缓存文件里有什么？"**
-→ 查看 [DATA_FLOW.md](DATA_FLOW.md) 的缓存文件示例
-
-**"如何调试我的论文处理？"**
-→ 运行 `python tools/debug_data_flow.py papers/your_paper.pdf`
-
-**"成本和时间消耗如何？"**
-→ 查看 [DATA_VISUALIZATION.md](DATA_VISUALIZATION.md) 的成本分析
-
-**"数据在内存中如何流转？"**
-→ 查看 [DATA_FLOW.md](DATA_FLOW.md) 的数据流图
-
-**"如何查看真实案例？"**
-→ 运行 `python tools/debug_data_flow.py papers/example.pdf --skip-ai`
-
-## 📊 核心中间产物速查
-
-| 产物 | 查看方式 | 文档位置 |
-|------|---------|---------|
-| PDF验证结果 | debug_data_flow.py | DATA_FLOW.md#阶段1 |
-| 提取的文本 | debug_data_flow.py | DATA_FLOW.md#阶段2 |
-| 论文元数据 | debug_data_flow.py | DATA_FLOW.md#阶段2 |
-| PDF哈希 | cache目录文件名 | DATA_FLOW.md#阶段3 |
-| AI分析结果 | runtime/cache/{hash}.json | DATA_FLOW.md#阶段4 |
-| 演示内容 | runtime/cache/{hash}.json | DATA_FLOW.md#阶段5 |
-| 组织的幻灯片 | debug_data_flow.py | DATA_FLOW.md#阶段7 |
-| Markdown | outputs/markdown/ | DATA_FLOW.md#阶段8 |
-| 最终PPT | outputs/slides/ | DATA_FLOW.md#阶段9 |
-
-## 🛠️ 实用命令
+## 当前推荐命令
 
 ```bash
-# 查看完整的数据流程（使用示例数据）
-python tools/debug_data_flow.py papers/example.pdf --skip-ai
-
-# 查看完整的数据流程（真实AI分析）
-python tools/debug_data_flow.py papers/example.pdf
-
-# 查看示例中间产物
-python examples/middle_products_example.py
-
-# 查看缓存内容
-cat runtime/cache/*.json | jq .
-
-# 查看生成的Markdown
-cat outputs/markdown/*.md
-
-# 统计信息
-python cli/main.py stats
+python cli/main.py pipeline --paper papers/example.pdf
 ```
 
-## 📚 文档关系图
+调试时保留中间文件：
 
-```
-                    ┌─────────────────────┐
-                    │  README.md          │
-                    │  (使用指南)          │
-                    └──────────┬──────────┘
-                               │
-              ┌────────────────┴────────────────┐
-              │                                  │
-    ┌─────────▼──────────┐          ┌──────────▼──────────┐
-    │ DATA_VISUALIZATION │          │    CLAUDE.md        │
-    │     (流程可视化)    │          │   (开发指南)         │
-    └─────────┬──────────┘          └─────────────────────┘
-              │
-    ┌─────────┴──────────────────────────────┐
-    │                                         │
-┌───▼──────────────┐              ┌──────────▼──────────┐
-│   DATA_FLOW.md   │              │  DATA_FLOW_QUICK_   │
-│   (详细流程)      │              │  REFERENCE.md       │
-└───┬──────────────┘              │  (快速参考)          │
-    │                              └─────────────────────┘
-    │
-┌───┴──────────────────────────────────────────────┐
-│                                                   │
-│          examples/                                │
-│          ├─ middle_products_example.py           │
-│          └─ README.md                             │
-│                                                   │
-│          debug_data_flow.py                       │
-│          (调试工具)                                │
-└───────────────────────────────────────────────────┘
+```bash
+python cli/main.py pipeline --paper papers/example.pdf --no-clean
 ```
 
-## 🎓 关键概念
+启用引用分析：
 
-### 数据流
-1. **PDF** → 验证 → 提取 → **文本**
-2. **文本** → AI分析 → **PaperAnalysis**
-3. **PaperAnalysis** → 内容生成 → **PresentationContent**
-4. **PresentationContent** → 组织 → **Slides**
-5. **Slides** → Markdown生成 → **输出文件**
+```bash
+python cli/main.py pipeline --paper papers/example.pdf --include-citations
+```
 
-### 核心对象
-- `ValidationResult` - PDF质量评估
-- `PaperMetadata` - 论文元数据
-- `PaperAnalysis` - AI分析结果（10个字段）
-- `PresentationContent` - 演示内容（17个字段）
-- `SlideContent` - 单个幻灯片
-- `OrganizedPresentation` - 完整演示（15-20个幻灯片）
+## 常见问题对应文档
 
-### 关键优化
-- **缓存** - 基于文件哈希，7天TTL
-- **分段分析** - 快速浏览 + 深度分析
-- **错误重试** - 指数退避，最多3次
-- **成本追踪** - 实时统计API使用
+**“完整流程现在怎么跑？”**
+→ 看 [PIPELINE_IMPLEMENTATION.md](PIPELINE_IMPLEMENTATION.md)
 
-## 💡 提示
+**“每个阶段会产出什么？”**
+→ 看 [DATA_FLOW.md](DATA_FLOW.md)
 
-1. **第一次使用**：先阅读 DATA_VISUALIZATION.md，了解整体流程
-2. **调试问题**：使用 debug_data_flow.py 查看中间产物
-3. **理解格式**：运行 middle_products_example.py 查看示例
-4. **日常参考**：使用 DATA_FLOW_QUICK_REFERENCE.md 快速查找
-5. **深入学习**：阅读 DATA_FLOW.md 了解每个细节
+**“输出文件现在放在哪？”**
+→ 看 [DATA_FLOW_QUICK_REFERENCE.md](DATA_FLOW_QUICK_REFERENCE.md)
 
-## 📞 获取帮助
+**“想快速理解整体结构？”**
+→ 看 [DATA_VISUALIZATION.md](DATA_VISUALIZATION.md)
 
-- **文档问题**：查看对应的文档文件
-- **代码问题**：查看源代码注释
-- **使用问题**：查看 README.md
-- **开发问题**：查看 CLAUDE.md
+## 当前关键中间产物
+
+| 产物 | 位置 |
+|---|---|
+| Slide plan | `outputs/intermediates/plans/{paper_name}_plan.json` |
+| Slides markdown | `outputs/intermediates/markdown/{paper_name}.md` |
+| Presentation script | `outputs/intermediates/scripts/{paper_name}_presentation_script.md` |
+| Final PPTX | `outputs/slides/{paper_name}.pptx` |
+
+## 调试时建议先看
+
+1. `outputs/slides/`：最终 PPTX 是否生成
+2. `outputs/intermediates/plans/`：slide plan 是否合理
+3. `outputs/intermediates/markdown/`：markdown 幻灯片内容是否正确
+4. `outputs/intermediates/scripts/`：讲稿是否和幻灯片一致
+5. `runtime/cache/`：缓存是否命中，分析结果是否复用
+
+## 说明
+
+- 当前文档以 `src/core/pipeline.py` 为主流程事实来源
+- 当前最终推荐输出是 `PPTX`
+- 不要再把 `HTML/PDF`、`outputs/markdown/`、`tools/debug_data_flow.py` 当作当前主流程的一部分
 
 ---
 
-**文档版本**: v1.0
-**最后更新**: 2026-03-05
-**维护者**: PaperReader Team
+**最后更新**: 2026-03-20

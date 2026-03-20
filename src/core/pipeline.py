@@ -26,6 +26,8 @@ from src.parser.pdf_parser import PDFParser
 from src.parser.pdf_image_extractor import PDFImageExtractor
 from src.analysis.ai_analyzer import AIAnalyzer, PaperAnalysis
 from src.analysis.content_extractor import ContentExtractor, OrganizedPresentation
+from src.analysis.citation_integration import CitationIntegrator
+from src.config.citation_config import CitationConfig
 from src.planning.slide_planner import SlidePlanner
 from src.planning.narrative_planner import NarrativePlanner
 from src.planning.models import SlidePlan, PresentationNarrative
@@ -45,7 +47,8 @@ class PaperPresentationPipeline:
         result = pipeline.run(pdf_path="papers/example.pdf")
     """
 
-    def __init__(self, api_key: str, config: Dict[str, Any], model: str = "claude-sonnet-4-6"):
+    def __init__(self, api_key: str, config: Dict[str, Any], model: str = "claude-sonnet-4-6",
+                 clean_intermediates: bool = True):
         """
         Initialize pipeline
 
@@ -53,12 +56,14 @@ class PaperPresentationPipeline:
             api_key: Anthropic API key
             config: Configuration dictionary
             model: AI model to use
+            clean_intermediates: Whether to clean intermediate files after pipeline completes (default: True)
         """
         self.api_key = api_key
         self.config = config
         self.model = model
         self.output_dir = "outputs"
         self.pdf_path = ""
+        self.clean_intermediates = clean_intermediates
 
         # Initialize components
         self.ai_analyzer = AIAnalyzer(api_key=api_key, model=model)
@@ -75,13 +80,15 @@ class PaperPresentationPipeline:
             'total_tokens': 0,
         }
 
-    def run(self, pdf_path: str, output_dir: Optional[str] = None) -> Dict[str, Any]:
+    def run(self, pdf_path: str, output_dir: Optional[str] = None,
+            citation_config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Run the complete pipeline
 
         Args:
             pdf_path: Path to PDF file
             output_dir: Output directory (default: outputs/)
+            citation_config: Citation analysis configuration (optional)
 
         Returns:
             Dictionary with paths to generated files and statistics
@@ -90,16 +97,25 @@ class PaperPresentationPipeline:
         paper_name = Path(pdf_path).stem
         self.pdf_path = pdf_path
 
+        logger.info(f"\n{'='*70}")
+        logger.info(f"Pipeline Configuration:")
+        logger.info(f"  Paper: {paper_name}")
+        logger.info(f"  Clean intermediates: {self.clean_intermediates}")
+        logger.info(f"{'='*70}\n")
+
         # Setup output directories
         if output_dir is None:
             output_dir = "outputs"
         self.output_dir = output_dir
 
+        # Organized output paths
+        # Final artifacts (kept)
+        # Intermediate artifacts (moved to intermediates/)
         output_paths = {
-            'markdown': Path(output_dir) / 'markdown' / f"{paper_name}.md",
+            'markdown': Path(output_dir) / 'intermediates' / 'markdown' / f"{paper_name}.md",
             'pptx': Path(output_dir) / 'slides' / f"{paper_name}.pptx",
-            'script': Path(output_dir) / 'scripts' / f"{paper_name}_presentation_script.md",
-            'plan': Path(output_dir) / 'plans' / f"{paper_name}_plan.json",
+            'script': Path(output_dir) / 'intermediates' / 'scripts' / f"{paper_name}_presentation_script.md",
+            'plan': Path(output_dir) / 'intermediates' / 'plans' / f"{paper_name}_plan.json",
         }
 
         # Ensure all output directories exist
@@ -133,6 +149,22 @@ class PaperPresentationPipeline:
             print(f"      ✓ Analysis completed (cost: ${self.ai_analyzer.total_cost:.4f})")
 
             # ------------------------------------------------
+            # Stage 3.5: Citation analysis (optional)
+            # ------------------------------------------------
+            citation_result = None
+            if citation_config and citation_config.get('enabled'):
+                print(f"[3.5/8] Analyzing citations...")
+                citation_result = self._analyze_citations(
+                    metadata,
+                    min_sources=citation_config.get('min_sources', 2),
+                    display_limit=citation_config.get('display_citations', 20)
+                )
+                if citation_result:
+                    print(f"      ✓ Found {citation_result.get('total_citations', 0)} verified citations")
+                else:
+                    print(f"      ⚠ No citations found (citation analysis skipped)")
+
+            # ------------------------------------------------
             # Stage 4: Generate slide plan
             # ------------------------------------------------
             print(f"[4/8] Planning slides...")
@@ -152,7 +184,7 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             # Extract figures
             # ------------------------------------------------
-            image_output_dir = Path(self.output_dir) / "images"
+            image_output_dir = Path(self.output_dir) / "intermediates" / "images"
             image_output_dir.mkdir(parents=True, exist_ok=True)
             self.image_extractor = PDFImageExtractor(str(image_output_dir))
             figures = self.image_extractor.extract_and_save(self.pdf_path)
@@ -162,7 +194,9 @@ class PaperPresentationPipeline:
             # Stage 6: Generate slides markdown
             # ------------------------------------------------
             print(f"[6/8] Generating slides...")
-            organized_presentation = self._generate_slides(analysis, slide_plan, figures=figures)
+            organized_presentation = self._generate_slides(
+                analysis, slide_plan, figures=figures, citation_data=citation_result
+            )
 
             # Validate: Ensure all planned slides are generated
             self._validate_slide_generation(slide_plan, organized_presentation)
@@ -215,6 +249,9 @@ class PaperPresentationPipeline:
             print(f"   Plan:     {output_paths['plan']}")
             print(f"{'='*70}\n")
 
+            # Clean intermediate files if requested
+            self._clean_intermediate_files()
+
             return {
                 'success': True,
                 'output_paths': {k: str(v) for k, v in output_paths.items()},
@@ -227,6 +264,12 @@ class PaperPresentationPipeline:
         except Exception as e:
             logger.error(f"Pipeline failed: {e}", exc_info=True)
             print(f"\n❌ Pipeline failed: {e}")
+
+            # Keep intermediate files on failure for debugging
+            if self.clean_intermediates:
+                logger.info("Preserving intermediate files for debugging (pipeline failed)")
+                print(f"ℹ️  Intermediate files preserved in outputs/intermediates/ for debugging")
+
             return {
                 'success': False,
                 'error': str(e),
@@ -278,10 +321,46 @@ class PaperPresentationPipeline:
         narrative = self.narrative_planner.extract_narrative(analysis)
         return narrative
 
-    def _generate_slides(self, analysis: PaperAnalysis, slide_plan: SlidePlan, figures=None) -> OrganizedPresentation:
+    def _analyze_citations(self, metadata: Dict, min_sources: int = 2,
+                          display_limit: int = 20) -> Optional[Dict]:
+        """Stage 3.5: Analyze paper citations (optional)"""
+        try:
+            # Create citation config
+            citation_cfg = CitationConfig.default()
+            citation_cfg.min_sources = min_sources
+            citation_cfg.display_citations = display_limit
+
+            # Initialize integrator
+            integrator = CitationIntegrator(config=citation_cfg)
+
+            # Extract metadata
+            paper_title = metadata.get('title', '')
+            authors = ', '.join(metadata.get('authors', []))
+            year = metadata.get('year')
+
+            # Run analysis
+            result = integrator.analyze_paper_citations(
+                paper_title=paper_title,
+                authors=authors,
+                year=year
+            )
+
+            if result and result.get('total_citations', 0) > 0:
+                logger.info(f"Citation analysis successful: {result['total_citations']} citations")
+                return result
+            else:
+                logger.info("No citations found or analysis failed")
+                return None
+
+        except Exception as e:
+            logger.warning(f"Citation analysis failed (non-critical): {e}")
+            return None
+
+    def _generate_slides(self, analysis: PaperAnalysis, slide_plan: SlidePlan,
+                        figures=None, citation_data=None) -> OrganizedPresentation:
         """Stage 6: Generate organized presentation slides from slide plan"""
         organized_presentation = self.content_extractor.extract_detailed_slides(
-            analysis, slide_plan=slide_plan, figures=figures
+            analysis, slide_plan=slide_plan, figures=figures, citation_data=citation_data
         )
         return organized_presentation
 
@@ -352,3 +431,73 @@ class PaperPresentationPipeline:
     def get_stats(self) -> Dict[str, Any]:
         """Get pipeline statistics"""
         return self.stats
+
+    def _clean_intermediate_files(self):
+        """
+        Clean intermediate files after pipeline completes successfully.
+
+        This method removes the entire outputs/intermediates/ directory,
+        taking advantage of the new centralized structure for simplicity and safety.
+        """
+        if not self.clean_intermediates:
+            logger.info("Preserving intermediate files (--no-clean mode)")
+            print(f"\n💾 Intermediate files preserved in outputs/intermediates/")
+            return
+
+        logger.info("Cleaning intermediate files...")
+        print(f"\n🧹 Cleaning intermediate files...")
+
+        try:
+            import shutil
+
+            intermediates_dir = Path(self.output_dir) / "intermediates"
+
+            if not intermediates_dir.exists():
+                logger.info("No intermediates directory to clean")
+                print(f"   ✓ No intermediates directory found")
+                return
+
+            # Calculate statistics before deletion
+            total_size = 0
+            file_count = 0
+            for f in intermediates_dir.glob('**/*'):
+                if f.is_file():
+                    total_size += f.stat().st_size
+                    file_count += 1
+
+            if file_count == 0:
+                logger.info("Intermediates directory is empty, nothing to clean")
+                print(f"   ✓ Intermediates directory already empty")
+                return
+
+            # Log what we're about to delete
+            size_kb = total_size / 1024
+            logger.info(f"Found {file_count} intermediate files ({size_kb:.2f} KB)")
+            print(f"   • {file_count} files ({size_kb:.2f} KB)")
+
+            # Delete entire intermediates directory
+            shutil.rmtree(intermediates_dir)
+            logger.info(f"Removed intermediates directory: {intermediates_dir}")
+            print(f"   ✓ Deleted: {intermediates_dir}")
+
+            # Recreate empty directory structure for next run
+            self._create_intermediates_structure()
+            logger.info("Recreated empty intermediates directory structure")
+            print(f"   ✓ Recreated empty directory structure")
+
+            logger.info(f"Cleaned {file_count} intermediate files ({size_kb:.2f} KB)")
+            print(f"   ✅ Cleaned {file_count} intermediate files\n")
+
+        except Exception as e:
+            logger.error(f"Failed to clean intermediate files: {e}")
+            print(f"   ⚠️  Warning: Failed to clean intermediate files: {e}")
+
+    def _create_intermediates_structure(self):
+        """Create empty intermediates directory structure"""
+        intermediates_dir = Path(self.output_dir) / "intermediates"
+
+        # Create all intermediate subdirectories
+        subdirs = ['images', 'images/citations', 'markdown', 'scripts', 'plans', 'citations', 'temp']
+
+        for subdir in subdirs:
+            (intermediates_dir / subdir).mkdir(parents=True, exist_ok=True)

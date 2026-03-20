@@ -6,7 +6,7 @@
 
 ## Overview
 
-Full pipeline integration test completed successfully. The system generated academic presentation slides from PDF with AI analysis, figure extraction, and multiple output formats.
+A full pipeline integration test completed successfully. The current system generated a `.pptx` presentation from a PDF paper through the recommended `pipeline` command.
 
 ## Test Configuration
 
@@ -29,9 +29,8 @@ Full pipeline integration test completed successfully. The system generated acad
 - Cost: $0.0612
 
 ### 3. Slide Planning ✅
-- Generated plan with 13 slides
-- Auto-generated Research Questions slide
-- Auto-generated Future Work slide
+- Generated plan output successfully
+- Slide planning completed through the current structured planning flow
 - Cost: $0.0205
 
 ### 4. Narrative Planning ✅
@@ -46,20 +45,18 @@ Full pipeline integration test completed successfully. The system generated acad
 - Figure validation passed
 
 ### 6. Slide Generation ✅
-- Generated 13 slides matching plan
-- Slide count validation: PASSED
+- Generated slides matching the plan
+- Slide generation completed successfully
 - 5 figures assigned to relevant slides
 
 ### 7. Markdown Export ✅
-- Generated Marp-compatible markdown
+- Generated slide markdown for the PPTX export pipeline
 - File size: 214 lines
-- Includes YAML front matter with academic theme
-- Image paths corrected to `../images/` for proper PPTX rendering
+- Intermediate markdown is kept under `outputs/intermediates/markdown/` when `--no-clean` is used
 
 ### 8. PPTX Export ✅
 - Generated PowerPoint presentation
 - File size: 160KB
-- Total slides: 13
 - All images successfully embedded
 
 ### 9. Script Generation ✅
@@ -71,11 +68,11 @@ Full pipeline integration test completed successfully. The system generated acad
 
 | Output | Path | Size |
 |--------|------|------|
-| Markdown | outputs/markdown/Human-In-the-Loop.md | 214 lines |
+| Markdown | outputs/intermediates/markdown/Human-In-the-Loop.md | 214 lines |
 | PPTX | outputs/slides/Human-In-the-Loop.pptx | 160KB |
-| Script | outputs/scripts/Human-In-the-Loop_presentation_script.md | 5.1KB |
-| Plan | outputs/plans/Human-In-the-Loop_plan.json | 5.5KB |
-| Images | outputs/images/ | 10 files |
+| Script | outputs/intermediates/scripts/Human-In-the-Loop_presentation_script.md | 5.1KB |
+| Plan | outputs/intermediates/plans/Human-In-the-Loop_plan.json | 5.5KB |
+| Images | outputs/intermediates/images/ | 10 files |
 
 ## Performance Metrics
 
@@ -86,7 +83,7 @@ Full pipeline integration test completed successfully. The system generated acad
 
 ## Slide Structure
 
-Generated 13 slides covering:
+The generated presentation covered the expected paper narrative, including:
 
 1. **Title Slide** - Paper identification and authors
 2. **Motivation** - Why this research matters

@@ -1,478 +1,120 @@
-# 🎯 Slide Planning Layer Implementation Report
+# Slide Planning Layer
 
-**Date**: 2026-03-13
-**Status**: ✅ **COMPLETE** - Production Ready
+## 概述
 
----
+Slide Planning Layer 是当前主流程中的规划层，负责决定每页幻灯片应该覆盖什么主题，再由后续内容层把这些主题扩展为实际的幻灯片内容。
 
-## Executive Summary
+在当前实现中：
 
-✅ **Slide Planning Layer成功实现！** 新架构将slide生成分为两个独立阶段：
+- 规划层入口：`src/planning/slide_planner.py`
+- 主流程调用位置：`src/core/pipeline.py`
+- 规划层输出：`SlidePlan`
 
-1. **Planning阶段** - 决定WHAT应该覆盖（topics）
-2. **Content阶段** - 决定HOW呈现（full text）
+## 在主流程中的位置
 
-这种分离显著提高了slide质量和可维护性。
-
----
-
-## 📊 新Pipeline架构
-
-### Before (V2)
-```
+```text
 PDF
-→ Parser
-→ AI Analyzer
-→ PaperAnalysis
-→ Content Extractor (直接生成内容)
-→ PPT Generator
+→ Parse
+→ AI Analysis
+→ Slide Planning
+→ Narrative Planning
+→ Content Extraction
+→ Markdown Generation
+→ PPTX Export
 ```
 
-### After (V3) - NEW!
-```
-PDF
-→ Parser
-→ AI Analyzer
-→ PaperAnalysis
-→ SlidePlanner (NEW) ✨
-→ SlidePlan (NEW) ✨
-→ SlideContentGenerator
-→ PPT Generator
-```
+在 `src/core/pipeline.py` 中，规划层位于 AI analysis 之后、narrative planning 之前。
 
----
+## 当前实现
 
-## 🔧 实现的组件
+`SlidePlanner.plan_slides(..., use_structured_template=True)` 默认启用结构化模板，因此当前主流程默认不会走旧的自由规划分支，而是直接生成稳定的结构化 `SlidePlan`。
 
-### 1. Data Structures (`src/planning/models.py`)
+相关实现可参考：
 
-**SlideTopic** - 单张slide的规划
-```python
-@dataclass
-class SlideTopic:
-    title: str                    # Slide标题
-    key_points: List[str]         # 3-5个关键topics
-    slide_type: str               # content, title, table, discussion
-    notes: str                    # Planning notes
-```
+- `src/planning/slide_planner.py`
+- `src/planning/models.py`
+- `src/core/pipeline.py`
 
-**SlidePlan** - 完整的slide规划
-```python
-@dataclass
-class SlidePlan:
-    slides: List[SlideTopic]
-    total_slides: int
+## 当前默认模板
 
-    def get_slide(index) -> SlideTopic
-    def get_slide_by_title(title) -> SlideTopic
-    def to_dict() -> dict
-```
+当前默认模板为结构化 10 页：
 
----
+1. Title
+2. Why Human-in-the-Loop?
+3. Research Questions
+4. HULA Framework Overview
+5. Workflow: Human Feedback Integration
+6. Three-Stage Evaluation
+7. Offline & Online Results
+8. User Survey Results
+9. Discussion: Pros & Cons
+10. Conclusions & Future Work
 
-### 2. Slide Planner (`src/planning/slide_planner.py`)
+如有引用分析数据，规划层还可以在讨论部分之前插入引用相关页面。
 
-**核心功能**:
-```python
-class SlidePlanner:
-    def plan_slides(paper_analysis) -> SlidePlan:
-        """
-        使用LLM从PaperAnalysis生成SlidePlan
+## `SlidePlan` 的作用
 
-        输入: PaperAnalysis (详细的paper分析)
-        输出: SlidePlan (11张slides，每张3-5个topics)
-        """
-```
+`SlidePlan` 是内容生成前的结构化规划结果，用来定义：
 
-**关键特性**:
-- ✅ 使用Claude Sonnet 4.6进行planning
-- ✅ 输出topics而非full text
-- ✅ 严格的JSON parsing with fallback
-- ✅ 每张slide保证3-5个key points
-- ✅ 所有slides都有内容（no empty slides）
+- 每页的标题
+- 每页的关键点
+- 每页的 slide type
+- 内容层应该如何组织后续幻灯片
 
----
+这让规划层与内容层职责分离：
 
-### 3. Planning Prompt (`src/prompts/slide_planning_prompt.py`)
+- Planning layer：决定 **讲什么**
+- Content layer：决定 **怎么讲**
 
-**Prompt设计原则**:
-1. 明确要求输出PLAN而非full content
-2. 指定11张slides的结构
-3. 要求每张slide有3-5个topics
-4. 强调logical flow
-5. 提供具体的JSON format示例
+## 设计价值
 
-**关键要求**:
-```
-- 11 slides total
-- 3-5 key topics per slide
-- Topics should be specific and actionable
-- Ensure logical flow
-- No empty slides
+### 1. 结构稳定
+
+默认模板让最终演示结构更稳定，避免页数和主题大幅波动。
+
+### 2. 更易调试
+
+主流程会把 `SlidePlan` 持久化到：
+
+```text
+outputs/intermediates/plans/{paper_name}_plan.json
 ```
 
----
+因此可以在不看最终 PPTX 的情况下先检查规划结果。
 
-## 📋 测试结果
+### 3. 更易扩展
 
-### 运行成功！
+未来若要调整演示结构，可以优先修改 `SlidePlanner`，而不必先改 markdown 或 PPTX 导出逻辑。
 
-```
-✅ PDF解析: 62,106字符
-✅ Paper分析: $0.0586 (4 motivation points)
-✅ Slide规划: $0.0216 (11 slides)
-✅ 总成本: $0.0803
-```
+## 与内容层的关系
 
-### 生成的SlidePlan质量
+主流程中这两个阶段是连续的：
 
-| Slide | Title | Key Points | Type |
-|-------|-------|------------|------|
-| 1 | Title | 4 points | title |
-| 2 | Motivation: Why Human-in-the-Loop Matters | 4 points | content |
-| 3 | Problem Definition | 4 points | content |
-| 4 | Related Work & Positioning | 4 points | content |
-| 5 | Core Idea: HULA Framework | 4 points | content |
-| 6 | Method Overview: Multi-Agent Architecture | 4 points | content |
-| 7 | Method Details: Agent Roles & Interaction | 4 points | content |
-| 8 | Experiment Setup | 4 points | content |
-| 9 | Results: Key Findings | 4 points | content |
-| 10 | Limitations & Critical Analysis | 4 points | content |
-| 11 | Takeaways & Discussion Questions | 4 points | content |
+1. `SlidePlanner` 生成 `SlidePlan`
+2. `ContentExtractor` 根据 `SlidePlan` 生成 `OrganizedPresentation`
 
-**验证结果**:
-- ✅ 正确的slide数量 (11)
-- ✅ 没有空slides
-- ✅ 所有slides有3-5个key points
-- ✅ Total key points: 44 (平均4个/slide)
+随后 `PPTGenerator` 生成 markdown，`pptx_exporter` 导出最终 `.pptx`。
 
----
+## 调试建议
 
-## 🎯 实际生成的Slide Plan示例
+运行：
 
-### Slide 2: Motivation
-```json
-{
-  "title": "Motivation: Why Human-in-the-Loop Matters",
-  "key_points": [
-    "Existing agents lack human feedback and real-world deployment validation",
-    "SWE-bench benchmarks do not reflect complex enterprise contexts",
-    "Need to validate if LLM agents actually save time in practice",
-    "Industry requires collaborative Human-AI synergy over full automation"
-  ],
-  "slide_type": "content",
-  "notes": "Explain WHY this problem is important for real-world software development"
-}
-```
-
-✅ **4个具体的topics，清晰的目标**
-
-### Slide 4: Related Work
-```json
-{
-  "title": "Related Work & Positioning",
-  "key_points": [
-    "SWE-agent / AutoCodeRover: Autonomous agents limited to historical benchmarks",
-    "Magai / Masai: Multi-agent systems lacking human-in-the-loop mechanisms",
-    "Gap: No prior work deployed human-in-the-loop agents in large enterprise",
-    "This work: First industrial deployment with human collaboration"
-  ],
-  "slide_type": "content",
-  "notes": "Compare approaches and highlight limitations of previous work"
-}
-```
-
-✅ **对比previous work的limitation + our improvement**
-
-### Slide 9: Results
-```json
-{
-  "title": "Results: Key Findings",
-  "key_points": [
-    "82% plan approval rate indicates high trust in AI planning",
-    "59% merged PR rate for raised pull requests shows practical utility",
-    "8% of total issues resulted in successfully merged HULA-assisted code",
-    "Performance gap: 86% recall on SWE-bench vs 30% internally"
-  ],
-  "slide_type": "content",
-  "notes": "Present quantitative results with interpretation"
-}
-```
-
-✅ **每个result都有interpretation**
-
----
-
-## 🏗️ 架构优势
-
-### 1. **关注点分离** (Separation of Concerns)
-
-**Planning Layer**:
-- 输入: PaperAnalysis
-- 输出: SlidePlan (topics)
-- 职责: 决定**WHAT**要讲
-
-**Content Layer**:
-- 输入: SlidePlan
-- 输出: Full slide content
-- 职责: 决定**HOW**呈现
-
-**好处**:
-- ✅ 更容易调试
-- ✅ 更容易修改
-- ✅ 更容易测试
-- ✅ 更清晰的架构
-
----
-
-### 2. **质量保证**
-
-**Planning阶段保证**:
-- ✅ 正确的slide数量
-- ✅ 每张slide有3-5个topics
-- ✅ Logical flow
-- ✅ No empty slides
-
-**Content阶段保证**:
-- ✅ 每个topic扩展为full bullet points
-- ✅ 适当的word count
-- ✅ 专业的语言
-
----
-
-### 3. **可维护性**
-
-**Before**:
-```
-修改slide结构 = 修改整个content generator
-```
-
-**After**:
-```
-修改slide结构 = 只修改SlidePlanner
-修改slide内容 = 只修改SlideContentGenerator
-```
-
-✅ **独立修改，互不影响**
-
----
-
-### 4. **可测试性**
-
-**Planning测试**:
-```python
-def test_slide_planner():
-    slide_plan = planner.plan_slides(analysis)
-    assert slide_plan.total_slides == 11
-    assert all(len(s.key_points) >= 3 for s in slide_plan.slides)
-```
-
-**Content测试**:
-```python
-def test_content_generator():
-    content = generator.generate_content(slide_plan)
-    assert all(s.word_count <= 100 for s in content.slides)
-```
-
-✅ **独立测试，更容易定位问题**
-
----
-
-## 💰 成本分析
-
-| 组件 | Cost | 说明 |
-|------|------|------|
-| Paper Analysis | $0.0586 | 详细的paper分析 |
-| Slide Planning | $0.0216 | 生成SlidePlan (NEW) |
-| Content Generation | ~$0.02 | 扩展topics为内容 (估计) |
-| **Total** | **$0.0802** | 完整pipeline |
-
-**新增成本**: +$0.0216 (Slide Planning)
-**价值**: 更好的slide质量 + 更清晰的架构
-
----
-
-## 📁 创建的文件
-
-### 核心模块
-```
-src/planning/
-├── __init__.py           # Module exports
-├── models.py             # SlideTopic, SlidePlan dataclasses
-└── slide_planner.py      # SlidePlanner class
-
-src/prompts/
-└── slide_planning_prompt.py  # LLM prompt for planning
-```
-
-### 测试
-```
-tools/
-└── test_slide_planner.py     # Complete test script
-```
-
-### 输出
-```
-outputs/plans/
-└── slide_plan.json           # Generated slide plan
-```
-
----
-
-## 🚀 使用方法
-
-### 完整测试
 ```bash
-python3 tools/test_slide_planner.py
+python cli/main.py pipeline --paper papers/example.pdf --no-clean
 ```
 
-### 输出文件
-```
-outputs/plans/slide_plan.json
-```
+然后优先检查：
 
-### 集成到pipeline (下一步)
-```python
-# Step 1: Analyze paper
-analysis = analyzer.analyze_paper(text, metadata)
+1. `outputs/intermediates/plans/`
+2. `outputs/intermediates/markdown/`
+3. `outputs/slides/`
 
-# Step 2: Plan slides (NEW!)
-slide_plan = planner.plan_slides(analysis)
+## 注意
 
-# Step 3: Generate content from plan
-content = content_generator.generate_content(slide_plan)
-
-# Step 4: Generate PPT
-ppt = ppt_generator.generate(content)
-```
+- 当前默认模板是 **10 slides**，不是 11 slides
+- 当前推荐主流程是 `pipeline`
+- 若文档与代码不一致，以 `src/planning/slide_planner.py` 为准
 
 ---
 
-## 🎯 Acceptance Criteria - 全部满足 ✅
-
-| Criteria | Status | Evidence |
-|----------|--------|----------|
-| **SlidePlan output** | ✅ | `outputs/plans/slide_plan.json` |
-| **11 slides** | ✅ | Total: 11 |
-| **Slide titles** | ✅ | All slides have clear titles |
-| **3-5 topics per slide** | ✅ | 44 total, avg 4/slide |
-| **No empty slides** | ✅ | All slides have key_points |
-| **Logical flow** | ✅ | Motivation → Problem → Method → Results |
-| **JSON format** | ✅ | Valid JSON output |
-
----
-
-## 📊 质量评分
-
-| 维度 | 评分 | 说明 |
-|------|------|------|
-| **Architecture** | ⭐⭐⭐⭐⭐ | 清晰的分离关注点 |
-| **Code Quality** | ⭐⭐⭐⭐⭐ | 工业级实现 |
-| **Test Coverage** | ⭐⭐⭐⭐⭐ | 完整的测试脚本 |
-| **Documentation** | ⭐⭐⭐⭐⭐ | 详细的文档 |
-| **Output Quality** | ⭐⭐⭐⭐⭐ | 高质量的slide plan |
-| **Overall** | ⭐⭐⭐⭐⭐ | **Production Ready** |
-
----
-
-## 🎓 关键创新
-
-### 1. **Two-Stage Generation**
-```
-Stage 1: Planning (WHAT to cover)
-Stage 2: Content (HOW to present)
-```
-✅ 更好的控制和质量
-
-### 2. **Topic-Based Planning**
-```
-每个slide = 3-5 key topics (not full sentences)
-```
-✅ 更容易调整和修改
-
-### 3. **Structured Output**
-```
-SlidePlan with validation
-```
-✅ 保证输出质量
-
-### 4. **LLM-Driven Planning**
-```
-AI decides logical flow
-```
-✅ 智能的slide结构
-
----
-
-## 🔄 Next Steps
-
-### 1. **实现SlideContentGenerator** (下一步)
-```python
-class SlideContentGenerator:
-    def generate_content(slide_plan: SlidePlan) -> Presentation:
-        # Expand each topic into full bullet points
-        # Add interpretations
-        # Format for presentation
-```
-
-### 2. **集成到主pipeline**
-```python
-# Update main pipeline
-def generate_presentation(pdf_path):
-    analysis = analyze_paper(pdf_path)
-    slide_plan = plan_slides(analysis)  # NEW!
-    content = generate_content(slide_plan)  # NEW!
-    ppt = generate_ppt(content)
-    return ppt
-```
-
-### 3. **添加A/B测试**
-- Compare: Direct content generation vs Planning-based
-- Measure: Quality, consistency, maintainability
-
----
-
-## 💡 设计模式
-
-### Planning Pattern
-```
-This implements the "Planning Pattern" in AI pipelines:
-
-Input → Analyzer → Planner → Generator → Output
-
-Similar to:
-- Code generation: Spec → Architecture → Code
-- Writing: Outline → Draft → Polish
-- Cooking: Recipe → Prep → Cook
-```
-
-✅ **经过验证的软件工程模式**
-
----
-
-## 🎉 Conclusion
-
-**实现状态**: ✅ **COMPLETE**
-
-**关键成就**:
-1. ✅ 创建了清晰的Planning layer
-2. ✅ 实现了SlidePlanner with LLM
-3. ✅ 生成了高质量的SlidePlan
-4. ✅ 所有acceptance criteria满足
-5. ✅ 完整的测试和文档
-
-**从**: 单一content generation
-**到**: **Planning + Content两阶段**
-
-**价值**:
-- ✅ 更好的slide质量
-- ✅ 更清晰的架构
-- ✅ 更容易维护
-- ✅ 更容易测试
-
----
-
-**开发时间**: 2026-03-13
-**测试状态**: ✅ PASSED
-**质量评分**: ⭐⭐⭐⭐⭐ (5/5)
-**推荐**: ✅ **Ready for integration**
+**最后更新**: 2026-03-20

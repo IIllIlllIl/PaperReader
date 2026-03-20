@@ -73,6 +73,10 @@ class PaperAnalysis:
     # Conclusion (keywords only)
     key_takeaways: List[str] = field(default_factory=list)
 
+    # Citation analysis (Phase 3)
+    citation_data: Optional[Dict] = None  # Citation analysis results
+    has_citation_data: bool = False  # Whether citation data is available
+
 
 class AIAnalyzer:
     """Enhanced AI analyzer with V3 prompt engineering"""

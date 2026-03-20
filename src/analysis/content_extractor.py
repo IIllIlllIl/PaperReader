@@ -41,7 +41,8 @@ class ContentExtractor:
     def __init__(self):
         self.max_words_per_slide = 30
 
-    def extract_detailed_slides(self, analysis: Any, slide_plan=None, figures=None) -> OrganizedPresentation:
+    def extract_detailed_slides(self, analysis: Any, slide_plan=None, figures=None,
+                                citation_data=None) -> OrganizedPresentation:
         """
         Extract slides from analysis with V3 requirements
 
@@ -49,6 +50,7 @@ class ContentExtractor:
             analysis: Analysis object from AI
             slide_plan: SlidePlan object (source of truth for slide structure)
             figures: Extracted figure metadata from PDFImageExtractor
+            citation_data: Citation analysis data (optional)
 
         Returns:
             Organized presentation with slides
@@ -58,7 +60,8 @@ class ContentExtractor:
         # CRITICAL: If slide_plan is provided, use it as the source of truth
         if slide_plan is not None:
             logger.info(f"Using SlidePlan as source of truth ({slide_plan.total_slides} slides planned)")
-            slides = self._generate_slides_from_plan(analysis, slide_plan, figures=figures)
+            slides = self._generate_slides_from_plan(analysis, slide_plan, figures=figures,
+                                                     citation_data=citation_data)
         else:
             # Fallback: Legacy behavior (independent slide generation)
             logger.warning("No SlidePlan provided, using legacy independent generation")
@@ -71,7 +74,8 @@ class ContentExtractor:
             total_slides=len(slides)
         )
 
-    def _generate_slides_from_plan(self, analysis: Any, slide_plan, figures=None) -> List[SlideContent]:
+    def _generate_slides_from_plan(self, analysis: Any, slide_plan, figures=None,
+                                    citation_data=None) -> List[SlideContent]:
         """
         Generate slides following the SlidePlan structure
 
@@ -83,6 +87,15 @@ class ContentExtractor:
 
         for index, planned_slide in enumerate(slide_plan.slides):
             assigned_figure = figure_assignments.get(index)
+
+            # Special handling: Insert citation slide before Discussion if citation data available
+            if (citation_data and
+                'discussion' in planned_slide.title.lower() and
+                citation_data.get('total_citations', 0) > 0):
+                citation_slide = self._create_citation_slide(citation_data)
+                slides.append(citation_slide)
+                logger.info(f"Inserted citation analysis slide before Discussion")
+
             slide = self._create_slide_from_plan(analysis, planned_slide, figure=assigned_figure)
             slides.append(slide)
 
@@ -147,54 +160,148 @@ class ContentExtractor:
         return slide
 
     def _build_figure_assignments(self, planned_slides: List[Any], figures: List[dict]) -> Dict[int, dict]:
-        """Assign extracted figures to the most relevant planned slides."""
+        """
+        Assign figures to slides using semantic matching (ENHANCED)
+
+        New features:
+        - Skip title slides
+        - Match figure captions to slide titles using keyword weights
+        - Use priority mechanism: each figure assigned to best matching slide
+        - Prevent duplicate assignments
+        """
         if not figures:
             return {}
 
-        preferred_keywords = [
-            'method', 'approach', 'framework', 'architecture', 'workflow',
-            'overview', 'system', 'experiment', 'setup', 'result', 'analysis',
-            'finding', 'evaluation'
-        ]
+        assignments = {}
+        used_figures = set()  # Track assigned figures
 
-        candidate_indices = []
-        fallback_indices = []
-        for index, planned_slide in enumerate(planned_slides):
+        # First pass: compute all match scores
+        match_scores = []
+        for slide_idx, planned_slide in enumerate(planned_slides):
             title_lower = planned_slide.title.lower()
+
+            # Skip title slides
             if title_lower in ['title', 'paper title', 'outline', 'agenda', 'q&a', 'qa', 'questions', 'thank you']:
                 continue
 
-            fallback_indices.append(index)
-            if any(keyword in title_lower for keyword in preferred_keywords):
-                candidate_indices.append(index)
+            # Compute match score for each figure
+            for fig_idx, figure in enumerate(figures):
+                if fig_idx in used_figures:
+                    continue  # Already assigned
 
-        ordered_indices = candidate_indices + [
-            index for index in fallback_indices
-            if index not in candidate_indices
-        ]
-        assignments = {}
-        for index, figure in zip(ordered_indices, figures):
-            assignments[index] = figure
+                score = self._compute_figure_match_score(
+                    planned_slide.title,
+                    figure.get('caption', ''),
+                    figure.get('figure_num', 0)
+                )
+
+                if score > 0:
+                    match_scores.append({
+                        'slide_idx': slide_idx,
+                        'fig_idx': fig_idx,
+                        'figure': figure,
+                        'score': score
+                    })
+
+        # Sort by score (descending)
+        match_scores.sort(key=lambda x: x['score'], reverse=True)
+
+        # Assign figures to slides (priority: highest score first)
+        for match in match_scores:
+            slide_idx = match['slide_idx']
+            fig_idx = match['fig_idx']
+
+            # Skip if slide already has a figure
+            if slide_idx in assignments:
+                continue
+
+            # Skip if figure already assigned
+            if fig_idx in used_figures:
+                continue
+
+            # Assign figure to slide
+            assignments[slide_idx] = match['figure']
+            used_figures.add(fig_idx)
+
+            logger.info(
+                f"Assigned Fig.{match['figure'].get('figure_num', '?')} to "
+                f"'{planned_slides[slide_idx].title}' (score: {match['score']:.2f})"
+            )
 
         logger.info(f"Prepared {len(assignments)} figure assignments from {len(figures)} extracted figures")
         return assignments
 
     def _extract_content_for_title(self, analysis: Any, title: str, key_points: List[str]) -> List[str]:
         """
-        Extract content from analysis based on slide title
+        Extract content from analysis based on slide title (ENHANCED)
 
-        Uses key_points as hints for what to extract
+        Now includes:
+        - Key number extraction
+        - Pros/Cons extraction
+        - Improved matching
         """
         title_lower = title.lower()
 
+        # NEW: Extract Pros/Cons for discussion slides
+        if 'discussion' in title_lower or ('pros' in title_lower and 'cons' in title_lower):
+            # Try both 'advantages_keywords' and 'strengths' (backward compatibility)
+            pros = self._safe_get_attr(analysis, 'advantages_keywords', [])
+            if not pros:
+                pros = self._safe_get_attr(analysis, 'strengths', [])
+            cons = self._safe_get_attr(analysis, 'limitations_keywords', [])
+
+            # Debug logging
+            logger.info(f"Extracting Pros/Cons for '{title}'")
+            logger.info(f"  Pros: {pros}")
+            logger.info(f"  Cons: {cons}")
+
+            content = []
+            if pros and isinstance(pros, list):
+                # Add ✅ emoji if not already present
+                for item in pros[:3]:
+                    if not item.startswith('✅'):
+                        content.append(f"✅ {item}")
+                    else:
+                        content.append(item)
+            if cons and isinstance(cons, list):
+                # Add ❌ emoji if not already present
+                for item in cons[:3]:
+                    if not item.startswith('❌'):
+                        content.append(f"❌ {item}")
+                    else:
+                        content.append(item)
+
+            # If no pros/cons found, use key_points as fallback
+            if not content:
+                logger.warning(f"No pros/cons found, using key_points")
+                content = key_points[:6]
+
+            return content
+
+        # NEW: Extract key numbers for results slides
+        elif 'result' in title_lower or 'finding' in title_lower:
+            base_content = self._safe_get_attr(analysis, 'main_results_keywords', key_points)
+
+            # Try to extract key numbers for emphasis
+            if hasattr(analysis, 'key_numbers'):
+                key_nums = analysis.key_numbers
+                if isinstance(key_nums, dict):
+                    # Add key numbers as additional emphasis
+                    emphasized = []
+                    for key, value in list(key_nums.items())[:3]:
+                        emphasized.append(f"{key.replace('_', ' ').title()}: {value}")
+                    base_content = base_content + emphasized
+
+            return base_content
+
         # Map title keywords to analysis attributes
-        if 'background' in title_lower or 'motivation' in title_lower:
+        elif 'background' in title_lower or 'motivation' in title_lower:
             return self._safe_get_attr(analysis, 'research_background_keywords', key_points)
-        elif 'problem' in title_lower:
+        elif 'problem' in title_lower or 'why' in title_lower:
             return self._safe_get_attr(analysis, 'research_problem_keywords', key_points)
         elif 'insight' in title_lower or 'breakthrough' in title_lower:
             return self._safe_get_attr(analysis, 'key_insights', key_points)
-        elif 'method' in title_lower or 'approach' in title_lower:
+        elif 'method' in title_lower or 'approach' in title_lower or 'framework' in title_lower:
             return self._safe_get_attr(analysis, 'method_keywords', key_points)
         elif 'technical' in title_lower or 'detail' in title_lower:
             return self._safe_get_attr(analysis, 'technical_details_keywords', key_points)
@@ -204,11 +311,19 @@ class ContentExtractor:
             return self._safe_get_attr(analysis, 'baselines_table', key_points)
         elif 'metric' in title_lower:
             return self._safe_get_attr(analysis, 'metrics_table', key_points)
-        elif 'experiment' in title_lower or 'setup' in title_lower:
+        elif 'experiment' in title_lower or 'setup' in title_lower or 'evaluation' in title_lower:
             return self._safe_get_attr(analysis, 'experimental_setup_keywords', key_points)
-        elif 'result' in title_lower:
-            return self._safe_get_attr(analysis, 'main_results_keywords', key_points)
-        elif 'finding' in title_lower:
+        elif 'survey' in title_lower or 'user' in title_lower:
+            # NEW: Extract user survey results
+            if hasattr(analysis, 'user_survey_results'):
+                survey = analysis.user_survey_results
+                if isinstance(survey, dict):
+                    content = []
+                    if 'benefits' in survey:
+                        content.extend(survey['benefits'][:3])
+                    if 'challenges' in survey:
+                        content.extend(survey['challenges'][:3])
+                    return content
             return self._safe_get_attr(analysis, 'key_findings_keywords', key_points)
         elif 'advantage' in title_lower or 'strength' in title_lower:
             return self._safe_get_attr(analysis, 'advantages_keywords', key_points)
@@ -216,8 +331,6 @@ class ContentExtractor:
             return self._safe_get_attr(analysis, 'limitations_keywords', key_points)
         elif 'future' in title_lower or 'conclusion' in title_lower:
             return self._safe_get_attr(analysis, 'future_work_keywords', key_points)
-        elif 'discussion' in title_lower or 'takeaway' in title_lower:
-            return self._safe_get_attr(analysis, 'key_findings_keywords', key_points)
         else:
             # Default: return key_points as content
             return key_points[:6]  # Max 6 items
@@ -386,12 +499,64 @@ class ContentExtractor:
             "Analysis & Discussion",
             "Conclusion & Future Work"
         ]
-        
+
         return SlideContent(
             title="Outline",
             bullet_points=bullet_points,
             notes="Presentation outline",
             slide_type="section",
+            word_count=self._count_words(bullet_points)
+        )
+
+    def _create_citation_slide(self, citation_data: Dict) -> SlideContent:
+        """Create citation analysis slide"""
+        total_citations = citation_data.get('total_citations', 0)
+        sources_used = citation_data.get('sources_used', [])
+        by_year = citation_data.get('by_year', {})
+        charts = citation_data.get('charts', [])
+
+        # Build bullet points
+        bullet_points = []
+
+        # Total citations with emphasis
+        bullet_points.append(f"Total verified citations: **{total_citations}**")
+
+        # Data sources
+        if sources_used:
+            sources_str = ', '.join(s.title() for s in sources_used)
+            bullet_points.append(f"Data sources: {sources_str}")
+
+        # Recent trend
+        if by_year:
+            recent_years = sorted(by_year.keys(), reverse=True)[:3]
+            trend_parts = [f"{year}: **{by_year[year]}**" for year in recent_years]
+            bullet_points.append(f"Recent citations: {', '.join(trend_parts)}")
+
+        # Charts information
+        if charts:
+            chart_types = []
+            for chart_path in charts:
+                if 'trend' in chart_path.lower():
+                    chart_types.append('trend chart')
+                elif 'coverage' in chart_path.lower():
+                    chart_types.append('coverage chart')
+            if chart_types:
+                bullet_points.append(f"Visualizations: {', '.join(chart_types)}")
+
+        # Representative works (top 3)
+        citations = citation_data.get('citations', [])
+        if citations:
+            bullet_points.append("Representative works:")
+            for citation in citations[:3]:
+                title = citation.get('title', 'Unknown')
+                year = citation.get('year', 'N/A')
+                bullet_points.append(f"  • {title} ({year})")
+
+        return SlideContent(
+            title="Citation Analysis",
+            bullet_points=bullet_points,
+            notes="Citation analysis showing research impact and follow-up research",
+            slide_type="content",
             word_count=self._count_words(bullet_points)
         )
     
@@ -736,7 +901,7 @@ class ContentExtractor:
     def add_figures_to_slides(self, slides: List, figures: List[dict], max_per_slide: int = 1) -> None:
         """
         Add figure slides to presentation
-        
+
         Args:
             slides: Existing slides list
             figures: List of figure dicts from PDFImageExtractor
@@ -744,7 +909,7 @@ class ContentExtractor:
         """
         if not figures:
             return
-        
+
         for i, fig in enumerate(figures[:6]):  # Max 6 figures total
             # Create dedicated figure slide
             slide = self._create_figure_slide(
@@ -753,6 +918,216 @@ class ContentExtractor:
                 caption=fig.get('caption', '')
             )
             slides.append(slide)
-            
+
             logger.info(f"Added figure {fig['figure_num']} from page {fig['page_num']}")
+
+    def _extract_key_numbers(self, text: str) -> List[str]:
+        """
+        Extract key numbers from paper text (e.g., "82% plan approval")
+
+        Args:
+            text: Paper text or analysis keywords
+
+        Returns:
+            List of formatted number strings
+        """
+        import re
+
+        # Find all percentages
+        percentage_pattern = r'\*\*(\d+(?:\.\d+)?)%\*\*|(\d+(?:\.\d+)?)%'
+        matches = re.findall(percentage_pattern, text)
+
+        numbers = []
+        for match in matches:
+            # Extract the number from either group
+            num = match[0] if match[0] else match[1]
+            if num:
+                numbers.append(f"**{num}%**")
+
+        return numbers[:6]  # Max 6 numbers
+
+    def _compute_figure_match_score(self, slide_title: str, figure_caption: str, figure_num: int) -> float:
+        """
+        Compute semantic match score between slide and figure using keyword weights
+
+        Args:
+            slide_title: Slide title (e.g., "HULA Framework Overview")
+            figure_caption: Figure caption (e.g., "Fig. 1. An Overview of our Framework...")
+            figure_num: Figure number (1, 2, 3, etc.)
+
+        Returns:
+            Match score (0.0 to 1.0), higher is better
+        """
+        title_lower = slide_title.lower()
+        caption_lower = figure_caption.lower()
+
+        # Define keyword weights for each figure type
+        # Higher weight = stronger match
+        figure_keywords = {
+            # Fig.1: Framework/Architecture diagrams
+            1: {
+                'keywords': ['overview', 'framework', 'architecture', 'system', 'hula'],
+                'weight': 1.0
+            },
+            # Fig.2: Often method details
+            2: {
+                'keywords': ['method', 'detail', 'component', 'technique', 'workflow'],
+                'weight': 0.9
+            },
+            # Fig.3: Evaluation flowcharts
+            3: {
+                'keywords': ['evaluation', 'stage', 'experiment', 'setup', 'flow', 'multi-stage', 'design'],
+                'weight': 1.0
+            },
+            # Fig.4-5: Often intermediate results
+            4: {
+                'keywords': ['result', 'comparison', 'baseline', 'offline'],
+                'weight': 0.8
+            },
+            5: {
+                'keywords': ['result', 'comparison', 'baseline', 'online'],
+                'weight': 0.8
+            },
+            # Fig.6: User satisfaction/ratings
+            6: {
+                'keywords': ['satisfaction', 'rating', 'score', 'likert', 'user', 'survey'],
+                'weight': 1.0
+            },
+            # Fig.7: Benefits/Positive feedback
+            7: {
+                'keywords': ['benefit', 'advantage', 'positive', 'perceived', 'pro', 'survey'],
+                'weight': 1.0
+            },
+            # Fig.8: Challenges/Issues
+            8: {
+                'keywords': ['challenge', 'issue', 'problem', 'difficulty', 'encountered', 'survey'],
+                'weight': 1.0
+            },
+            # Fig.9: Improvement suggestions/Future work
+            9: {
+                'keywords': ['improvement', 'future', 'suggestion', 'area', 'recommendation', 'discussion'],
+                'weight': 1.0
+            }
+        }
+
+        # Default keywords for unknown figure numbers
+        default_keywords = {
+            'keywords': ['result', 'finding', 'data'],
+            'weight': 0.5
+        }
+
+        # Get keywords for this figure
+        fig_config = figure_keywords.get(figure_num, default_keywords)
+        keywords = fig_config['keywords']
+        base_weight = fig_config['weight']
+
+        # Compute match score
+        score = 0.0
+
+        # Check if keywords appear in slide title
+        for keyword in keywords:
+            if keyword in title_lower:
+                score += 0.4  # Strong match: keyword in title
+
+            # Check if keyword appears in caption (weaker signal)
+            if keyword in caption_lower:
+                score += 0.1  # Weaker match: keyword in caption
+
+        # Special rules to improve matching
+
+        # Rule 1: Problem/Why slides should NOT get survey results
+        if 'why' in title_lower or 'problem' in title_lower or 'research question' in title_lower:
+            if figure_num in [6, 7, 8, 9]:
+                score *= 0.1  # Strongly reduce score for survey figures on problem slides
+
+        # Rule 2: Workflow slides should NOT get any survey/result figures
+        if 'workflow' in title_lower:
+            if figure_num in [6, 7, 8, 9]:
+                score *= 0.05  # Almost completely reject survey figures
+            elif figure_num in [3, 4, 5]:
+                score *= 0.2  # Reduce evaluation/result figures
+            elif figure_num == 2:
+                score += 0.3  # Slight boost for method details
+
+        # Rule 3: Discussion/Future slides strongly prefer Fig.9
+        if 'discussion' in title_lower or 'future' in title_lower or 'conclusion' in title_lower:
+            if figure_num == 9:
+                score += 0.8  # Strong boost for Fig.9
+            elif figure_num in [6, 7, 8]:
+                score *= 0.3  # Reduce survey figures on discussion slides
+
+        # Rule 4: Survey/User feedback slides prefer Fig.7,8 (Benefits/Challenges)
+        if 'survey' in title_lower or 'user' in title_lower:
+            if figure_num in [7, 8]:
+                score += 0.7  # Strong boost for benefits/challenges
+            elif figure_num == 6:
+                score += 0.5  # Boost for satisfaction
+            elif figure_num == 9:
+                score *= 0.3  # Reduce improvement figure
+
+        # Rule 5: Results slides should get result figures, not evaluation flow
+        if 'result' in title_lower and ('offline' in title_lower or 'online' in title_lower):
+            if figure_num == 3:
+                score *= 0.2  # Reduce evaluation flow on results slides
+            elif figure_num in [4, 5]:
+                score += 0.4  # Boost result figures
+
+        # Rule 6: Evaluation/Design slides prefer Fig.3
+        if 'evaluation' in title_lower or 'stage' in title_lower or 'design' in title_lower:
+            if figure_num == 3:
+                score += 0.7  # Strong boost for Fig.3
+
+        # Rule 7: Framework/Overview slides strongly prefer Fig.1
+        if 'overview' in title_lower or 'framework' in title_lower:
+            if figure_num == 1:
+                score += 0.8  # Strong boost for Fig.1
+            elif figure_num in [2, 3]:
+                score *= 0.4  # Reduce other method figures
+
+        # Rule 8: Offline/Online results should NOT get survey figures
+        if ('offline' in title_lower or 'online' in title_lower) and 'result' in title_lower:
+            if figure_num in [6, 7, 8, 9]:
+                score *= 0.1  # Strongly reduce survey figures
+
+        # Normalize score to [0, 1]
+        final_score = min(score * base_weight, 1.0)
+
+        # Return 0 if score is too low (below threshold)
+        if final_score < 0.15:
+            return 0.0
+
+        return final_score
+
+    def _extract_pros_cons(self, analysis: Any) -> dict:
+        """
+        Extract pros/cons from analysis for discussion slides
+
+        Args:
+            analysis: Paper analysis object
+
+        Returns:
+            Dict with 'pros' and 'cons' lists
+        """
+        pros = []
+        cons = []
+
+        # Extract advantages (try both field names for compatibility)
+        if hasattr(analysis, 'advantages_keywords'):
+            pros = analysis.advantages_keywords[:3]
+        elif hasattr(analysis, 'strengths'):
+            pros = analysis.strengths[:3]
+
+        # Extract limitations
+        if hasattr(analysis, 'limitations_keywords'):
+            cons = analysis.limitations_keywords[:3]
+
+        # Add emoji if not present
+        pros = [f"✅ {p}" if not p.startswith('✅') else p for p in pros]
+        cons = [f"❌ {c}" if not c.startswith('❌') else c for c in cons]
+
+        return {
+            'pros': pros,
+            'cons': cons
+        }
+
 

@@ -2,348 +2,158 @@
 
 ## Overview
 
-Implemented a clean end-to-end pipeline for generating PhD meeting presentations from PDF papers.
+`src/core/pipeline.py` 提供当前推荐的端到端流程：从 PDF 生成学术汇报用 PPTX，并在需要时保留可检查的中间产物。
 
-## Architecture
+主命令：
 
-```
-PDF → [1. Parse] → [2. Extract Sections] → [3. AI Analysis] →
-[4. Slide Plan] → [5. Narrative Plan] → [6. Generate Slides] →
-[7. Export PPTX] → [8. Generate Script] → Final Outputs
+```bash
+python cli/main.py pipeline --paper papers/example.pdf
 ```
 
 ---
 
-## New Files Created
+## Pipeline Stages
 
-### 1. `src/core/pipeline.py` (Main Pipeline Module)
-
-**Class**: `PaperPresentationPipeline`
-
-**Responsibilities**:
-- Orchestrate 8-stage pipeline
-- Coordinate all existing modules
-- Track statistics (time, cost, tokens)
-- Generate comprehensive outputs
-
-**Key Methods**:
-```python
-def run(pdf_path, output_dir) -> Dict:
-    """Run complete 8-stage pipeline"""
-
-def _parse_pdf() -> (paper_text, metadata)
-def _extract_sections() -> sections_dict
-def _run_ai_analysis() -> PaperAnalysis
-def _plan_slides() -> SlidePlan
-def _plan_narrative() -> PresentationNarrative
-def _generate_slides() -> OrganizedPresentation
-def _export_pptx()
-def _generate_script()
-```
-
-**Design Principles**:
-- No refactoring of existing modules
-- Clean orchestration layer only
-- Comprehensive error handling
-- Progress logging for each stage
-
-### 2. `src/generation/pptx_exporter.py` (PPTX Export Module)
-
-**Purpose**: Convert Markdown slides to PPTX format
-
-**Key Functions**:
-```python
-def parse_marpedown(md_file: str) -> List[Dict]
-def create_pptx(slides, output_file: str, title: str)
-def markdown_to_pptx(markdown_path, output_path, title)
-```
-
-**Features**:
-- Parse Marp Markdown format
-- Extract slides with titles and bullets
-- Create styled PPTX presentations
-- Handle emoji and formatting
-
-### 3. `test_pipeline.py` (Test Script)
-
-**Purpose**: Quick test script for pipeline verification
-
-**Usage**:
-```bash
-python test_pipeline.py papers/example.pdf
+```text
+PDF
+→ [1] Parse PDF
+→ [2] Extract Sections
+→ [3] AI Analysis
+→ [3.5] Citation Analysis (optional)
+→ [4] Slide Plan
+→ [5] Narrative Plan
+→ [6] Generate Slides Markdown
+→ [7] Export PPTX
+→ [8] Generate Script
 ```
 
 ---
 
 ## CLI Integration
 
-### Updated `cli/main.py`
-
-**New Command**: `paperreader pipeline`
+`cli/main.py` 当前提供的主流程命令：
 
 ```bash
-# Basic usage
-paperreader pipeline --paper papers/example.pdf
-
-# With options
-paperreader pipeline -p papers/example.pdf -o outputs -v --config config.yaml
+python cli/main.py pipeline --paper papers/example.pdf
+python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python cli/main.py pipeline --paper papers/example.pdf --include-citations
 ```
 
-**Options**:
-- `--paper, -p`: Path to PDF paper (required)
-- `--output, -o`: Output directory (default: outputs)
-- `--verbose, -v`: Verbose output
-- `--config`: Path to config file
+主要参数：
+- `--paper, -p`: 输入 PDF
+- `--output, -o`: 输出目录，默认 `outputs`
+- `--config`: 配置文件，默认 `config.yaml`
+- `--verbose, -v`: 详细输出
+- `--include-citations`: 启用引用分析
+- `--citation-min-sources`: 每条引用最少验证来源数
+- `--citation-limit`: 幻灯片展示的引用数量上限
+- `--clean/--no-clean`: 成功后是否清理中间文件
 
 ---
 
-## Pipeline Stages (8 Stages)
+## Stage Details
 
 ### Stage 1: Parse PDF
-**Module**: `src/parser/pdf_parser.py`
-**Output**: `paper_text`, `metadata`
-**Progress**: `[1/8] Parsing PDF...`
+- 模块：`src/parser/pdf_parser.py`
+- 输出：`paper_text`, `metadata`
 
 ### Stage 2: Extract Structured Sections
-**Module**: `src/parser/pdf_parser.py`
-**Output**: `sections` dict (abstract, intro, method, etc.)
-**Progress**: `[2/8] Extracting structured sections...`
+- 模块：`src/parser/pdf_parser.py`
+- 输出：`sections`
 
 ### Stage 3: Run AI Analysis
-**Module**: `src/analysis/ai_analyzer.py`
-**Output**: `PaperAnalysis` object
-**Progress**: `[3/8] Running AI analysis...`
-**Cost**: ~$0.06-0.11
+- 模块：`src/analysis/ai_analyzer.py`
+- 输出：`PaperAnalysis`
+
+### Stage 3.5: Citation Analysis (optional)
+- 模块：`src/analysis/citation_integration.py`
+- 输出：`citation_result`
 
 ### Stage 4: Generate Slide Plan
-**Module**: `src/planning/slide_planner.py`
-**Output**: `SlidePlan` object (11 slides structure)
-**Progress**: `[4/8] Planning slides...`
+- 模块：`src/planning/slide_planner.py`
+- 输出：`SlidePlan`
+- 当前默认：结构化 10 页模板
 
 ### Stage 5: Generate Narrative Plan
-**Module**: `src/planning/narrative_planner.py`
-**Output**: `PresentationNarrative` object
-**Progress**: `[5/8] Planning narrative...`
+- 模块：`src/planning/narrative_planner.py`
+- 输出：`PresentationNarrative`
 
 ### Stage 6: Generate Slides Markdown
-**Module**: `src/analysis/content_extractor.py` + `src/generation/ppt_generator.py`
-**Output**: Markdown file (Marp format)
-**Progress**: `[6/8] Generating slides...`
+- 模块：`src/analysis/content_extractor.py` + `src/generation/ppt_generator.py`
+- 输出：`outputs/intermediates/markdown/{paper_name}.md`
 
 ### Stage 7: Export PPTX
-**Module**: `src/generation/pptx_exporter.py`
-**Output**: PPTX file
-**Progress**: `[7/8] Exporting PPTX...`
+- 模块：`src/generation/pptx_exporter.py`
+- 输出：`outputs/slides/{paper_name}.pptx`
 
 ### Stage 8: Generate Presentation Script
-**Module**: Internal method using narrative + plan
-**Output**: Markdown script with speaker notes
-**Progress**: `[8/8] Generating presentation script...`
+- 模块：pipeline 内部脚本生成逻辑
+- 输出：`outputs/intermediates/scripts/{paper_name}_presentation_script.md`
 
 ---
 
 ## Output Structure
 
-```
+```text
 outputs/
-├── markdown/
-│   └── {paper_name}.md          # Marp Markdown slides
 ├── slides/
-│   └── {paper_name}.pptx        # PowerPoint presentation
-├── scripts/
-│   └── {paper_name}_presentation_script.md  # Speaker notes
-└── plans/
-    └── {paper_name}_plan.json   # Slide plan structure
+│   └── {paper_name}.pptx
+└── intermediates/
+    ├── markdown/
+    │   └── {paper_name}.md
+    ├── plans/
+    │   └── {paper_name}_plan.json
+    ├── scripts/
+    │   └── {paper_name}_presentation_script.md
+    ├── images/
+    └── citations/
 ```
+
+说明：
+- 最终交付物放在 `outputs/slides/`
+- 规划、Markdown、讲稿、图片和引用缓存放在 `outputs/intermediates/`
+- 默认会清理中间文件；使用 `--no-clean` 保留
 
 ---
 
-## Example Run
+## Slide Planning
 
-```bash
-$ paperreader pipeline --paper papers/Human-In-the-Loop.pdf
+`src/planning/slide_planner.py` 中的默认结构化模板为 10 页：
 
-======================================================================
-PIPELINE: Human-In-the-Loop
-======================================================================
-
-[1/8] Parsing PDF...
-      ✓ Extracted 125,432 characters from 15 pages
-[2/8] Extracting structured sections...
-      ✓ Found 6 sections: abstract, introduction, method, results, discussion, conclusion
-[3/8] Running AI analysis...
-      ✓ Analysis completed (cost: $0.0847)
-[4/8] Planning slides...
-      ✓ Generated plan with 11 slides
-[5/8] Planning narrative...
-      ✓ Narrative extracted: We introduce a Human-in-the-Loop agent framework...
-[6/8] Generating slides...
-      ✓ Generated 16 slides
-      ✓ Markdown saved: outputs/markdown/Human-In-the-Loop.md
-[7/8] Exporting PPTX...
-✅ Created PPTX: outputs/slides/Human-In-the-Loop.pptx
-   Total slides: 16
-      ✓ PPTX saved: outputs/slides/Human-In-the-Loop.pptx
-[8/8] Generating presentation script...
-      ✓ Script saved: outputs/scripts/Human-In-the-Loop_presentation_script.md
-
-======================================================================
-PIPELINE COMPLETED SUCCESSFULLY
-======================================================================
-
-📊 Statistics:
-   Total time: 1m 45.2s
-   Total cost: $0.0923
-   Total tokens: 45,678
-
-📁 Generated files:
-   Markdown: outputs/markdown/Human-In-the-Loop.md
-   PPTX:     outputs/slides/Human-In-the-Loop.pptx
-   Script:   outputs/scripts/Human-In-the-Loop_presentation_script.md
-   Plan:     outputs/plans/Human-In-the-Loop_plan.json
-======================================================================
-```
+1. Title
+2. Why Human-in-the-Loop?
+3. Research Questions
+4. HULA Framework Overview
+5. Workflow: Human Feedback Integration
+6. Three-Stage Evaluation
+7. Offline & Online Results
+8. User Survey Results
+9. Discussion: Pros & Cons
+10. Conclusions & Future Work
 
 ---
 
-## Statistics Tracking
+## Return Value
 
-The pipeline tracks:
-- **Total time**: Full pipeline execution time
-- **AI cost**: Combined cost of all LLM calls
-- **Token usage**: Total tokens used across all stages
-- **Per-stage metrics**: Individual stage timing and costs
-
-**Access via**:
-```python
-result = pipeline.run(pdf_path)
-stats = result['stats']
-# {
-#   'total_time': '1m 45.2s',
-#   'ai_cost': 0.0923,
-#   'total_tokens': 45678
-# }
-```
-
----
-
-## Error Handling
-
-- **Graceful degradation**: Each stage has try-catch blocks
-- **Detailed logging**: Errors logged with stack traces
-- **Return structure**: Consistent success/failure response
-- **User-friendly messages**: Clear error output for CLI users
+`PaperPresentationPipeline.run()` 返回：
 
 ```python
-# Success response
 {
-    'success': True,
-    'output_paths': {...},
-    'stats': {...},
-    'analysis': PaperAnalysis,
-    'slide_plan': SlidePlan,
-    'narrative': PresentationNarrative
-}
-
-# Failure response
-{
-    'success': False,
-    'error': 'Error message',
-    'output_paths': {},
-    'stats': {...}
+    "success": bool,
+    "output_paths": {...},
+    "stats": {...},
+    "analysis": analysis,
+    "slide_plan": slide_plan,
+    "narrative": narrative,
 }
 ```
 
----
-
-## Integration with Existing Modules
-
-### Uses (No Modifications):
-- `src/parser/pdf_parser.py` - PDF parsing
-- `src/analysis/ai_analyzer.py` - AI analysis
-- `src/analysis/content_extractor.py` - Content extraction
-- `src/planning/slide_planner.py` - Slide planning
-- `src/planning/narrative_planner.py` - Narrative planning
-- `src/generation/ppt_generator.py` - Markdown generation
-
-### Adds:
-- `src/core/pipeline.py` - Orchestration
-- `src/generation/pptx_exporter.py` - PPTX export
-- `cli/main.py` - New CLI command
+其中 `output_paths` 与代码中的 `output_paths` 定义一致，是当前输出路径的最终依据。
 
 ---
 
-## Design Decisions
+## Notes
 
-1. **No Refactoring**: Did not modify existing modules
-2. **Clean Orchestration**: Pipeline only coordinates, doesn't implement logic
-3. **Comprehensive Outputs**: Generates multiple output formats
-4. **Progress Logging**: Clear 8-stage progress indicators
-5. **Statistics Tracking**: Full cost and timing metrics
-6. **Error Resilience**: Graceful failure handling
-
----
-
-## Testing
-
-### Syntax Check
-```bash
-python3 -c "from src.core.pipeline import PaperPresentationPipeline; print('✅ OK')"
-```
-
-### CLI Check
-```bash
-python3 cli/main.py pipeline --help
-```
-
-### Full Test
-```bash
-python test_pipeline.py papers/Human-In-the-Loop.pdf
-```
-
----
-
-## Future Enhancements (Not Implemented)
-
-Potential future improvements:
-- [ ] Batch processing mode (multiple papers)
-- [ ] Cache integration (reuse AI analysis)
-- [ ] Parallel processing (stages 4-5 can run in parallel)
-- [ ] Configurable output formats
-- [ ] Progress bar (using tqdm or Rich)
-- [ ] Webhook notifications
-- [ ] Custom template support
-
----
-
-## Summary
-
-✅ **New files created**: 3
-- `src/core/pipeline.py`
-- `src/generation/pptx_exporter.py`
-- `test_pipeline.py`
-
-✅ **CLI command added**: 1
-- `paperreader pipeline --paper <pdf_path>`
-
-✅ **Pipeline stages implemented**: 8
-1. Parse PDF
-2. Extract sections
-3. AI analysis
-4. Slide planning
-5. Narrative planning
-6. Generate slides
-7. Export PPTX
-8. Generate script
-
-✅ **Output formats**: 4
-- Markdown (Marp)
-- PPTX (PowerPoint)
-- Script (Speaker notes)
-- Plan (JSON structure)
-
-✅ **No refactoring**: Zero modifications to existing modules
-
----
-
-**Status**: Ready for testing and use
+- 当前主流程以 PPTX 为最终输出，不再把 HTML/PDF 作为主路径。
+- 若文档内容与实现不一致，请优先以 `src/core/pipeline.py` 为准。
+- `process` 命令仍然存在，但当前推荐面向完整汇报生成的命令是 `pipeline`。

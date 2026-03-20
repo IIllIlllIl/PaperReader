@@ -1,322 +1,160 @@
 # Outputs 清理指南
 
-## 📊 问题分析
+## 概述
 
-### 清理前状态
-- **总大小**: 15M
-- **总文件数**: 249 个
-- **问题**: 大量测试/调试目录占用空间
+当前推荐的 PaperReader 主流程是：
 
-### 清理后状态
-- **总大小**: 1.3M (减少 87%)
-- **总文件数**: 38 个 (减少 85%)
-- **清理目录**: 19 个
+```bash
+python cli/main.py pipeline --paper papers/example.pdf
+```
+
+该流程的最终交付物是 `outputs/slides/{paper_name}.pptx`。
+中间产物统一位于 `outputs/intermediates/`，并且默认在成功后自动清理；如需保留，请使用 `--no-clean`。
 
 ---
 
-## 🎯 输出分类
+## 当前输出分类
 
-### ✅ 永久输出（应保留）
-```
-outputs/slides/      # PPT 幻灯片 (.pptx)
-outputs/images/      # 提取的图片 (.png, .jpg)
-outputs/markdown/    # 生成的 Markdown 文档
-outputs/plans/       # 幻灯片规划文件
-outputs/charts/      # 生成的图表
+### 最终交付物
+
+```text
+outputs/slides/
+└── {paper_name}.pptx
 ```
 
-### ❌ 临时输出（应清理）
+### 中间产物（默认成功后清理）
+
+```text
+outputs/intermediates/
+├── markdown/
+├── plans/
+├── scripts/
+├── images/
+└── citations/
 ```
-outputs/test_*/              # 所有测试目录
-outputs/debug_*/             # 所有调试目录
-outputs/*_old_*/             # 旧备份目录
-outputs/*_backup_*/          # 备份目录
-outputs/validation_*.md      # 验证报告（可选）
-```
+
+说明：
+- `outputs/slides/` 应视为最终交付目录。
+- `outputs/intermediates/` 应视为调试、排查、复查目录。
+- 如果不使用 `--no-clean`，成功运行后中间产物通常不会保留在工作区。
 
 ---
 
-## 🛠️ 清理工具
+## 推荐清理方式
 
-### 1. **专用清理脚本** (推荐)
+### 1. 默认自动清理
 
 ```bash
-# 预览模式（不实际删除，只显示将要清理的内容）
-DRY_RUN=true ./scripts/clean_outputs.sh
-
-# 执行清理
-./scripts/clean_outputs.sh
+python cli/main.py pipeline --paper papers/example.pdf
 ```
 
-**特点**：
-- ✅ 清理所有测试/调试/备份目录
-- ✅ 清理空目录
-- ✅ 显示详细统计信息
-- ✅ 支持 dry-run 预览
-- ✅ 保留所有永久输出
+这是推荐方式。流程成功后会自动清理中间文件。
 
-### 2. **自动清理脚本** (完整清理)
+### 2. 调试时保留中间文件
 
 ```bash
-./scripts/auto_clean.sh
+python cli/main.py pipeline --paper papers/example.pdf --no-clean
 ```
 
-**功能**：
-1. 移动根目录文档到 `docs/project/`
-2. 清理临时文件 (.DS_Store, *.pyc, *.log, *.tmp, *.bak)
-3. 清理 Python 缓存 (__pycache__)
-4. **调用 clean_outputs.sh 清理 outputs/**
-5. 运行健康检查
+适合以下场景：
+- 检查 slide plan
+- 检查 markdown 幻灯片内容
+- 检查 presentation script
+- 检查图片提取或引用分析结果
 
-### 3. **健康检查脚本**
+### 3. 手动检查保留的中间产物
 
-```bash
-./scripts/health_check.sh
-```
-
-**检查项**：
-- 根目录文档位置
-- 临时文件
-- Python 缓存
-- 文档索引完整性
-- **outputs 临时目录**
-
----
-
-## 📋 使用建议
-
-### 日常使用
-
-#### 开发完成后
-```bash
-# 运行完整清理
-./scripts/auto_clean.sh
-```
-
-#### 只清理 outputs
-```bash
-# 先预览
-DRY_RUN=true ./scripts/clean_outputs.sh
-
-# 确认无误后执行
-./scripts/clean_outputs.sh
-```
-
-#### 提交代码前
-```bash
-# 检查项目健康状态
-./scripts/health_check.sh
-
-# 如有问题，运行自动修复
-./scripts/auto_clean.sh
-```
-
-### 定期维护
-
-#### 每周一次
-```bash
-# 检查项目状态
-./scripts/health_check.sh
-
-# 如果有临时输出，运行清理
-./scripts/clean_outputs.sh
+```text
+outputs/intermediates/plans/
+outputs/intermediates/markdown/
+outputs/intermediates/scripts/
+outputs/intermediates/images/
+outputs/intermediates/citations/
 ```
 
 ---
 
-## 🔧 工具集成
+## 提交代码前的清理建议
 
-### 与 Pipeline 集成
+提交前优先检查：
 
-在 Pipeline 运行完成后自动清理临时输出：
+1. 是否误改了 `outputs/` 下的生成结果
+2. 是否保留了 `.claude/worktrees/` 等本地工作区产物
+3. 是否有只用于本地调试的中间文件或报告
 
-```python
-# 在 src/core/pipeline.py 中添加
+建议流程：
 
-def run(self, clean_temp_outputs: bool = False):
-    """Run the pipeline.
+```bash
+# 查看当前工作区
+git status --short
 
-    Args:
-        clean_temp_outputs: Whether to clean temporary outputs after completion
-    """
-    try:
-        # ... existing pipeline code ...
+# 如需保留中间文件进行排查，先这样运行
+python cli/main.py pipeline --paper papers/example.pdf --no-clean
 
-        if clean_temp_outputs:
-            self._clean_temp_outputs()
-
-    finally:
-        pass
-
-def _clean_temp_outputs(self):
-    """Clean temporary output directories."""
-    import subprocess
-    logger.info("Cleaning temporary outputs...")
-    subprocess.run(["./scripts/clean_outputs.sh"], check=False)
-```
-
-### 与测试脚本集成
-
-在 `tools/manual_tests/` 中的测试脚本使用临时目录：
-
-```python
-# 使用固定的测试输出目录
-output_dir = "outputs/test_latest"  # 而不是 test_fix1, test_fix2...
-
-# 或者在测试结束后清理
-import shutil
-if os.path.exists(output_dir):
-    shutil.rmtree(output_dir)
+# 排查完成后，重新运行默认流程或手动清理不需要的生成物
+python cli/main.py pipeline --paper papers/example.pdf
 ```
 
 ---
 
-## ⚙️ 配置选项
+## 当前应保留与不应提交的内容
 
-### 环境变量
+### 推荐保留
 
-```bash
-# Dry-run 模式（只预览，不删除）
-export DRY_RUN=true
+- 源代码改动
+- 测试代码
+- 真实需要更新的文档
+- 必要的配置调整
 
-# 详细模式
-export VERBOSE=true
-```
+### 通常不应提交
 
-### 自定义清理模式
+- `.claude/worktrees/` 下的本地工作区产物
+- `outputs/intermediates/` 下的调试中间文件
+- 旧目录结构中的本地生成物，例如：
+  - `outputs/markdown/`
+  - `outputs/plans/`
+  - `outputs/scripts/`
+  - `outputs/citations/`
+  - `outputs/images/citations/`
+- 只用于本地验证的临时报告
 
-编辑 `scripts/clean_outputs.sh` 中的 `TEMP_PATTERNS` 数组：
-
-```bash
-TEMP_PATTERNS=(
-    "outputs/test_*"
-    "outputs/debug_*"
-    "outputs/*_old_*"
-    "outputs/*_backup_*"
-    "outputs/validation_*.md"
-    # 添加你自己的模式
-    # "outputs/temp_*"
-)
-```
+如需保留中间结果做分析，请在本地使用，不要默认把这些文件作为最终交付物提交。
 
 ---
 
-## 📊 .gitignore 更新
+## 调试建议
 
-已将临时输出添加到 `.gitignore`：
+当你怀疑问题出在流程中间阶段时：
 
-```gitignore
-# Temporary outputs (test/debug/backup)
-outputs/test_*/
-outputs/debug_*/
-outputs/*_old_*/
-outputs/*_backup_*/
-outputs/validation_*.md
+```bash
+python cli/main.py pipeline --paper papers/example.pdf --verbose --no-clean
 ```
 
-这样可以防止临时文件被提交到 Git。
+然后按顺序检查：
+
+1. `outputs/intermediates/plans/`
+2. `outputs/intermediates/markdown/`
+3. `outputs/intermediates/scripts/`
+4. `outputs/slides/`
 
 ---
 
-## 🚨 注意事项
+## 与当前实现保持一致的原则
 
-### 清理前确认
+为避免文档再次过时，请遵循以下约定：
 
-1. **检查是否有重要的测试结果**
-   ```bash
-   # 查看将要清理的内容
-   find outputs/ -maxdepth 1 -type d -name "test_*" -o -name "debug_*"
-   ```
-
-2. **使用 dry-run 预览**
-   ```bash
-   DRY_RUN=true ./scripts/clean_outputs.sh
-   ```
-
-### 不应清理的目录
-
-以下目录**永远不会被清理脚本删除**：
-- `outputs/slides/`
-- `outputs/images/`
-- `outputs/markdown/`
-- `outputs/plans/`
-- `outputs/charts/`
-
-### 手动清理
-
-如果需要手动清理特定目录：
-
-```bash
-# 只清理测试目录
-rm -rf outputs/test_*
-
-# 只清理调试目录
-rm -rf outputs/debug_*
-
-# 只清理备份目录
-rm -rf outputs/*_old_*
-```
+- 当前推荐入口是 `python cli/main.py pipeline ...`
+- 当前推荐最终输出是 `.pptx`
+- 当前中间产物主路径是 `outputs/intermediates/...`
+- 不要再把 `outputs/markdown/`、`outputs/plans/`、`outputs/scripts/` 当作主路径
+- 若文档与代码不一致，以 `cli/main.py` 和 `src/core/pipeline.py` 为准
 
 ---
 
-## 📈 效果统计
+## 相关文档
 
-### 单次清理效果
-- **减少空间**: 15M → 1.3M (87% reduction)
-- **减少文件**: 249 → 38 (85% reduction)
-- **清理目录**: 19 个
-
-### 清理的目录类型
-- `test_*`: 15 个目录 (10M)
-- `debug_*`: 3 个目录 (3M)
-- `*_old_*`: 1 个目录 (912K)
-- 空目录: 5 个
-
----
-
-## 🆘 故障排除
-
-### 问题：脚本没有执行权限
-
-```bash
-chmod +x scripts/clean_outputs.sh
-chmod +x scripts/auto_clean.sh
-chmod +x scripts/health_check.sh
-```
-
-### 问题：找不到脚本
-
-确保在项目根目录运行：
-```bash
-cd /path/to/PaperReader
-./scripts/clean_outputs.sh
-```
-
-### 问题：清理了不想删除的文件
-
-恢复方法：
-1. 检查 Git 历史：`git checkout outputs/your_file`
-2. 使用 Time Machine 或其他备份恢复
-
-**预防措施**：始终先用 `DRY_RUN=true` 预览
-
----
-
-## 📝 总结
-
-1. **定期运行** `./scripts/health_check.sh` 检查项目状态
-2. **需要清理时** 运行 `./scripts/auto_clean.sh`
-3. **只清理 outputs** 使用 `./scripts/clean_outputs.sh`
-4. **不确定时** 先用 `DRY_RUN=true` 预览
-
-**推荐工作流**：
-```bash
-# 1. 开发完成后
-./scripts/auto_clean.sh
-
-# 2. 提交代码前
-./scripts/health_check.sh
-
-# 3. 定期维护（每周）
-./scripts/auto_clean.sh
-```
+- `README.md`
+- `docs/user-guide/ENHANCED_PPTX_GUIDE.md`
+- `docs/architecture/PIPELINE_IMPLEMENTATION.md`
+- `docs/architecture/DATA_FLOW.md`
+- `docs/project/PROJECT_STATUS.md`

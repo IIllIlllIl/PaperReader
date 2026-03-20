@@ -258,7 +258,17 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
 @click.option('--verbose', '-v', is_flag=True, help='Verbose output')
 @click.option('--config', type=click.Path(exists=True), default='config.yaml',
               help='Path to config file')
-def pipeline(paper: str, output: str, verbose: bool, config: str):
+@click.option('--include-citations', is_flag=True,
+              help='Include citation analysis in the presentation')
+@click.option('--citation-min-sources', type=int, default=2,
+              help='Minimum number of sources required to verify a citation (default: 2)')
+@click.option('--citation-limit', type=int, default=20,
+              help='Maximum number of citations to include in slides (default: 20)')
+@click.option('--clean/--no-clean', default=True,
+              help='Clean intermediate files after pipeline completes (default: --clean)')
+def pipeline(paper: str, output: str, verbose: bool, config: str,
+             include_citations: bool, citation_min_sources: int, citation_limit: int,
+             clean: bool):
     """Run the full presentation pipeline (PDF → PhD meeting PPT)
 
     This is the recommended command for generating presentations.
@@ -273,8 +283,24 @@ def pipeline(paper: str, output: str, verbose: bool, config: str):
     7. Export PPTX
     8. Generate presentation script
 
-    Example:
+    By default, intermediate files are cleaned after pipeline completes.
+    Use --no-clean to preserve all intermediate files for debugging.
+
+    Examples:
+        # Basic usage (cleans intermediates by default)
         paperreader pipeline --paper papers/example.pdf
+
+        # Debug mode (preserve all intermediate files)
+        paperreader pipeline --paper papers/example.pdf --no-clean
+
+        # With citation analysis
+        paperreader pipeline --paper papers/example.pdf --include-citations
+
+        # With custom citation settings
+        paperreader pipeline --paper papers/example.pdf \\
+            --include-citations \\
+            --citation-min-sources 3 \\
+            --citation-limit 30
     """
 
     # Load configuration
@@ -290,16 +316,30 @@ def pipeline(paper: str, output: str, verbose: bool, config: str):
         click.echo(f"Error: {e}", err=True)
         sys.exit(1)
 
+    # Prepare citation config
+    citation_config = None
+    if include_citations:
+        citation_config = {
+            'enabled': True,
+            'min_sources': citation_min_sources,
+            'display_citations': citation_limit,
+        }
+
     # Initialize pipeline
     pipeline_runner = PaperPresentationPipeline(
         api_key=api_key,
         config=cfg,
-        model=cfg['ai']['model']
+        model=cfg['ai']['model'],
+        clean_intermediates=clean
     )
 
     # Run pipeline
     try:
-        result = pipeline_runner.run(pdf_path=paper, output_dir=output)
+        result = pipeline_runner.run(
+            pdf_path=paper,
+            output_dir=output,
+            citation_config=citation_config
+        )
 
         if result['success']:
             sys.exit(0)

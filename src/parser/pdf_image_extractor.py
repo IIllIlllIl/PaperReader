@@ -37,7 +37,7 @@ class PDFImageExtractor:
         re.compile(r"FIG\.\s*(\d+)\s*[:.]\s*(.*)", re.IGNORECASE),
     ]
 
-    def __init__(self, output_dir: str = "outputs/images"):
+    def __init__(self, output_dir: str = "outputs/intermediates/images"):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 

@@ -34,6 +34,7 @@ env/
 
 # Environment variables
 .env
+.claude/settings.local.json
 
 # Runtime data
 runtime/cache/
@@ -41,14 +42,26 @@ runtime/logs/
 *.cache
 *.log
 
-# Generated outputs
+# Generated outputs - Final artifacts (some may be committed as examples)
 outputs/slides/*.html
 outputs/slides/*.pdf
 outputs/slides/*.pptx
+
+# Intermediate artifacts (always ignored)
+outputs/intermediates/images/*.png
+outputs/intermediates/images/citations/*.png
+outputs/intermediates/markdown/*.md
+outputs/intermediates/scripts/*.md
+outputs/intermediates/plans/*.json
+outputs/intermediates/citations/*.json
+outputs/intermediates/temp/*
+
+# Legacy structure (for backward compatibility)
 outputs/images/*.png
 outputs/markdown/*.md
 outputs/charts/*.png
 outputs/plans/*.md
+outputs/scripts/*.md
 
 # Temporary outputs (test/debug/backup)
 outputs/test_*/
@@ -70,7 +83,11 @@ outputs/images_old_*/
 !runtime/cache/.gitkeep
 !runtime/logs/.gitkeep
 !outputs/slides/.gitkeep
-!outputs/markdown/.gitkeep
+!outputs/intermediates/images/.gitkeep
+!outputs/intermediates/markdown/.gitkeep
+!outputs/intermediates/scripts/.gitkeep
+!outputs/intermediates/plans/.gitkeep
+!outputs/intermediates/citations/.gitkeep
 
 # OS
 .DS_Store
