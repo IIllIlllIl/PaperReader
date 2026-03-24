@@ -183,7 +183,7 @@ font-size: 40px;  # 从 32px 增加到 40px
 
 ```bash
 # 清除缓存
-python cli/main.py clear-cache
+python -m src.cli.main clear-cache
 
 # 重新生成
 python tools/generate_enhanced_pptx.py papers/Human-In-the-Loop.pdf

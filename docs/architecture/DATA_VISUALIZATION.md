@@ -36,7 +36,7 @@ PDF
 ## 模块视角
 
 ```text
-cli/main.py
+src/cli/main.py
   └─ pipeline command
       └─ src/core/pipeline.py
           ├─ src/parser/pdf_parser.py
@@ -98,13 +98,13 @@ PDF
 
 ```bash
 # 推荐主流程
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 
 # 保留中间文件
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # 启用引用分析
-python cli/main.py pipeline --paper papers/example.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/example.pdf --include-citations
 ```
 
 排查问题时通常先看：

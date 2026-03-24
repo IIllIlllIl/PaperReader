@@ -10,11 +10,9 @@ Enhanced features:
 5. Presentation script generation
 """
 
+import subprocess
 import sys
 from pathlib import Path
-
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.parser.pdf_parser import PDFParser
 from src.parser.pdf_image_extractor import PDFImageExtractor
@@ -86,7 +84,7 @@ def test_phd_meeting_pipeline_v2():
     markdown = generator.generate_markdown(presentation)
 
     # Save markdown
-    output_path = Path("outputs/markdown/Human-In-the-Loop_PhD_Meeting_V2.md")
+    output_path = Path("outputs/intermediates/markdown/Human-In-the-Loop_PhD_Meeting_V2.md")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -96,9 +94,8 @@ def test_phd_meeting_pipeline_v2():
 
     # Step 6: Convert to PPTX
     print("\n📑 Step 6: Converting to PPTX...")
-    import subprocess
     result = subprocess.run([
-        "python3", "tools/md_to_pptx.py",
+        sys.executable, "-m", "src.tools.md_to_pptx",
         str(output_path),
         "outputs/slides/Human-In-the-Loop_PhD_Meeting_V2.pptx"
     ], capture_output=True, text=True)

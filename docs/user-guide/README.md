@@ -9,17 +9,19 @@
 ## 推荐命令
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
+
+说明：CLI 实现位于 `src/cli/main.py`。
 
 常见变体：
 
 ```bash
 # 保留中间文件
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # 启用引用分析
-python cli/main.py pipeline --paper papers/example.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/example.pdf --include-citations
 ```
 
 ## 说明

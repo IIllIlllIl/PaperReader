@@ -5,7 +5,7 @@
 当前推荐的 PaperReader 主流程是：
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 该流程的最终交付物是 `outputs/slides/{paper_name}.pptx`。
@@ -45,7 +45,7 @@ outputs/intermediates/
 ### 1. 默认自动清理
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 这是推荐方式。流程成功后会自动清理中间文件。
@@ -53,7 +53,7 @@ python cli/main.py pipeline --paper papers/example.pdf
 ### 2. 调试时保留中间文件
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 适合以下场景：
@@ -89,10 +89,10 @@ outputs/intermediates/citations/
 git status --short
 
 # 如需保留中间文件进行排查，先这样运行
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # 排查完成后，重新运行默认流程或手动清理不需要的生成物
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 ---
@@ -127,7 +127,7 @@ python cli/main.py pipeline --paper papers/example.pdf
 当你怀疑问题出在流程中间阶段时：
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --verbose --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --verbose --no-clean
 ```
 
 然后按顺序检查：
@@ -143,11 +143,11 @@ python cli/main.py pipeline --paper papers/example.pdf --verbose --no-clean
 
 为避免文档再次过时，请遵循以下约定：
 
-- 当前推荐入口是 `python cli/main.py pipeline ...`
+- 当前推荐入口是 `python -m src.cli.main pipeline ...`
 - 当前推荐最终输出是 `.pptx`
 - 当前中间产物主路径是 `outputs/intermediates/...`
 - 不要再把 `outputs/markdown/`、`outputs/plans/`、`outputs/scripts/` 当作主路径
-- 若文档与代码不一致，以 `cli/main.py` 和 `src/core/pipeline.py` 为准
+- 若文档与代码不一致，以 `src/cli/main.py` 和 `src/core/pipeline.py` 为准
 
 ---
 

@@ -101,7 +101,7 @@ python tools/generate_enhanced_pptx.py papers/example.pdf
 ```bash
 Run full pipeline:
 
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 **Improvement:**

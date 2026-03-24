@@ -20,7 +20,6 @@ import json
 import time
 from pathlib import Path
 from typing import Dict, Any, Optional
-from dataclasses import asdict
 
 from src.parser.pdf_parser import PDFParser
 from src.parser.pdf_image_extractor import PDFImageExtractor
@@ -122,29 +121,27 @@ class PaperPresentationPipeline:
         for path in output_paths.values():
             ensure_dir(path.parent)
 
-        logger.info(f"\n{'='*70}")
-        logger.info(f"PIPELINE: {paper_name}")
-        logger.info(f"{'='*70}\n")
+        total_stages = 8
 
         try:
             # ------------------------------------------------
             # Stage 1: Parse PDF
             # ------------------------------------------------
-            print(f"[1/8] Parsing PDF...")
+            print(f"[1/{total_stages}] Parsing PDF...")
             paper_text, metadata = self._parse_pdf(pdf_path)
             print(f"      ✓ Extracted {len(paper_text)} characters from {metadata.get('page_count', 'unknown')} pages")
 
             # ------------------------------------------------
             # Stage 2: Extract structured sections
             # ------------------------------------------------
-            print(f"[2/8] Extracting structured sections...")
+            print(f"[2/{total_stages}] Extracting structured sections...")
             sections = self._extract_sections(pdf_path)
             print(f"      ✓ Found {len(sections)} sections: {', '.join(sections.keys())}")
 
             # ------------------------------------------------
             # Stage 3: Run AI analysis
             # ------------------------------------------------
-            print(f"[3/8] Running AI analysis...")
+            print(f"[3/{total_stages}] Running AI analysis...")
             analysis = self._run_ai_analysis(paper_text, metadata)
             print(f"      ✓ Analysis completed (cost: ${self.ai_analyzer.total_cost:.4f})")
 
@@ -153,7 +150,7 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             citation_result = None
             if citation_config and citation_config.get('enabled'):
-                print(f"[3.5/8] Analyzing citations...")
+                print(f"[3.5/{total_stages}] Analyzing citations...")
                 citation_result = self._analyze_citations(
                     metadata,
                     min_sources=citation_config.get('min_sources', 2),
@@ -167,7 +164,7 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             # Stage 4: Generate slide plan
             # ------------------------------------------------
-            print(f"[4/8] Planning slides...")
+            print(f"[4/{total_stages}] Planning slides...")
             slide_plan = self._plan_slides(analysis)
             print(f"      ✓ Generated plan with {slide_plan.total_slides} slides")
 
@@ -177,7 +174,7 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             # Stage 5: Generate narrative
             # ------------------------------------------------
-            print(f"[5/8] Planning narrative...")
+            print(f"[5/{total_stages}] Planning narrative...")
             narrative = self._plan_narrative(analysis)
             print(f"      ✓ Narrative extracted: {narrative.key_idea[:60]}...")
 
@@ -193,7 +190,7 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             # Stage 6: Generate slides markdown
             # ------------------------------------------------
-            print(f"[6/8] Generating slides...")
+            print(f"[6/{total_stages}] Generating slides...")
             organized_presentation = self._generate_slides(
                 analysis, slide_plan, figures=figures, citation_data=citation_result
             )
@@ -209,14 +206,14 @@ class PaperPresentationPipeline:
             # ------------------------------------------------
             # Stage 7: Export PPTX
             # ------------------------------------------------
-            print(f"[7/8] Exporting PPTX...")
+            print(f"[7/{total_stages}] Exporting PPTX...")
             self._export_pptx(output_paths['markdown'], output_paths['pptx'])
             print(f"      ✓ PPTX saved: {output_paths['pptx']}")
 
             # ------------------------------------------------
             # Stage 8: Generate presentation script
             # ------------------------------------------------
-            print(f"[8/8] Generating presentation script...")
+            print(f"[8/{total_stages}] Generating presentation script...")
             self._generate_script(narrative, slide_plan, output_paths['script'])
             print(f"      ✓ Script saved: {output_paths['script']}")
 

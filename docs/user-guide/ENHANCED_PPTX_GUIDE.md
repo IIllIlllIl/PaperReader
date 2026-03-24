@@ -12,17 +12,17 @@
 ## 快速开始
 
 ```bash
-python cli/main.py pipeline --paper papers/your-paper.pdf
+python -m src.cli.main pipeline --paper papers/your-paper.pdf
 ```
 
 常见变体：
 
 ```bash
 # 保留中间文件用于调试
-python cli/main.py pipeline --paper papers/your-paper.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/your-paper.pdf --no-clean
 
 # 启用引用分析
-python cli/main.py pipeline --paper papers/your-paper.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/your-paper.pdf --include-citations
 ```
 
 ## 输出文件
@@ -87,6 +87,6 @@ outputs/
 
 ## 注意
 
-- 当前推荐路径是 `python cli/main.py pipeline ...`
+- 当前推荐路径是 `python -m src.cli.main pipeline ...`
 - 当前最终推荐输出是 `.pptx`
 - 不要再把 `outputs/markdown/` 或旧的增强版脚本当作当前主路径

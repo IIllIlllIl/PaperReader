@@ -302,7 +302,7 @@ class PhDMeetingContentExtractorV2:
         total = 0
         for text in texts:
             if text:
-                clean = text.replace("|", " ").replace("*", "").replace("#", "")
+                clean = str(text).replace("|", " ").replace("*", "").replace("#", "")
                 clean = clean.replace(":", " ").replace("-", " ")
                 total += len(clean.split())
         return total

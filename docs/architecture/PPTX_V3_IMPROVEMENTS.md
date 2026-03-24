@@ -273,7 +273,7 @@ def _generate_markdown_table(self, table_data: dict) -> List[str]:
 
 ```bash
 # 清除缓存
-python cli/main.py clear-cache
+python -m src.cli.main clear-cache
 
 # 重新生成 V3 版本
 python tools/generate_enhanced_pptx_v3.py papers/Human-In-the-Loop.pdf

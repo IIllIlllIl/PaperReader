@@ -61,7 +61,7 @@ outputs/
 Simply run the pipeline as usual. All intermediate files will be automatically created in `outputs/intermediates/`.
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 ### For Existing Users

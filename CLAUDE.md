@@ -12,6 +12,7 @@ Pipeline: PDF → Parse → Analyze → Plan → Generate → Export
 
 ```
 src/
+  cli/           CLI implementation
   parser/        PDF parsing + figure extraction
   analysis/      AI analysis and content extraction
   planning/      slide planning
@@ -70,11 +71,13 @@ outputs/
 
 ```bash
 # Basic pipeline (recommended)
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 
 # Tests
 pytest
 ```
+
+Implementation note: use `python -m src.cli.main ...` for CLI commands.
 
 ---
 

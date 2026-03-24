@@ -319,7 +319,7 @@ outputs/markdown/Human-In-the-Loop_ResearchMeeting.md
 ### 1. **Integrate into Main CLI** (Recommended)
 Add `--mode research-meeting` option to main CLI:
 ```bash
-python cli/main.py process -p paper.pdf --mode research-meeting
+python -m src.cli.main process -p paper.pdf --mode research-meeting
 ```
 
 ### 2. **Add Figure Extraction** (Future)

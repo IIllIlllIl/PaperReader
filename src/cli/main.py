@@ -12,9 +12,6 @@ from typing import Optional, List
 import click
 import yaml
 
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
 from src.utils import (
     load_config, setup_logging, get_file_hash, ensure_dir,
     get_api_key, scan_papers, format_time
@@ -48,40 +45,40 @@ def cli():
 def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
            no_cache: bool, config: str):
     """Process paper(s) and generate presentation(s)"""
-    
+
     # Load configuration
     cfg = load_config(config)
-    
+
     # Setup logging
     logger = setup_logging(cfg)
-    
+
     # Setup progress reporter
     reporter = get_reporter(verbose)
-    
+
     # Get API key
     try:
         api_key = get_api_key(cfg)
     except ValueError as e:
         reporter.error(str(e))
         sys.exit(1)
-    
+
     # Initialize components
     cache_manager = CacheManager(
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     if no_cache:
         cache_manager.disable()
-    
+
     ai_analyzer = AIAnalyzer(
         api_key=api_key,
         model=cfg['ai']['model']
     )
-    
+
     content_extractor = ContentExtractor()
     ppt_generator = PPTGenerator(template_path=cfg['presentation']['template'])
-    
+
     # Determine which papers to process
     if process_all:
         try:
@@ -94,11 +91,11 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
     else:
         reporter.error("Please specify --paper or --all")
         sys.exit(1)
-    
+
     if not papers:
         reporter.warning("No papers found to process")
         sys.exit(0)
-    
+
     # Process papers
     stats = {
         'papers_processed': 0,
@@ -107,17 +104,17 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
         'total_time': 0,
         'estimated_cost': 0.0,
     }
-    
+
     start_time = time.time()
-    
+
     reporter.show_panel(
         "PaperReader",
         f"Papers to process: {len(papers)}\nOutput format: {format}\nCache: {'disabled' if no_cache else 'enabled'}"
     )
-    
+
     for i, paper_path in enumerate(papers, 1):
         reporter.info(f"\n[{i}/{len(papers)}] Processing: {Path(paper_path).name}")
-        
+
         try:
             success = process_single_paper(
                 paper_path=paper_path,
@@ -130,25 +127,25 @@ def process(paper: Optional[str], process_all: bool, format: str, verbose: bool,
                 output_format=format,
                 reporter=reporter
             )
-            
+
             if success:
                 stats['papers_processed'] += 1
                 stats['cache_hits'] += 1 if cache_manager.enabled else 0
             else:
                 stats['papers_failed'] += 1
-                
+
         except Exception as e:
             logger.error(f"Failed to process {paper_path}: {e}")
             reporter.error(f"Failed: {e}")
             stats['papers_failed'] += 1
-    
+
     # Calculate stats
     stats['total_time'] = format_time(time.time() - start_time)
     stats['estimated_cost'] = ai_analyzer.get_stats()['total_cost']
-    
+
     # Show summary
     reporter.show_summary(stats)
-    
+
     if stats['papers_failed'] > 0:
         sys.exit(1)
 
@@ -159,27 +156,27 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
                         output_format: str, reporter) -> bool:
     """
     Process a single paper
-    
+
     Returns:
         True if successful, False otherwise
     """
     paper_name = Path(paper_path).stem
-    
+
     # Start progress
     reporter.start(total_steps=6, description=f"Processing {paper_name}")
-    
+
     # Step 1: Validate PDF
     reporter.update(description="Validating PDF...")
     parser = PDFParser(paper_path)
     is_valid, validation_msg = parser.validate()
-    
+
     if not is_valid:
         reporter.error(validation_msg)
         reporter.stop(success=False, message="PDF validation failed")
         return False
-    
+
     reporter.success(f"PDF validation: {validation_msg}")
-    
+
     # Step 2: Extract text and metadata
     reporter.update(description="Extracting text...")
     try:
@@ -190,12 +187,12 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         reporter.error(f"Text extraction failed: {e}")
         reporter.stop(success=False, message="Text extraction failed")
         return False
-    
+
     # Step 3: Check cache
     reporter.update(description="Checking cache...")
     pdf_hash = get_file_hash(paper_path)
     cached_analysis = cache_manager.get_cached_analysis(pdf_hash)
-    
+
     if cached_analysis:
         reporter.success("Using cached analysis")
         # Restore analysis from cache
@@ -228,13 +225,13 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
     reporter.update(description="Extracting slide content...")
     organized_presentation = content_extractor.extract_detailed_slides(analysis)
     reporter.success(f"Organized {organized_presentation.total_slides} slides")
-    
+
     # Step 6: Generate presentation
     reporter.update(description="Generating presentation...")
     try:
         # Generate Markdown
         markdown = ppt_generator.generate_markdown(organized_presentation)
-        
+
         # Save Markdown
         markdown_dir = ensure_dir(Path(cfg['presentation']['output_dir']) / 'markdown')
         markdown_path = markdown_dir / f"{paper_name}.md"
@@ -243,7 +240,7 @@ def process_single_paper(paper_path: str, cfg: dict, cache_manager: CacheManager
         reporter.success(f"Markdown saved: {markdown_path}")
         reporter.stop(success=True, message="Processing completed!")
         return True
-    
+
     except Exception as e:
         reporter.error(f"Presentation generation failed: {e}")
         reporter.stop(success=False, message="Presentation generation failed")
@@ -297,9 +294,9 @@ def pipeline(paper: str, output: str, verbose: bool, config: str,
         paperreader pipeline --paper papers/example.pdf --include-citations
 
         # With custom citation settings
-        paperreader pipeline --paper papers/example.pdf \\
-            --include-citations \\
-            --citation-min-sources 3 \\
+        paperreader pipeline --paper papers/example.pdf \
+            --include-citations \
+            --citation-min-sources 3 \
             --citation-limit 30
     """
 
@@ -360,9 +357,9 @@ def stats():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     cache_stats = cache_manager.get_cache_stats()
-    
+
     click.echo("Cache Statistics:")
     click.echo(f"  Total files: {cache_stats['total_files']}")
     click.echo(f"  Valid files: {cache_stats['valid_files']}")
@@ -378,7 +375,7 @@ def clear_cache():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     count = cache_manager.clear_cache()
     click.echo(f"Cleared {count} cache files")
 
@@ -391,7 +388,7 @@ def cleanup():
         cache_dir=cfg['cache']['cache_dir'],
         ttl=cfg['cache']['ttl']
     )
-    
+
     count = cache_manager.cleanup_expired()
     click.echo(f"Removed {count} expired cache files")
 

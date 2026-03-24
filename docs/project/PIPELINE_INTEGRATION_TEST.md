@@ -13,7 +13,7 @@ A full pipeline integration test completed successfully. The current system gene
 - **Input:** papers/Human-In-the-Loop.pdf (11 pages)
 - **Model:** claude-sonnet-4-6
 - **Output Directory:** outputs/
-- **Pipeline Command:** `python cli/main.py pipeline --paper papers/Human-In-the-Loop.pdf --verbose`
+- **Pipeline Command:** `python -m src.cli.main pipeline --paper papers/Human-In-the-Loop.pdf --verbose`
 
 ## Pipeline Stages Executed
 
@@ -136,14 +136,14 @@ Successfully extracted and integrated 5 figures:
 
 ```bash
 # Run full pipeline
-python cli/main.py pipeline --paper papers/Human-In-the-Loop.pdf --verbose
+python -m src.cli.main pipeline --paper papers/Human-In-the-Loop.pdf --verbose
 
 # Alternative with custom output directory
-python cli/main.py pipeline --paper papers/example.pdf --output custom_output/
+python -m src.cli.main pipeline --paper papers/example.pdf --output custom_output/
 
 # Process multiple papers
-python cli/main.py pipeline --paper papers/paper1.pdf
-python cli/main.py pipeline --paper papers/paper2.pdf
+python -m src.cli.main pipeline --paper papers/paper1.pdf
+python -m src.cli.main pipeline --paper papers/paper2.pdf
 ```
 
 ## Conclusion

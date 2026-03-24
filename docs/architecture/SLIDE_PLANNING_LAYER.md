@@ -100,7 +100,7 @@ outputs/intermediates/plans/{paper_name}_plan.json
 运行：
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 然后优先检查：

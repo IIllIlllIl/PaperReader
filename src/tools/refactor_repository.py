@@ -298,9 +298,9 @@ class RepositoryRefactor:
 
         self.log("Running verification commands")
         commands = [
-            ["python", "-c", "import cli.main; print('cli.main OK')"],
+            ["python", "-c", "from src.cli.main import cli; print('src.cli.main OK')"],
             ["python", "-c", "from src.prompts.slide_planning_prompt import SLIDE_PLANNING_PROMPT; print('src.prompts OK')"],
-            ["python", "cli/main.py", "--help"],
+            ["python", "-m", "src.cli.main", "--help"],
             ["python", "-m", "pytest", "tests/"],
         ]
         ok = True

@@ -1,0 +1,1 @@
+"""PaperReader CLI package."""

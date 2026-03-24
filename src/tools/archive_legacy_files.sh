@@ -116,7 +116,7 @@ $(date +%Y-%m-%d)
 ## Archived Files
 
 ### Scripts
-- `main.py` - Compatibility wrapper (replaced by cli/main.py)
+- `main.py` - Compatibility wrapper (replaced by `python -m src.cli.main ...`)
 - `cli/main_backup_enhanced_version.py` - Backup file
 - `tools/debug_data_flow.py` - Debug tool
 - `examples/middle_products_example.py` - Example file
@@ -139,7 +139,7 @@ $(date +%Y-%m-%d)
 ## Current Main Workflow
 
 ### Entry Points
-- **Standard**: `python cli/main.py process --paper <file.pdf>`
+- **Standard**: `python -m src.cli.main process --paper <file.pdf>`
 - **Enhanced**: `python tools/generate_enhanced_pptx.py <file.pdf>`
 
 ### Core Modules

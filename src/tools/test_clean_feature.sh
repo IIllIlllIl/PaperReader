@@ -38,7 +38,7 @@ echo "Test 1: Manual cleanup script (dry run)"
 echo "------------------------------------------------------------------------"
 echo ""
 
-python scripts/clean_intermediates.py
+python src/scripts/clean_intermediates.py
 
 if [ -f "outputs/intermediates/markdown/test.md" ]; then
     echo "✓ Dry run preserved files"
@@ -54,7 +54,7 @@ echo "------------------------------------------------------------------------"
 echo ""
 
 # Auto-confirm deletion
-python scripts/clean_intermediates.py --execute <<< "y"
+python src/scripts/clean_intermediates.py --execute <<< "y"
 
 if [ ! -f "outputs/intermediates/markdown/test.md" ]; then
     echo "✓ Files successfully deleted"
@@ -81,7 +81,7 @@ echo ""
 python -c "
 import sys
 sys.path.insert(0, '.')
-from cli.main import pipeline
+from src.cli.main import pipeline
 
 # Simulate click context
 class MockContext:

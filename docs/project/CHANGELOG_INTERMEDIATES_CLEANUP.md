@@ -22,13 +22,13 @@ Added automatic cleanup of intermediate files after pipeline execution.
 ## Files Modified
 
 - `src/core/pipeline.py`: cleanup methods and intermediate-file lifecycle handling
-- `cli/main.py`: `--clean/--no-clean` CLI options
+- `src/cli/main.py`: `--clean/--no-clean` CLI options
 - `README.md`: updated usage and cleanup documentation
 - `docs/project/QUICK_START.md`: updated examples for debug mode
 
 ## Files Added
 
-- `scripts/clean_intermediates.py`: standalone cleanup script with dry-run mode
+- `src/scripts/clean_intermediates.py`: standalone cleanup script with dry-run mode
 - `tests/test_clean_intermediates.py`: unit tests for cleanup behavior
 - `docs/CLEAN_INTERMEDIATES.md`: detailed cleanup documentation
 - `docs/CLEAN_FEATURE_IMPLEMENTATION_REPORT.md`: implementation summary
@@ -44,23 +44,23 @@ Added automatic cleanup of intermediate files after pipeline execution.
 
 ### Default Mode (Auto-clean)
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 # Result: intermediate files cleaned, final PPTX preserved
 ```
 
 ### Debug Mode (Preserve files)
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 # Result: intermediate files preserved in outputs/intermediates/
 ```
 
 ### Manual Cleanup
 ```bash
 # Preview
-python scripts/clean_intermediates.py
+python src/scripts/clean_intermediates.py
 
 # Execute
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ## Benefits

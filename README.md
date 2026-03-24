@@ -50,32 +50,34 @@ export ANTHROPIC_API_KEY=your-api-key-here
 ### Recommended: full pipeline
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
+
+`src/cli/main.py` is the canonical CLI implementation.
 
 Useful variants:
 
 ```bash
 # Keep intermediate files for debugging
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # Include citation analysis
-python cli/main.py pipeline --paper papers/example.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/example.pdf --include-citations
 ```
 
 ### Other useful commands
 
 ```bash
 # Cache statistics
-python cli/main.py stats
+python -m src.cli.main stats
 
 # Clean expired cache
-python cli/main.py cleanup
+python -m src.cli.main cleanup
 ```
 
 ## Pipeline Overview
 
-The recommended `pipeline` command runs the current end-to-end flow in `src/core/pipeline.py`:
+The recommended `pipeline` command runs the current end-to-end flow in `src/core/pipeline.py` through `src/cli/main.py`:
 
 1. Parse PDF
 2. Extract structured sections
@@ -129,7 +131,7 @@ Notes:
 
 ## Legacy `process` Command
 
-`python cli/main.py process ...` still exists for the older lightweight flow. For complete presentation generation, use `pipeline`.
+`python -m src.cli.main process ...` still exists for the older lightweight flow. For complete presentation generation, use `pipeline`.
 
 ## Documentation
 

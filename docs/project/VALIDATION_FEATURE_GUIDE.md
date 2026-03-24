@@ -17,7 +17,7 @@
 
 ```bash
 # 验证单个PDF
-python examples/figure_validation_demo.py papers/Human-In-the-Loop.pdf
+python -m src.tools.manual_tests.figure_validation_demo papers/Human-In-the-Loop.pdf
 
 # 查看报告
 cat outputs/validation_Human-In-the-Loop.md
@@ -216,10 +216,10 @@ class FigureInfo:
 ## 📁 文件位置
 
 - **模块**: `src/parser/figure_validator.py`
-- **示例**: `examples/figure_validation_demo.py`
+- **示例**: `src/tools/manual_tests/figure_validation_demo.py`
 - **报告**: `outputs/validation_*.md`
 
 ---
 
 **Status**: ✅ 功能已实现并测试
-**Usage**: `python examples/figure_validation_demo.py <pdf_path>`
+**Usage**: `python -m src.tools.manual_tests.figure_validation_demo <pdf_path>`

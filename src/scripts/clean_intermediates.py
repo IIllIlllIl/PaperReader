@@ -7,13 +7,13 @@ This script removes all intermediate files while preserving final outputs
 
 Usage:
     # Preview what will be deleted (dry run)
-    python scripts/clean_intermediates.py
+    python src/scripts/clean_intermediates.py
 
     # Actually delete files
-    python scripts/clean_intermediates.py --execute
+    python src/scripts/clean_intermediates.py --execute
 
     # Also delete citation cache
-    python scripts/clean_intermediates.py --execute --include-cache
+    python src/scripts/clean_intermediates.py --execute --include-cache
 """
 
 import sys
@@ -113,10 +113,10 @@ def clean_intermediates(output_dir: str = "outputs",
         print("DRY RUN - No files will be deleted")
         print("="*70)
         print(f"\nTo actually delete these files, run:")
-        print(f"  python scripts/clean_intermediates.py --execute")
+        print(f"  python src/scripts/clean_intermediates.py --execute")
         if not include_cache:
             print(f"\nTo also clean citation cache:")
-            print(f"  python scripts/clean_intermediates.py --execute --include-cache")
+            print(f"  python src/scripts/clean_intermediates.py --execute --include-cache")
         return True
 
     # Confirm deletion
@@ -165,13 +165,13 @@ def main():
         epilog="""
 Examples:
     # Preview what will be deleted
-    python scripts/clean_intermediates.py
+    python src/scripts/clean_intermediates.py
 
     # Delete intermediate files
-    python scripts/clean_intermediates.py --execute
+    python src/scripts/clean_intermediates.py --execute
 
     # Also delete citation cache
-    python scripts/clean_intermediates.py --execute --include-cache
+    python src/scripts/clean_intermediates.py --execute --include-cache
         """
     )
 

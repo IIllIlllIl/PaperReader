@@ -339,7 +339,7 @@ PPTX (13 slides)
 
 **Pipeline Command**:
 ```bash
-python cli/main.py pipeline --paper papers/Human-In-the-Loop.pdf --verbose
+python -m src.cli.main pipeline --paper papers/Human-In-the-Loop.pdf --verbose
 ```
 
 **Results**:

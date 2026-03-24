@@ -5,8 +5,10 @@
 PaperReader 当前提供一条以 `pipeline` 命令为核心的论文到汇报生成流程：
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
+
+说明：CLI 的 canonical implementation 位于 `src/cli/main.py`。
 
 该流程从 PDF 出发，完成解析、AI 分析、slide planning、narrative planning、markdown 生成、PPTX 导出，以及讲稿生成。
 
@@ -28,7 +30,7 @@ python cli/main.py pipeline --paper papers/example.pdf
 
 ## 当前关键模块
 
-- `cli/main.py`：CLI 入口与 `pipeline` 命令
+- `src/cli/main.py`：CLI 主实现
 - `src/core/pipeline.py`：端到端主流程编排
 - `src/parser/pdf_parser.py`：PDF 文本与章节提取
 - `src/analysis/ai_analyzer.py`：论文结构化分析
@@ -78,19 +80,19 @@ outputs/
 
 ```bash
 # 标准运行
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 
 # 调试模式：保留中间文件
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # 启用引用分析
-python cli/main.py pipeline --paper papers/example.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/example.pdf --include-citations
 
 # 查看缓存统计
-python cli/main.py stats
+python -m src.cli.main stats
 
 # 清理过期缓存
-python cli/main.py cleanup
+python -m src.cli.main cleanup
 ```
 
 ## 注意
@@ -98,7 +100,7 @@ python cli/main.py cleanup
 - 当前主流程以 PPTX 为最终输出
 - 不要再把 HTML/PDF 视为当前推荐输出路径
 - 不要再把 `outputs/markdown/`、`outputs/plans/`、`outputs/scripts/` 当作主路径
-- 若文档与实现不一致，以 `src/core/pipeline.py` 和 `cli/main.py` 为准
+- 若文档与实现不一致，以 `src/core/pipeline.py` 和 `src/cli/main.py` 为准
 
 ---
 

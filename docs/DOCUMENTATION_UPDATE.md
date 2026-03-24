@@ -132,7 +132,7 @@ cat QUICK_START.md
 ./examples/run_examples.sh
 
 # Generate first presentation
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 ### For Developers
@@ -156,7 +156,7 @@ cat docs/BEST_PRACTICES.md
 # Edit src/planning/slide_planner.py
 
 # Batch process
-python cli/main.py process --all
+python -m src.cli.main process --all
 ```
 
 ---

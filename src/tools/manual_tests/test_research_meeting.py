@@ -8,11 +8,8 @@ Tests the new research group meeting optimized pipeline:
 3. Analysis → 11-slide presentation
 """
 
-import sys
+import subprocess
 from pathlib import Path
-
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.parser.pdf_parser import PDFParser
 from src.analysis.ai_analyzer_research_meeting import ResearchMeetingAnalyzer
@@ -61,7 +58,7 @@ def test_research_meeting_pipeline():
     markdown = generator.generate_markdown(presentation)
 
     # Save markdown
-    output_path = Path("outputs/markdown/Human-In-the-Loop_ResearchMeeting.md")
+    output_path = Path("outputs/intermediates/markdown/Human-In-the-Loop_ResearchMeeting.md")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -71,11 +68,10 @@ def test_research_meeting_pipeline():
 
     # Step 5: Convert to PPTX
     print("\n📑 Step 5: Converting to PPTX...")
-    import subprocess
     result = subprocess.run([
-        "python", "tools/md_to_pptx.py",
+        "python3", "-m", "src.tools.md_to_pptx",
         str(output_path),
-        f"outputs/slides/Human-In-the-Loop_ResearchMeeting.pptx"
+        "outputs/slides/Human-In-the-Loop_ResearchMeeting.pptx"
     ], capture_output=True, text=True)
 
     if result.returncode == 0:

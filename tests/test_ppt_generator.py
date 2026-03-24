@@ -79,7 +79,7 @@ class TestPPTGenerator:
 
         assert "- Key idea" in markdown
         assert "- Component A" in markdown
-        assert "![Method Overview](outputs/images/overview.png)" in markdown
+        assert "![System architecture](../images/overview.png)" in markdown
         assert "*System architecture*" in markdown
 
     def test_markdown_to_pptx_renders_image(self, tmp_path):

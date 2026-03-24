@@ -342,7 +342,7 @@ Potential future improvements:
 - **Phase 1 Report**: `docs/phase1_acceptance_report.md`
 - **Phase 2 Report**: `docs/phase2_acceptance_report.md`
 - **Phase 3 Report**: This document
-- **Example Script**: `examples/multisource_citation_analysis.py`
+- **Example Script**: `src/tools/manual_tests/multisource_citation_analysis.py`
 - **Test Suite**: `tests/test_citation_analyzer.py`, `tests/test_citation_integration.py`
 
 ---

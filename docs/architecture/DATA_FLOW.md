@@ -2,7 +2,7 @@
 
 ## 总览
 
-推荐命令是 `python cli/main.py pipeline --paper <pdf>`。
+推荐命令是 `python -m src.cli.main pipeline --paper <pdf>`。
 
 当前主流程由 `src/core/pipeline.py` 协调，默认执行 8 个阶段，并在启用引用分析时插入可选的 `3.5` 阶段：
 
@@ -180,12 +180,12 @@ outputs/
 
 ### 保留中间产物
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 ### 查看缓存统计
 ```bash
-python cli/main.py stats
+python -m src.cli.main stats
 ```
 
 ### 查看关键中间文件

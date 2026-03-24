@@ -45,7 +45,7 @@ def _clean_intermediate_files(self):
 
 **Usage**:
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 ### 3. Failure Preservation
@@ -68,7 +68,7 @@ except Exception as e:
 
 ### 4. Manual Cleanup Script
 
-**Location**: `scripts/clean_intermediates.py`
+**Location**: `src/scripts/clean_intermediates.py`
 
 **Features**:
 - Dry run mode (default): Preview what will be deleted
@@ -79,13 +79,13 @@ except Exception as e:
 **Usage**:
 ```bash
 # Preview
-python scripts/clean_intermediates.py
+python src/scripts/clean_intermediates.py
 
 # Execute
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 
 # Include cache
-python scripts/clean_intermediates.py --execute --include-cache
+python src/scripts/clean_intermediates.py --execute --include-cache
 ```
 
 ## Files Modified
@@ -99,13 +99,13 @@ python scripts/clean_intermediates.py --execute --include-cache
    - Added failure preservation logic
 
 ### CLI Updates
-2. **`cli/main.py`**
+2. **`src/cli/main.py`**
    - Added `--clean/--no-clean` parameter to pipeline command
    - Updated help text and examples
    - Passed clean_intermediates parameter to pipeline
 
 ### Tools and Scripts
-3. **`scripts/clean_intermediates.py`** (new)
+3. **`src/scripts/clean_intermediates.py`** (new)
    - Standalone cleanup script
    - Dry run and execute modes
    - Detailed file statistics
@@ -167,7 +167,7 @@ python scripts/clean_intermediates.py --execute --include-cache
 
 ### Example 1: Normal Pipeline Run (Auto-Clean)
 ```bash
-$ python cli/main.py pipeline --paper papers/example.pdf
+$ python -m src.cli.main pipeline --paper papers/example.pdf
 
 [Pipeline runs successfully...]
 
@@ -182,7 +182,7 @@ $ python cli/main.py pipeline --paper papers/example.pdf
 
 ### Example 2: Debug Mode (Preserve Intermediates)
 ```bash
-$ python cli/main.py pipeline --paper papers/example.pdf --no-clean
+$ python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 [Pipeline runs successfully...]
 
@@ -196,7 +196,7 @@ images/  markdown/  scripts/  plans/  citations/  temp/
 
 ### Example 3: Pipeline Failure (Auto-Preserve)
 ```bash
-$ python cli/main.py pipeline --paper papers/broken.pdf
+$ python -m src.cli.main pipeline --paper papers/broken.pdf
 
 [Pipeline fails with error...]
 
@@ -207,7 +207,7 @@ $ python cli/main.py pipeline --paper papers/broken.pdf
 
 ### Example 4: Manual Cleanup
 ```bash
-$ python scripts/clean_intermediates.py
+$ python src/scripts/clean_intermediates.py
 
 [DRY RUN] Cleaning intermediate files
 
@@ -221,7 +221,7 @@ Contents:
 
 DRY RUN - No files will be deleted
 
-$ python scripts/clean_intermediates.py --execute
+$ python src/scripts/clean_intermediates.py --execute
 
 ⚠️  WARNING: This will permanently delete all intermediate files!
 Delete 42 files (3.45 MB)? [y/N]: y
@@ -261,13 +261,13 @@ Delete 42 files (3.45 MB)? [y/N]: y
 ### Default Behavior
 ```bash
 # Clean enabled by default
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 ### Override Default
 ```bash
 # Disable clean
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 ### Programmatic Usage
@@ -297,14 +297,14 @@ pipeline = PaperPresentationPipeline(
 ### For Debugging
 ```bash
 # Step 1: Run with --no-clean
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # Step 2: Inspect intermediate files
 ls outputs/intermediates/
 cat outputs/intermediates/markdown/example.md
 
 # Step 3: Clean when done
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ### For CI/CD

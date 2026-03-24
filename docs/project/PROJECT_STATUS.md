@@ -10,7 +10,7 @@
 当前仓库的推荐使用方式已经收敛到 `pipeline` 主流程：
 
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 该流程会生成最终 `.pptx`，并在需要时保留 `outputs/intermediates/` 下的中间产物用于排查。
@@ -21,14 +21,19 @@ python cli/main.py pipeline --paper papers/example.pdf
 
 ```text
 PaperReader/
-├── cli/                    # CLI 入口
 ├── docs/                   # 项目文档
-├── examples/               # 示例脚本
 ├── outputs/                # 生成结果
 ├── papers/                 # 输入 PDF
 ├── runtime/                # cache / logs
-├── scripts/                # 维护脚本
 ├── src/                    # 核心源代码
+│   ├── cli/                # CLI 入口
+│   ├── parser/             # PDF 解析
+│   ├── analysis/           # AI 分析
+│   ├── planning/           # Slide 规划
+│   ├── generation/         # PPTX 生成
+│   ├── scripts/            # 工具脚本
+│   ├── templates/          # 模板
+│   └── tools/              # 工具集
 ├── tests/                  # 测试
 ├── CLAUDE.md               # 项目协作说明
 ├── README.md               # 项目主文档
@@ -63,7 +68,7 @@ PaperReader/
 
 ## 当前关键模块
 
-- `cli/main.py`：CLI 命令入口
+- `src/cli/main.py`：CLI 命令入口
 - `src/core/pipeline.py`：端到端流程编排
 - `src/parser/pdf_parser.py`：PDF 解析
 - `src/parser/pdf_image_extractor.py`：图片提取
@@ -119,19 +124,19 @@ outputs/
 
 ```bash
 # 推荐主流程
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 
 # 保留中间文件
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # 启用引用分析
-python cli/main.py pipeline --paper papers/example.pdf --include-citations
+python -m src.cli.main pipeline --paper papers/example.pdf --include-citations
 
 # 缓存统计
-python cli/main.py stats
+python -m src.cli.main stats
 
 # 清理过期缓存
-python cli/main.py cleanup
+python -m src.cli.main cleanup
 ```
 
 `process` 命令仍然存在，但当前推荐用于完整汇报生成的命令是 `pipeline`。
@@ -142,12 +147,12 @@ python cli/main.py cleanup
 
 近期已更新的活跃文档重点聚焦：
 
-- 推荐命令统一为 `python cli/main.py pipeline ...`
+- 推荐命令统一为 `python -m src.cli.main pipeline ...`
 - 最终输出统一为 `.pptx`
 - 中间产物路径统一为 `outputs/intermediates/...`
 - slide planning 默认结构统一为 10 slides
 
-若文档与代码不一致，以 `src/core/pipeline.py`、`cli/main.py`、`src/planning/slide_planner.py` 为准。
+若文档与代码不一致，以 `src/core/pipeline.py`、`src/cli/main.py`、`src/planning/slide_planner.py` 为准。
 
 ---
 

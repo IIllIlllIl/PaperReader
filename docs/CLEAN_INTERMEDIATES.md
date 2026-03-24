@@ -12,7 +12,7 @@ By default, the pipeline automatically removes all intermediate files after succ
 
 ```bash
 # Default: cleans intermediates after success
-python cli/main.py pipeline --paper papers/example.pdf
+python -m src.cli.main pipeline --paper papers/example.pdf
 ```
 
 **What gets cleaned**:
@@ -33,7 +33,7 @@ To preserve all intermediate files for debugging:
 
 ```bash
 # Keep all intermediate files
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 **When to use --no-clean**:
@@ -48,7 +48,7 @@ If the pipeline fails (exception or error), intermediate files are **automatical
 
 ```bash
 # If pipeline fails, intermediates are kept
-python cli/main.py pipeline --paper papers/broken.pdf
+python -m src.cli.main pipeline --paper papers/broken.pdf
 # Output: "ℹ️  Intermediate files preserved in outputs/intermediates/ for debugging"
 ```
 
@@ -59,7 +59,7 @@ python cli/main.py pipeline --paper papers/broken.pdf
 Preview what will be deleted (dry run):
 
 ```bash
-python scripts/clean_intermediates.py
+python src/scripts/clean_intermediates.py
 ```
 
 Output:
@@ -83,13 +83,13 @@ DRY RUN - No files will be deleted
 ======================================================================
 
 To actually delete these files, run:
-  python scripts/clean_intermediates.py --execute
+  python src/scripts/clean_intermediates.py --execute
 ```
 
 Execute cleanup:
 
 ```bash
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ### Including Citation Cache
@@ -97,7 +97,7 @@ python scripts/clean_intermediates.py --execute
 By default, the cleanup script preserves citation API cache. To also clean the cache:
 
 ```bash
-python scripts/clean_intermediates.py --execute --include-cache
+python src/scripts/clean_intermediates.py --execute --include-cache
 ```
 
 ### Manual Deletion
@@ -188,13 +188,13 @@ pipeline = PaperPresentationPipeline(
 ### For Debugging
 ```bash
 # Step 1: Run with --no-clean
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 
 # Step 2: Inspect intermediate files
 ls outputs/intermediates/
 
 # Step 3: Clean when done
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ### For CI/CD
@@ -208,14 +208,14 @@ python scripts/clean_intermediates.py --execute
 
 **Solution**: Enable default cleaning or run manual cleanup:
 ```bash
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ### Issue: Need to inspect intermediate files
 
 **Solution**: Use `--no-clean` mode:
 ```bash
-python cli/main.py pipeline --paper papers/example.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/example.pdf --no-clean
 ```
 
 ### Issue: Pipeline failed and I lost intermediate files
@@ -233,7 +233,7 @@ python cli/main.py pipeline --paper papers/example.pdf --no-clean
 ### Example 1: Normal Workflow
 ```bash
 # Run pipeline (auto-clean)
-python cli/main.py pipeline --paper papers/paper1.pdf
+python -m src.cli.main pipeline --paper papers/paper1.pdf
 
 # Final PPTX preserved in outputs/slides/paper1.pptx
 # All intermediates cleaned up
@@ -242,22 +242,22 @@ python cli/main.py pipeline --paper papers/paper1.pdf
 ### Example 2: Debug Workflow
 ```bash
 # Run with debug mode
-python cli/main.py pipeline --paper papers/paper1.pdf --no-clean
+python -m src.cli.main pipeline --paper papers/paper1.pdf --no-clean
 
 # Check intermediate outputs
 cat outputs/intermediates/markdown/paper1.md
 ls outputs/intermediates/images/
 
 # Clean up when done
-python scripts/clean_intermediates.py --execute
+python src/scripts/clean_intermediates.py --execute
 ```
 
 ### Example 3: Multiple Papers
 ```bash
 # Process multiple papers (each auto-cleans)
-python cli/main.py pipeline --paper papers/paper1.pdf
-python cli/main.py pipeline --paper papers/paper2.pdf
-python cli/main.py pipeline --paper papers/paper3.pdf
+python -m src.cli.main pipeline --paper papers/paper1.pdf
+python -m src.cli.main pipeline --paper papers/paper2.pdf
+python -m src.cli.main pipeline --paper papers/paper3.pdf
 
 # Only final PPTX files remain
 ls outputs/slides/

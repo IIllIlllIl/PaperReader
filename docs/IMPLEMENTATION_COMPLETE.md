@@ -198,7 +198,7 @@ config = CitationConfig(
 ### Basic Usage
 ```bash
 # The citation analysis will be automatically included if available
-python cli/main.py --paper papers/example.pdf
+python -m src.cli.main --paper papers/example.pdf
 ```
 
 ### With Custom Configuration
